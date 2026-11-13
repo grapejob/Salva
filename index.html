@@ -1646,7 +1646,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v148", data:"2026-11-13"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v149", data:"2026-11-13"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -2216,9 +2216,9 @@ const NA_CARTA = {
   "chardonnay|antaovaz":{w:["cland-b"], nota:P("Na carta não temos um branco rico com madeira nova. O mais próximo é o Clandestino: Chardonnay com Semillon do Dão, com abacaxi e manga, feito em inox.","We don’t have a rich, new-oak white on the list. The closest is Clandestino: Chardonnay with Semillon from Dão, with pineapple and mango, made in steel.")},
   "riesling|alvarinho":{w:[]},
   "riesling|bical":{w:[]},
-  "riesling|arinto":{w:["pm-b","avs-b","aventura"], nota:P("O Alice Vieira de Sousa não leva Arinto: é Rabigato, Viosinho e Gouveio, de vinhas a 500 m no Douro. Está aqui pelo estilo de um Riesling seco: seco, cítrico e muito fresco. O Aventura é um corte de castas da Serra de São Mamede, com pêssego, perfume e acidez alta.","Alice Vieira de Sousa has no Arinto: it’s Rabigato, Viosinho and Gouveio, from vineyards at 500 m in the Douro. It’s here for the style of a dry Riesling: dry, citrusy and very fresh. Aventura is a blend of Serra de São Mamede grapes, with peach, perfume and high acidity.")},
+  "riesling|arinto":{w:["pm-b","avs-b"], nota:P("O Alice Vieira de Sousa é um lote do Douro (Rabigato, Viosinho e Gouveio), de vinhas a 500 m. Não leva Arinto, mas tem o perfil de um Riesling seco: seco, cítrico e muito fresco.","Alice Vieira de Sousa is a Douro blend (Rabigato, Viosinho and Gouveio), from vineyards at 500 m. It has no Arinto, but it has the profile of a dry Riesling: dry, citrusy and very fresh.")},
   "pinotgris|alvarinho":{w:["moreish"], nota:P("O Moreish não é Alvarinho, mas é um branco seco e discreto, com fruta branca subtil, como um Pinot Grigio.","Moreish isn’t Alvarinho, but it’s a dry, restrained white with subtle white fruit, like a Pinot Grigio.")},
-  "chenin|arinto":{w:["ribeira"]},
+  "chenin|arinto":{w:["ribeira","aventura"], nota:P("O Aventura é um lote de vinha velha da Serra de São Mamede: boca cheia mas fresca, acidez alta, final seco e tenso.","Aventura is an old-vine blend from Serra de São Mamede: full yet fresh, high acidity, a dry, taut finish.")},
   "viognier|fernaopires":{w:["guru"], nota:P("O Guru não é Fernão Pires. É um corte do Douro, encorpado, com flores brancas, pêssego e textura sedosa, como um Viognier.","Guru isn’t Fernão Pires. It’s a full-bodied Douro blend, with white flowers, peach and a silky texture, like a Viognier.")},
   "muscat|fernaopires":{w:["purista-fp"]},
   "albarino|alvarinho":{w:["sobre-lias"]},
@@ -2297,7 +2297,9 @@ function dCartaHTML(g,l){
     let body;
     if(so&&sx&&sx.qa){ body=[["a",sx.qa],["b",sx.qb]].map(([k,q])=>{ const ids=so[k].filter(dOk); return ids.length?`<div class="dsrow"><span class="lbl">${esc(tx(q[0]))}</span>${chips(ids)}</div>`:""; }).join(""); }
     else if(pk.length){ const al=g.alias.map(fold), has=id=>al.some(a=>fold(byId[id].castas).includes(a)), a=pk.filter(has), b=pk.filter(id=>!has(id));
-      body=b.length?(a.length?`<div class="dsrow"><span class="lbl">${L("Com","With")} ${esc(g.n)}</span>${chips(a)}</div>`:"")+`<div class="dsrow"><span class="lbl">${L("Pelo estilo","By style")}</span>${chips(b)}</div>`:chips(a); }
+      const vago=id=>/tradiciona|field blend|mistura|traditional/i.test(byId[id].castas), b1=b.filter(id=>!vago(id)), b2=b.filter(vago);
+      const row=(lab,ids)=>ids.length?`<div class="dsrow"><span class="lbl">${lab}</span>${chips(ids)}</div>`:"";
+      body=b.length?row(`${L("Com","With")} ${esc(g.n)}`,a)+row(`${L("Sem","No")} ${esc(g.n)} · ${L("mesmo estilo","same style")}`,b1)+row(L("Mesmo estilo","Same style"),b2):chips(a); }
     else body=pk.length?chips(pk):`<p class="dnone">${L("Na carta atual não temos um vinho neste estilo.","We don’t have a wine in this style on the current list.")}</p>`;
     return body+(n&&n.nota&&pk.length?`<p class="dnota">${esc(tx(n.nota))}</p>`:"");
   }
