@@ -1646,7 +1646,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v145", data:"2026-11-13"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v146", data:"2026-11-13"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -3077,7 +3077,12 @@ function wfilter(row,q){ const box=row.querySelector(".chips.fold1"), more=box.q
   if(more) more.hidden=!!k; row.querySelector(".wfind-0").hidden=!(k&&!n); }
 document.addEventListener("input",e=>{ const i=e.target.closest(".wfind input"); if(i) wfilter(i.closest(".wsr"),i.value); });
 /* v145: no iPad, tocar na caixa (ou na lupa) põe o cursor no campo; a tecla Pesquisar/Enter fecha o teclado e mostra os resultados; Esc limpa */
-function wfocus(e){ const l=e.target.closest&&e.target.closest(".wfind-in"); if(!l) return; const i=l.querySelector("input"); if(i&&document.activeElement!==i){ try{i.focus({preventScroll:true})}catch(_){i.focus()} } }
+/* v146: iPad antigo (iPadOS 15, ex.: iPad Air 2 do Mito) não dá foco à caixa; se o foco não chegar, abre uma janela simples para escrever a pesquisa */
+const OLDIOS=(()=>{ try{ const ua=navigator.userAgent, apple=/iP(hone|ad|od)/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1); return apple&&!(window.CSS&&CSS.supports&&CSS.supports("color","color-mix(in srgb, red, blue)")); }catch(_){ return false; } })();
+let wAsk=0;
+function wfocus(e){ const l=e.target.closest&&e.target.closest(".wfind-in"); if(!l) return; const i=l.querySelector("input"); if(!i) return;
+  if(document.activeElement!==i){ try{i.focus({preventScroll:true})}catch(_){i.focus()} }
+  if(OLDIOS&&Date.now()-wAsk>1500){ wAsk=Date.now(); setTimeout(()=>{ if(document.activeElement===i) return; const v=prompt(L("Procurar garrafa: nome, região ou estilo","Find a bottle: name, region or style"),i.value); wAsk=Date.now(); if(v!==null){ i.value=v; wfilter(i.closest(".wsr"),v); i.closest(".wsr").scrollIntoView({block:"start",behavior:"smooth"}); } },400); } }
 document.addEventListener("touchend",wfocus,{passive:true});
 document.addEventListener("click",wfocus);
 document.addEventListener("focusin",e=>{ const i=e.target.closest&&e.target.closest(".wfind input"); if(!i||!matchMedia("(pointer:coarse)").matches) return; setTimeout(()=>{ const r=i.getBoundingClientRect(), top=parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tbh"))||64; if(r.top>innerHeight*0.35||r.top<top) scrollTo({top:Math.max(0,r.top+scrollY-top-16),behavior:"smooth"}); },300); });
