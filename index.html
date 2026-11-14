@@ -1135,6 +1135,9 @@ html::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .cst-in .dprof,.cmore .dprof{grid-template-columns:78px minmax(0,1fr);gap:7px 12px}
 .cst .cmore summary{display:block;cursor:pointer;font:600 14.5px var(--display);color:var(--accent);padding:8px 0;min-height:0}.cst .cmore summary::after{content:none}.cst .cmore summary::before{content:"+";display:inline-block;width:16px;font-weight:700}.cst .cmore[open] summary::before{content:"–"}.cmore .dprof{margin-top:8px}
 @media (max-width:560px){.cst-in .dprof,.cmore .dprof{grid-template-columns:78px minmax(0,1fr);gap:7px 12px}.cst-in .dprof dd{margin-bottom:0}}
+/* v154: aviso do táxi em Alergénios › Pode */
+.qtaxi{font-style:italic;margin:.9rem 0 0;line-height:1.45;opacity:.9}
+.qtaxi span{font-style:normal;margin-right:.2rem}
 </style>
 
 <header class="topbar"><div class="wrap tb-in"><button class="brand disp" data-tab="inicio" aria-label="Salva, início (em teste)"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="61" cy="41" r="9.5" fill="var(--red)"/></svg><span class="wm">Salva<em>.</em></span><span class="tag" id="tb-tag" aria-hidden="true">em teste</span></button><span class="tb-ed" id="tb-ed"></span><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt">PT</button><button type="button" data-lang="en">EN</button></div></div></header>
@@ -1683,7 +1686,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v153", data:"2026-11-14"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v154", data:"2026-11-14"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -3220,7 +3223,9 @@ function pQuadro(){
   /* a mesma nota em vários filtros aparece uma só vez (ex.: 🌾🥚 fritadeira compartilhada) */
   const tags=av=>{ const m=new Map(); av.forEach(([c,v])=>{const n=qNote(v)||L("avisar a cozinha","tell the kitchen"); if(!m.has(n)) m.set(n,[]); m.get(n).push(c);}); return [...m].map(([n,cs])=>`<span class="qtag">${many?`<span aria-hidden="true">${cs.map(c=>c.e).join("")}</span><span class="sr">${esc(cs.map(c=>tx(c.t)).join(", "))}:</span>`:""}<span>${esc(n)}</span></span>`).join(""); };
   const li=([p,av,nt])=>`<li${av.length||nt?' class="hn"':""}><b>${esc(tx(p.n))}</b>${nt?`<span class="qn">(${esc(nt)})</span>`:""}${av.length?`<span class="qtags">${tags(av)}</span>`:""}</li>`;
-  const grp=k=>`<div class="qg qg-${k}" id="qg-${k}"><h3><span class="qi" aria-hidden="true">${QI[k]}</span> ${T[k]} <small>${G[k].length}</small></h3>${G[k].length?`<ul>${G[k].filter(x=>!x[1].length&&!x[2]).concat(G[k].filter(x=>x[1].length||x[2])).map(li).join("")}</ul>`:`<p class="hint">${L("Nenhum prato.","No dishes.")}</p>`}</div>`;
+  /* v154 (14 nov, Pri): combinação "terrível" = 2 ou mais restrições e 5 pratos ou menos em "Pode" → aviso do táxi no fim de "Pode" */
+  const taxi=many&&G.ok.length<=5;
+  const grp=k=>`<div class="qg qg-${k}" id="qg-${k}"><h3><span class="qi" aria-hidden="true">${QI[k]}</span> ${T[k]} <small>${G[k].length}</small></h3>${G[k].length?`<ul>${G[k].filter(x=>!x[1].length&&!x[2]).concat(G[k].filter(x=>x[1].length||x[2])).map(li).join("")}</ul>`:`<p class="hint">${L("Nenhum prato.","No dishes.")}</p>`}${k==="ok"&&taxi?`<p class="qtaxi"><span aria-hidden="true">🚕 🚖 ‼️</span> ${L("Antes de pedir um táxi para o cliente, converse com a cozinha!","Before calling the guest a taxi, talk to the kitchen!")}</p>`:""}</div>`;
   return `<div class="quadro">
     <div class="qhead"><h2>${L("Alergénios","Allergens")}</h2>${clr}</div>
     <div class="qcols qgrid" role="group" aria-label="${L("Escolha uma ou mais restrições","Pick one or more restrictions")}">${Q.cols.map(chip).join("")}</div>
