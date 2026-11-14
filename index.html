@@ -1098,6 +1098,43 @@ html::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .wfind-in{cursor:text;z-index:2;-webkit-tap-highlight-color:transparent}
 .wfind input{position:relative;z-index:1;-webkit-appearance:none;appearance:none;-webkit-user-select:text;user-select:text;touch-action:manipulation;pointer-events:auto}
 .wfind-in svg{z-index:2}
+/* v150 (14 nov): aba Castas portuguesas. Sem color-mix nem :has (Safari 15 do iPad Air 2) */
+.cstp{gap:20px}
+.cst-list{display:flex;flex-direction:column;max-width:760px}
+.cst{border-top:1px solid var(--line)}.cst:last-child{border-bottom:1px solid var(--line)}
+.cst summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:46px minmax(0,1fr) 14px;align-items:center;column-gap:12px;row-gap:1px;padding:13px 2px 14px;min-height:56px;-webkit-tap-highlight-color:transparent}
+.cst summary::-webkit-details-marker{display:none}
+.cst .rk{grid-row:1/4;display:flex;flex-direction:column;align-items:center;line-height:1}
+.cst .rk b{font-family:var(--brandf);font-weight:600;font-size:30px;color:var(--ink)}
+.cst .rk i{font-style:normal;font-family:var(--display);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.cst .nm{grid-column:2;font-family:var(--display);font-weight:700;font-size:19px;line-height:1.2}
+.cst .ct{grid-column:2;font-size:13.5px;color:var(--muted)}
+.cst .ct::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:6px}
+.cst .cbar{grid-column:2;height:3px;border-radius:3px;background:var(--line);margin-top:7px;overflow:hidden}
+.cst .cbar i{display:block;height:100%;border-radius:3px;background:var(--c)}
+.cst summary::after{content:"›";grid-column:3;grid-row:1/4;font-size:22px;color:var(--accent);transition:transform .2s}
+.cst[open] summary::after{transform:rotate(90deg)}
+.cst-in{display:flex;flex-direction:column;gap:18px;padding:4px 2px 22px 60px;max-width:62ch}
+.cst-in p{margin:0}.cst-in .dsrow{margin-top:0}
+.cst-in .clead{font-size:17px;line-height:1.45}
+.clinks{display:block;margin-top:6px;font-size:14px;line-height:2;color:var(--muted)}.clink{all:unset;cursor:pointer;color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;margin-right:10px;white-space:nowrap}
+.cgrp{display:flex;flex-direction:column;gap:8px}.cgrp .lbl{margin:0}
+.cst-in .dprof{gap:6px 14px}
+@media (max-width:560px){.cst-in{padding-left:2px}.cst-in .dprof{grid-template-columns:1fr;gap:0}.cst-in .dprof dt{font-size:13.5px}.cst-in .dprof dd{margin-bottom:9px}.cst-in .dprof dd:last-child{margin-bottom:0}}
+/* v150b: lista mais compacta, filtro por cor, perfil em ordem de serviço (fala, vinhos, copo; vinha e história recolhidas) */
+.cseg{margin-top:-4px;--c:var(--ink)}.cseg button{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;font-size:14.5px}.cseg .cq{font-weight:600;opacity:.65}
+.cdot{display:inline-block;flex:none;width:9px;height:9px;border-radius:50%;background:var(--c)}
+.cseg button[aria-pressed=true] .cdot{background:var(--surface)}
+.cst summary{grid-template-columns:34px minmax(0,1fr) 14px;padding:10px 2px 11px;min-height:52px;row-gap:6px}
+.cst .rk{grid-row:1/3;flex-direction:row;justify-content:center}.cst .rk b{font-size:24px}.cst .rk i{display:none}
+.cst .nm{font-size:17.5px;display:flex;align-items:baseline;gap:8px}.cst .nm .cdot{position:relative;top:-1px}
+.cst .cbar{margin-top:0}.cst summary::after{grid-row:1/3}
+.cst[open]{background:var(--surface);border-radius:14px;border:1px solid var(--line);margin:8px 0;padding:0 12px}
+.cst[open]+.cst{border-top-color:transparent}
+.cst-in{padding:6px 0 18px 0;gap:16px}
+.cst-in .dprof,.cmore .dprof{grid-template-columns:78px minmax(0,1fr);gap:7px 12px}
+.cst .cmore summary{display:block;cursor:pointer;font:600 14.5px var(--display);color:var(--accent);padding:8px 0;min-height:0}.cst .cmore summary::after{content:none}.cst .cmore summary::before{content:"+";display:inline-block;width:16px;font-weight:700}.cst .cmore[open] summary::before{content:"–"}.cmore .dprof{margin-top:8px}
+@media (max-width:560px){.cst-in .dprof,.cmore .dprof{grid-template-columns:78px minmax(0,1fr);gap:7px 12px}.cst-in .dprof dd{margin-bottom:0}}
 </style>
 
 <header class="topbar"><div class="wrap tb-in"><button class="brand disp" data-tab="inicio" aria-label="Salva, início (em teste)"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="61" cy="41" r="9.5" fill="var(--red)"/></svg><span class="wm">Salva<em>.</em></span><span class="tag" id="tb-tag" aria-hidden="true">em teste</span></button><span class="tb-ed" id="tb-ed"></span><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt">PT</button><button type="button" data-lang="en">EN</button></div></div></header>
@@ -1184,7 +1221,7 @@ const REG_ORDER = [
 ];
 const BODY = {"Leve":"Light","Médio":"Medium","Encorpado":"Full-bodied"};
 const TABS = [
-  {id:"inicio",n:["Início","Home"]},{id:"mito",n:["O Mito","Mito"]},{id:"vinhos",n:["Vinhos","Wines"]},{id:"descobrir",n:["Com sotaque português","With a Portuguese accent"],hide:true},{id:"vender",n:["Vender à mesa","Selling"]},{id:"alergenios",n:["Alergénios","Allergens"]},{id:"cocktails",n:["Cocktails","Cocktails"]},{id:"mulheres",n:["Rainhas do Terroir","Queens of Terroir"]},{id:"como",n:["Como se faz","How it’s made"]},{id:"aromas",n:["Aromas","Aromas"]},{id:"conceito",n:["A carta","The list"]},{id:"stock",n:["Estoque","Estoque"],hide:true},
+  {id:"inicio",n:["Início","Home"]},{id:"mito",n:["O Mito","Mito"]},{id:"vinhos",n:["Vinhos","Wines"]},{id:"descobrir",n:["Com sotaque português","With a Portuguese accent"],hide:true},{id:"vender",n:["Vender à mesa","Selling"]},{id:"alergenios",n:["Alergénios","Allergens"]},{id:"cocktails",n:["Cocktails","Cocktails"]},{id:"mulheres",n:["Rainhas do Terroir","Queens of Terroir"]},{id:"como",n:["Como se faz","How it’s made"]},{id:"castas",n:["Castas portuguesas","Portuguese grapes"]},{id:"aromas",n:["Aromas","Aromas"]},{id:"conceito",n:["A carta","The list"]},{id:"stock",n:["Estoque","Estoque"],hide:true},
   {sep:true},{id:"jogo",n:["Jogo","Game"],soon:true},{id:"comida",n:["Carta de comida","Food menu"],soon:true},{id:"harmonias",n:["Harmonizações","Pairings"],soon:true}
 ];
 /* translated field getters: fall back to Portuguese when no English text exists */
@@ -1646,7 +1683,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v152", data:"2026-11-13"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v153", data:"2026-11-14"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -2225,6 +2262,355 @@ const NA_CARTA_SOT = {
   pinotnoir:{a:["revela","leve"], b:[], nota:P("O Revela é Alfrocheiro: pálido, floral, com morango, leve e fresco.","Revela is Alfrocheiro: pale, floral, with strawberry, light and fresh.")},
   cabernet:{a:["crochet","furnas"], b:["mainova"], nota:P("O Furnas tem Cabernet Franc, uma das castas de Bordéus, com ervas secas e grafite.","Furnas has Cabernet Franc, one of the Bordeaux grapes, with dried herbs and graphite.")}
 };
+
+/* ---------- ABA "CASTAS PORTUGUESAS" (14 nov 2026, pedido da Pri) ----------
+   Ranking: a app conta sozinha, na carta ativa, em quantos vinhos cada casta aparece (campo "castas" da ficha).
+   Um vinho só conta quando a ficha nomeia a casta. "ex" são nomes parecidos que NÃO contam (ex.: Arinto dos Açores não é contado em Arinto).
+   Perfil: cada traço tem 2 fontes ou mais (PERFIL_F e CFONTES). Onde as fontes não concordam, o traço fica de fora
+   (ex.: acidez do Viosinho, película da Baga, cor do Tinto Cão). "base" reaproveita os traços já validados em CASTAS_PT.
+   Cada traço: [texto PT, texto EN, [fontes]]. "frase" (para dizer ao cliente, formal) só junta traços já confirmados no perfil: se um traço mudar, rever a frase. Fotos das uvas: ainda sem (falta imagem com origem e licença claras). */
+const PERFIL_F = {
+  woptn:{t:"Wines of Portugal · Touriga Nacional", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/touriga-nacional/"},
+  woptf:{t:"Wines of Portugal · Touriga Franca", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/touriga-franca/"},
+  wopar:{t:"Wines of Portugal · Aragonez / Tinta Roriz", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/aragonez/"},
+  wopari:{t:"Wines of Portugal · Arinto", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/arinto/"},
+  wopvio:{t:"Wines of Portugal · Viosinho", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/viosinho/"},
+  wopbaga:{t:"Wines of Portugal · Baga", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/baga/"},
+  woprab:{t:"Wines of Portugal · Rabigato", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/rabigato/"},
+  wopgou:{t:"Wines of Portugal · Gouveio", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/gouveio/"},
+  woptc:{t:"Wines of Portugal · Tinto Cão", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/tinta-cao/"},
+  wopjaen:{t:"Wines of Portugal · Jaen", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/jaen/"},
+  wopvin:{t:"Wines of Portugal · Vinhão", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/vinhao/"},
+  v2wtn:{t:"Vine to Wine Circle · Touriga Nacional", u:"https://www.vinetowinecircle.com/en/castas_post/nacional-touriga"},
+  v2wtf:{t:"Vine to Wine Circle · Touriga Franca", u:"https://www.vinetowinecircle.com/en/castas_post/Touriga-franca-3/"},
+  v2war:{t:"Vine to Wine Circle · Aragonez", u:"https://www.vinetowinecircle.com/en/castas_post/aragonez-2"},
+  v2wari:{t:"Vine to Wine Circle · Arinto", u:"https://www.vinetowinecircle.com/en/castas_post/arinto-2/"},
+  v2wvio:{t:"Vine to Wine Circle · Viosinho", u:"https://www.vinetowinecircle.com/en/castas_post/viosinho-3/"},
+  v2wrab:{t:"Vine to Wine Circle · Rabigato", u:"https://www.vinetowinecircle.com/en/castas_post/rabigato-3/"},
+  v2wgou:{t:"Vine to Wine Circle · Gouveio", u:"https://www.vinetowinecircle.com/en/castas_post/gouveio-2"},
+  v2wtc:{t:"Vine to Wine Circle · Tinto Cão", u:"https://www.vinetowinecircle.com/en/castas_post/tinto-cao-3/"},
+  v2wjaen:{t:"Vine to Wine Circle · Jaen (Mencía)", u:"https://www.vinetowinecircle.com/en/castas_post/mencia-2"},
+  v2wvin:{t:"Vine to Wine Circle · Vinhão", u:"https://www.vinetowinecircle.com/en/castas_post/vinhao-3/"},
+  ivdp:{t:"IVDP · Cultura da vinha (castas do Douro e do Porto)", u:"https://www.ivdp.pt/en/viticulture/vine-culture"},
+  sethbair:{t:"Wine with Seth · Bairrada", u:"https://www.winewithseth.com/winewiki/bairrada/"},
+  follymen:{t:"Wine Folly · Mencía", u:"https://plus.winefolly.com/grapes/mencia/"},
+  jrcod:{t:"Jancis Robinson · Códega de Larinho", u:"https://jancisrobinson.com/ocw/detail/codega-de-larinho"},
+  ivv18:{t:"IVV, ranking das castas em Portugal, abril de 2018 (via Phosphorland)", u:"https://www.phosphorland.pt/ranking-das-castas-em-portugal-em-2018/"},
+  sethpt:{t:"Wine with Seth · Portugal (castas plantadas, IVV 2025)", u:"https://www.winewithseth.com/winewiki/portugal/"},
+  wopkit:{t:"ViniPortugal · Dossier de imprensa (top castas)", u:"https://winesofportugal.com/pt/media/dossier-de-imprensa/"},
+  wofw:{t:"The World of Fine Wine · Touriga Nacional", u:"https://worldoffinewine.com/uncategorized/touriga-nacional-4203636"},
+  jrtn:{t:"Jancis Robinson · How Touriga Nacional was rescued (2011)", u:"https://www.jancisrobinson.com/articles/how-touriga-nacional-was-rescued"},
+  sethtf:{t:"Wine with Seth · Touriga Franca (VIVC, IVDP 2023)", u:"https://www.winewithseth.com/winewiki/touriga-franca/"},
+  kopke:{t:"Kopke Group · Touriga Franca", u:"https://kopkegroupwineshop.com/blogs/news/touriga-franca-uma-das-melhores-castas-nacionais"},
+  vidarural:{t:"Vida Rural · Vinho de Portugal e seleção de castas", u:"https://www.vidarural.pt/sem-categoria/vinho-portugal-um-conceito-exige-cultivares-caracteristicas-morfofuncionais-dirigidas-qualidade/"},
+  dnbuc:{t:"Diário de Notícias · Shakespeare e o vinho de Bucelas (2019)", u:"https://www.dn.pt/arquivo/diario-de-noticias/shakespeare-adorou-vinho-de-bucelas-e-na-murta-acreditam-ter-o-melhor-branco-11354163.html"},
+  sethbuc:{t:"Wine with Seth · Bucelas DOC", u:"https://www.winewithseth.com/winewiki/bucelas-doc/"},
+  wdbaga:{t:"The Wine Detective · Baga: the best of traditions (2013)", u:"https://thewinedetective.co.uk/baga-the-best-of-traditions/"},
+  maybaga:{t:"Richard Mayson · Baga Friends", u:"https://richardmayson.com/portuguese-notes/blog-post-title-one-g7zjt-354jg-3jf63-a526x-tr6p6-c66nb-gh4kl-jn7jw-7j792-ba979"},
+  sethsou:{t:"Wine with Seth · Sousão", u:"https://www.winewithseth.com/winewiki/sousao/"},
+  decdouro:{t:"Decanter · Douro table reds", u:"https://www.decanter.com/magazine/douro-table-reds-249989/"},
+  ctrab:{t:"Cellar Tours · Rabigato", u:"https://cellartours.com/blog/portugal/rarer-than-rare-rabigato-grape-variety"},
+  wopalf:{t:"Wines of Portugal · Alfrocheiro", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/alfrocheiro/"},
+  v2walf:{t:"Vine to Wine Circle · Alfrocheiro", u:"https://www.vinetowinecircle.com/en/castas_post/alfrocheiro-2/"},
+  v2wgra:{t:"Vine to Wine Circle · Graciano / Tinta Miúda", u:"https://www.vinetowinecircle.com/en/castas_post/graciano-2"},
+  sethgra:{t:"Wine with Seth · Graciano", u:"https://www.winewithseth.com/winewiki/graciano/"},
+  wopalv:{t:"Wines of Portugal · Alvarinho", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/alvarinho/"},
+  woploi:{t:"Wines of Portugal · Loureiro", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/loureiro/"},
+  v2wloi:{t:"Vine to Wine Circle · Loureiro", u:"https://www.vinetowinecircle.com/en/castas_post/loureiro-2/"},
+  wopmf:{t:"Wines of Portugal · Malvasia Fina", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/malvasia-fina/"},
+  v2wmf:{t:"Vine to Wine Circle · Malvasia Fina", u:"https://www.vinetowinecircle.com/en/castas_post/malvasia-fina-3/"},
+  v2wbas:{t:"Vine to Wine Circle · Bastardo", u:"https://www.vinetowinecircle.com/en/castas_post/bastardo-3"},
+  ctbas:{t:"Cellar Tours · Bastardo", u:"https://www.cellartours.com/blog/portugal/bastardos-hidden-glory"},
+  symcod:{t:"Symington · Ilustres Desconhecidos Códega do Larinho 2022", u:"https://www.symington.com/p/5a0c64e0d74be8d1584192c2591986ba"},
+  wopsir:{t:"Wines of Portugal · Síria", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/siria/"},
+  v2wsir:{t:"Vine to Wine Circle · Síria", u:"https://www.vinetowinecircle.com/en/castas_post/siria-3/"},
+  valgrape:{t:"Vinhos do Alentejo · Castas", u:"https://www.vinhosdoalentejo.pt/en/wines/grape-varieties/"},
+  sethalg:{t:"Wine with Seth · Algarve", u:"https://www.winewithseth.com/winewiki/algarve/"},
+  cluboaz:{t:"Club Oenologique · Pico, Açores", u:"https://cluboenologique.com/story/wines-of-portugal-pico-azores-vineyard-recovery/"},
+  jraz:{t:"Jancis Robinson · The volcanic wines of the Azores", u:"https://jancisrobinson.com/ja/node/194901"},
+  sethaz:{t:"Wine with Seth · Açores", u:"https://www.winewithseth.com/winewiki/azorean-wines-character-climate-atlantic-identity/"},
+  gisaz:{t:"Gismondi on Wine · Arinto dos Açores 2022", u:"https://gismondionwine.com/tasting-notes/202401/azores-wine-co-arinto-dos-aores-2022?note=40953"},
+  wopmr:{t:"Wines of Portugal · Moscatel Galego Roxo", u:"https://winesofportugal.com/en/portuguese-wines/grape-varieties/moscatel-galego-roxo/"},
+  blendmr:{t:"Blend All About Wine · Moscatel Roxo", u:"https://blend-allaboutwine.com/?p=19467"},
+  bacmr:{t:"Bacalhôa · ficha Moscatel Roxo Rosé", u:"https://media.bacalhoa.pt/1/documentos/641/4248787812149t.pdf"},
+  sulneg:{t:"Sul Informação · Negra Mole", u:"https://www.sulinformacao.pt/en/2018/09/comissao-vitivinicola-acompanhou-vindima-de-negra-mole-a-casta-exclusiva-do-algarve/"},
+  agroneg:{t:"Agroportal · O que é que a casta Negra Mole tem", u:"https://bo.agroportal.pt/o-que-e-que-a-casta-negra-mole-tem"},
+  essneg:{t:"Essential Algarve · Negra Mole", u:"https://www.essential-algarve.com/wine/algarves-native-grape-variety-wines/"},
+  wopneg:{t:"Wines of Portugal · Negra Mole", u:"https://winesofportugal.com/en/media/news/637/"},
+  jrcer:{t:"Jancis Robinson · Cercial", u:"https://www.jancisrobinson.com/learn/grape-varieties/cercial"},
+  radcer:{t:"Radar.wine · Cercial", u:"https://radar.wine/en/wines/varieties/cercial/"},
+  wdser:{t:"The Wine Detective · Sercialinho e Cercial", u:"https://thewinedetective.co.uk/luis-pato-sercial-alvarinho-cerceal-well/"},
+  v2wser:{t:"Vine to Wine Circle · Sercial", u:"https://www.vinetowinecircle.com/en/castas_post/sercial-3"},
+  wpser:{t:"wein.plus · Sercialinho", u:"https://glossary.wein.plus/sercialinho"}
+};
+const CASTAS_CARTA = [
+  {id:"touriganacional", frase:["“A Touriga Nacional dá tintos de cor intensa, com violeta e fruta negra, taninos firmes e boa guarda.”","“Touriga Nacional makes deeply coloured reds, with violet and black fruit, firm tannins and good ageing potential.”"], n:"Touriga Nacional", cor:"t", alias:["Touriga Nacional"], base:"touriganacional",
+   onde:["Nasceu no norte de Portugal. O Dão e o Douro disputam a origem, e hoje ela está em todo o país.","Born in northern Portugal. Dão and Douro both claim it, and today it grows all over the country.",["woptn","v2wtn","wset"]],
+   plantio:["É a 3.ª casta mais plantada de Portugal, com cerca de 7% da vinha.","Portugal’s 3rd most planted grape, with around 7% of the vineyard.",["ivv18","sethpt","wopkit"]],
+   hist:["No século XIX, era a principal casta do país. Nos anos 1970 quase tinha desaparecido, porque dá pouca uva. Voltou quando, no Douro, começaram a estudar a casta e a escolher as melhores plantas.","In the 19th century it was the country’s main grape. By the 1970s it had almost vanished, because it yields so little. It came back when growers in the Douro began studying the grape and selecting the best vines.",["wofw","wset","jrtn"]],
+   vinha:["Dá pouca uva por planta.","Low yields per vine.",["woptn","v2wtn","wset"]],
+   guarda:["Envelhece bem.","Ages well.",["woptn","v2wtn","wopbook"]]},
+  {id:"tourigafranca", frase:["“A Touriga Franca é a casta mais plantada do Douro. Traz amora, um perfume de flores e estrutura firme.”","“Touriga Franca is the Douro’s most planted grape. It brings blackberry, a floral perfume and firm structure.”"], n:"Touriga Franca", cor:"t", alias:["Touriga Franca","Touriga Francesa"], base:"tourigafranca",
+   onde:["Casta do Douro, uma das recomendadas para o vinho do Porto. Quase sempre entra em corte, muitas vezes com a Touriga Nacional e a Tinta Roriz.","A Douro grape, one of those recommended for Port. Nearly always blended, often with Touriga Nacional and Tinta Roriz.",["woptf","v2wtf","wopbook"]],
+   plantio:["É a 2.ª casta mais plantada de Portugal, com 7 a 8% da vinha, e a 1.ª do Douro.","Portugal’s 2nd most planted grape, with 7 to 8% of the vineyard, and number one in the Douro.",["ivv18","sethpt","wopkit","woptf"]],
+   hist:["É filha da Touriga Nacional: nasceu de um cruzamento natural com o Marufo (Mourisco Tinto). Até 2000 se chamava Touriga Francesa. Apesar do nome, não tem ligação com a França.","It’s a child of Touriga Nacional, born from a natural cross with Marufo (Mourisco Tinto). Until 2000 it was called Touriga Francesa. Despite the name, it has no link to France.",["sethtf","kopke","v2wtf"]],
+   vinha:["Produz bem e de forma regular.","Crops well and reliably.",["woptf","v2wtf"]],
+   aromas:["Amora e flores, com destaque para a rosa.","Blackberry and flowers, rose above all.",["woptf","v2wtf","wopbook"]],
+   guarda:["Dá estrutura e capacidade de guarda aos cortes.","Brings structure and ageing potential to blends.",["woptf","v2wtf"]]},
+  {id:"tintaroriz", frase:["“A Tinta Roriz é a mesma casta do Tempranillo espanhol. Tem fruta vermelha, ameixa e taninos firmes.”","“Tinta Roriz is the same grape as Spain’s Tempranillo. It has red fruit, plum and firm tannins.”"], n:"Tinta Roriz / Aragonez", cor:"t", alias:["Tinta Roriz","Aragonez","Aragonês"], base:"tintaroriz",
+   onde:["No Douro e no Dão se chama Tinta Roriz. No Alentejo, Aragonez.","In Douro and Dão it’s called Tinta Roriz. In the Alentejo, Aragonez.",["wopar","v2war","wopbook"]],
+   plantio:["É a casta mais plantada de Portugal, com cerca de 11% da vinha.","Portugal’s most planted grape, with around 11% of the vineyard.",["ivv18","sethpt","wopkit"]],
+   hist:["Veio da Espanha, onde se chama Tempranillo.","It came from Spain, where it’s called Tempranillo.",["v2war","vidarural","wopar"]],
+   vinha:["Planta vigorosa e produtiva. Dá o melhor em clima quente e seco.","A vigorous, productive vine. At its best in hot, dry climates.",["wopar","v2war"]]},
+  {id:"arinto", frase:["“O Arinto é uma casta de muito frescor: acidez alta, limão e maçã verde, com um lado mineral.”","“Arinto is all about freshness: high acidity, lemon and green apple, with a mineral edge.”"], n:"Arinto", cor:"b", alias:["Arinto"], ex:["Arinto dos Açores"], base:"arinto",
+   onde:["Está em quase todo o país. A referência é Bucelas, perto de Lisboa. Nos Vinhos Verdes se chama Pedernã.","Grown almost everywhere in Portugal. Its benchmark is Bucelas, near Lisbon. In Vinho Verde it’s called Pedernã.",["wopari","v2wari","wset"]],
+   plantio:["É uma das três castas brancas mais plantadas de Portugal, com 3 a 4% da vinha.","One of Portugal’s three most planted white grapes, with 3 to 4% of the vineyard.",["ivv18","sethpt","wopkit"]],
+   hist:["O vinho de Bucelas, feito sobretudo de Arinto, é conhecido na Inglaterra há séculos. Acredita-se que é o “Charneco” que Shakespeare cita na peça Henrique VI.","Bucelas wine, made mostly from Arinto, has been known in England for centuries. It’s believed to be the “Charneco” Shakespeare mentions in Henry VI.",["dnbuc","sethbuc"]],
+   vinha:["Cachos compactos, de bagos pequenos.","Compact bunches of small berries.",["wopari","v2wari"]],
+   nota:["O Insula é de Arinto dos Açores, que tem nome parecido mas é outra casta e conta à parte.","Insula is made from Arinto dos Açores, which has a similar name but is a different grape and is counted separately."]},
+  {id:"viosinho", frase:["“O Viosinho vem do Douro. Dá brancos encorpados e perfumados, com notas florais.”","“Viosinho comes from the Douro. It makes full-bodied, fragrant whites with floral notes.”"], n:"Viosinho", cor:"b", alias:["Viosinho"],
+   onde:["Casta do Douro. Entra nos brancos da região e também no Porto branco.","A Douro grape. It goes into the region’s whites and into white Port too.",["wopvio","v2wvio"]],
+   plantio:["Nos dados do IVV de 2018, era a 33.ª casta mais plantada do país.","In the IVV’s 2018 data, it was the country’s 33rd most planted grape.",["ivv18"]],
+   vinha:["Cachos e bagos pequenos. Amadurece cedo e produz pouco.","Small bunches and berries. Ripens early and yields little.",["wopvio","v2wvio"]],
+   corpo:["Dá vinhos encorpados.","Makes full-bodied wines.",["wopvio","v2wvio"]],
+   aromas:["Perfumado, com notas florais.","Fragrant, with floral notes.",["wopvio","v2wvio"]]},
+  {id:"baga", frase:["“A Baga é a casta da Bairrada. Tem acidez alta e taninos firmes, com cereja e ameixa, e ganha elegância com os anos.”","“Baga is Bairrada’s grape. It has high acidity and firm tannins, with cherry and plum, and gains elegance with age.”"], n:"Baga", cor:"t", alias:["Baga"], base:"baga",
+   onde:["A casa dela é a Bairrada. Também está no resto das Beiras, incluindo o Dão.","Its home is Bairrada. It also grows across the rest of the Beiras, Dão included.",["wopbaga","wopbook","wset"]],
+   plantio:["Está entre as dez castas mais plantadas de Portugal, com cerca de 4% da vinha.","Among Portugal’s ten most planted grapes, with around 4% of the vineyard.",["ivv18","sethpt","wopkit"]],
+   hist:["Em 1980, Luís Pato fez o seu primeiro Baga. Hoje, a filha, Filipa Pato, faz parte dos Baga Friends, um grupo de produtores que se juntou para mostrar o que a casta pode dar.","In 1980, Luís Pato made his first Baga. Today his daughter, Filipa Pato, is one of the Baga Friends, a group of producers who came together to show what the grape can do.",["sethb","wdbaga","maybaga"]],
+   vinha:["Amadurece tarde e gosta de solos de argila.","Ripens late and likes clay soils.",["wopbaga","sethbair","wset"]],
+   estilos:["Faz tinto, rosé e espumante.","Makes red, rosé and sparkling.",["wset","wopbook"]]},
+  {id:"rabigato", frase:["“O Rabigato traz frescor aos brancos do Douro. Tem acidez alta e um toque de flor de laranjeira.”","“Rabigato brings freshness to Douro whites. It has high acidity and a touch of orange blossom.”"], n:"Rabigato", cor:"b", alias:["Rabigato"],
+   onde:["Casta branca do Douro. Entra em vinhos brancos e no Porto branco.","A white Douro grape. It goes into white wines and white Port.",["woprab","v2wrab","ivdp"]],
+   plantio:["Nos dados do IVV de 2018, era a 22.ª casta mais plantada do país.","In the IVV’s 2018 data, it was the country’s 22nd most planted grape.",["ivv18"]],
+   hist:["O nome vem de “rabo de gato”. Já aparece em documentos do século XVI.","The name comes from “rabo de gato” (cat’s tail). It already appears in 16th-century documents.",["ctrab","v2wrab"]],
+   acidez:["Alta. Nos cortes, é ela que traz o frescor.","High. In blends, it’s the one that brings the freshness.",["woprab","v2wrab"]],
+   aromas:["Flor de laranjeira, com um lado vegetal.","Orange blossom, with a vegetal side.",["woprab","v2wrab"]]},
+  {id:"gouveio", frase:["“O Gouveio é do Douro. Dá brancos frescos e com corpo, que envelhecem bem.”","“Gouveio is from the Douro. It makes fresh whites with body, which age well.”"], n:"Gouveio", cor:"b", alias:["Gouveio"],
+   onde:["Casta do Douro e de Trás-os-Montes.","A grape of Douro and Trás-os-Montes.",["wopgou","v2wgou","wopbook"]],
+   plantio:["Nos dados do IVV de 2018, era a 32.ª casta mais plantada do país.","In the IVV’s 2018 data, it was the country’s 32nd most planted grape.",["ivv18"]],
+   hist:["No Douro, foi chamada de Verdelho durante anos, mas não é o Verdelho da Madeira.","In the Douro it was called Verdelho for years, but it isn’t Madeira’s Verdelho.",["wopgou","v2wgou","ivdp"]],
+   acidez:["Boa. O vinho fica fresco e vivo.","Good. The wine is fresh and lively.",["wopgou","v2wgou"]],
+   corpo:["O vinho tem corpo.","The wine has body.",["wopgou","v2wgou"]],
+   guarda:["Envelhece bem em garrafa.","Ages well in bottle.",["wopgou","v2wgou"]]},
+  {id:"codegalarinho", frase:["“A Códega do Larinho é uma casta do norte, do Douro e de Trás-os-Montes. No copo, lembra fruta tropical.”","“Códega do Larinho is a northern grape, from Douro and Trás-os-Montes. In the glass, it recalls tropical fruit.”"], n:"Códega do Larinho", cor:"b", alias:["Códega do Larinho","Côdega do Larinho","Códega de Larinho"],
+   onde:["Casta branca do Douro e de Trás-os-Montes.","A white grape of Douro and Trás-os-Montes.",["jrcod","wopbook"]],
+   plantio:["Nos dados do IVV de 2018, não aparecia entre as 30 castas mais plantadas do país.","In the IVV’s 2018 data, it wasn’t among the country’s 30 most planted grapes.",["ivv18"]],
+   aromas:["Lembra fruta tropical.","Recalls tropical fruit.",["jrcod","symcod"]]},
+  {id:"tintocao", frase:["“O Tinto Cão é uma casta antiga do Douro, hoje rara. Dá taninos firmes ao vinho.”","“Tinto Cão is an old Douro grape, rare today. It gives the wine firm tannins.”"], n:"Tinto Cão", cor:"t", alias:["Tinto Cão"],
+   onde:["Casta antiga do Douro, uma das recomendadas para o vinho do Porto.","An old Douro grape, one of those recommended for Port.",["woptc","v2wtc","ivdp"]],
+   plantio:["Nos dados do IVV de 2018, não aparecia entre as 30 castas mais plantadas do país.","In the IVV’s 2018 data, it wasn’t among the country’s 30 most planted grapes.",["ivv18"]],
+   hist:["É conhecida no Douro desde o século XVIII. Como produz muito pouco, continua rara.","Known in the Douro since the 18th century. Because it yields so little, it’s still rare.",["woptc","v2wtc","decdouro"]],
+   vinha:["Amadurece tarde e produz muito pouco.","Ripens late and yields very little.",["woptc","v2wtc"]],
+   taninos:["Firmes, quando a uva amadurece bem.","Firm, when the grapes ripen well.",["woptc","v2wtc"]]},
+  {id:"jaen", frase:["“A Jaen é a Mencía espanhola. No Dão, dá tintos perfumados e macios, com frutas vermelhas e negras.”","“Jaen is Spain’s Mencía. In Dão it makes perfumed, soft reds with red and black fruit.”"], n:"Jaen", cor:"t", alias:["Jaen"],
+   onde:["É no Dão que ela mostra o melhor.","It shows its best in Dão.",["wopjaen","v2wjaen","wopbook"]],
+   plantio:["Nos dados do IVV de 2018, era a 15.ª casta mais plantada do país.","In the IVV’s 2018 data, it was the country’s 15th most planted grape.",["ivv18"]],
+   hist:["Veio da Espanha, onde se chama Mencía.","It came from Spain, where it’s called Mencía.",["v2wjaen","follymen"]],
+   acidez:["No Dão, costuma ser baixa.","In Dão, usually low.",["wopjaen","v2wjaen"]],
+   aromas:["Perfumada, com frutas vermelhas e negras.","Perfumed, with red and black fruit.",["wopjaen","v2wjaen"]],
+   guarda:["Dá tintos macios, para beber jovens.","Makes soft reds, for drinking young.",["wopjaen","v2wjaen"]]},
+  {id:"vinhao", frase:["“O Vinhão, que no Douro se chama Sousão, dá vinhos de cor muito intensa e acidez alta.”","“Vinhão, called Sousão in the Douro, makes wines of very deep colour and high acidity.”"], n:"Vinhão / Sousão", cor:"t", alias:["Vinhão","Sousão","Souzão"],
+   onde:["Nasceu no Minho, na região dos Vinhos Verdes. No Douro se chama Sousão.","Born in Minho, in the Vinho Verde region. In the Douro it’s called Sousão.",["wopvin","v2wvin","wopbook"]],
+   plantio:["Nos dados do IVV de 2018, era a 13.ª casta mais plantada do país.","In the IVV’s 2018 data, it was the country’s 13th most planted grape.",["ivv18"]],
+   hist:["Por volta de 1790, foi levada do Minho para o Douro, para dar mais cor aos vinhos. É por isso que ela entra no Porto.","Around 1790 it was taken from Minho to the Douro, to give the wines more colour. That’s why it goes into Port.",["v2wvin","sethsou","wopvin"]],
+   cor2:["Muito intensa. A polpa também tem cor, o que é raro.","Very deep. The flesh is coloured too, which is rare.",["wopvin","v2wvin"]],
+   acidez:["Alta.","High.",["wopvin","v2wvin","wopbook"]]},
+  {id:"alfrocheiro", frase:["“O Alfrocheiro é uma casta do Dão. Dá tintos de boa cor, muito frutados e com boa acidez.”","“Alfrocheiro is a Dão grape. It makes well-coloured, very fruity reds with good acidity.”"], n:"Alfrocheiro", cor:"t", alias:["Alfrocheiro"],
+   onde:["Casta do Dão. Depois se espalhou para o sul, até o Alentejo.","A Dão grape. It later spread south, as far as the Alentejo.",["wopalf","v2walf"]],
+   plantio:["Nos dados do IVV de 2018, era a 29.ª casta mais plantada do país.","In the IVV’s 2018 data, it was the country’s 29th most planted grape.",["ivv18"]],
+   cor2:["Boa. No Alentejo, foi plantada para dar mais cor aos vinhos.","Good. In the Alentejo it was planted to give the wines more colour.",["wopalf","v2walf"]],
+   acidez:["Boa.","Good.",["wopalf","v2walf"]],
+   aromas:["Muito frutado.","Very fruity.",["wopalf","v2walf"]]},
+  {id:"alvarinho", frase:["“O Alvarinho é a casta de Monção e Melgaço, nos Vinhos Verdes. Tem acidez alta, com pêssego, cítricos e jasmim.”","“Alvarinho is the grape of Monção and Melgaço, in Vinho Verde. It has high acidity, with peach, citrus and jasmine.”"], n:"Alvarinho", cor:"b", alias:["Alvarinho"], base:"alvarinho",
+   onde:["Casta do norte, das margens do rio Minho. A terra dela é Monção e Melgaço, nos Vinhos Verdes. Na Espanha se chama Albariño.","A northern grape, from the banks of the river Minho. Its home is Monção and Melgaço, in Vinho Verde. In Spain it’s called Albariño.",["wopalv","wset","wopbook"]],
+   plantio:["Está entre as cinco castas brancas mais plantadas de Portugal, com cerca de 2% da vinha.","Among Portugal’s five most planted white grapes, with around 2% of the vineyard.",["ivv18","wopkit"]]},
+  {id:"loureiro", frase:["“O Loureiro é uma casta dos Vinhos Verdes. É muito floral, com flor de laranjeira, pêssego e uma acidez refrescante.”","“Loureiro is a Vinho Verde grape. It’s very floral, with orange blossom, peach and refreshing acidity.”"], n:"Loureiro", cor:"b", alias:["Loureiro"],
+   onde:["Nasceu no vale do rio Lima, nos Vinhos Verdes. O nome quer dizer “loureiro”, a árvore do louro.","Born in the Lima river valley, in Vinho Verde. The name means “laurel”, the bay tree.",["woploi","v2wloi"]],
+   plantio:["É uma das três castas brancas mais plantadas de Portugal, com 3 a 4% da vinha.","One of Portugal’s three most planted white grapes, with 3 to 4% of the vineyard.",["ivv18","sethpt","wopkit"]],
+   vinha:["Planta vigorosa, que produz muito.","A vigorous vine that yields a lot.",["woploi","v2wloi"]],
+   acidez:["Refrescante.","Refreshing.",["woploi","v2wloi"]],
+   aromas:["Muito floral: flor de laranjeira e acácia, com pêssego e cítricos.","Very floral: orange blossom and acacia, with peach and citrus.",["woploi","v2wloi"]]},
+  {id:"bical", frase:["“O Bical é uma casta da Bairrada. É fresco, com pêssego e damasco, e com a idade ganha notas de mel.”","“Bical is a Bairrada grape. It’s fresh, with peach and apricot, and with age it gains honeyed notes.”"], n:"Bical", cor:"b", alias:["Bical"], base:"bical",
+   onde:["Casta das Beiras, sobretudo da Bairrada e do Dão. Também é chamada de Borrado das Moscas.","A grape of the Beiras, mainly Bairrada and Dão. It’s also called Borrado das Moscas.",["wopbic","ivv18","sethbic"]],
+   plantio:["Nos dados do IVV de 2018, era a 27.ª casta mais plantada do país.","In the IVV’s 2018 data, it was the country’s 27th most planted grape.",["ivv18"]]},
+  {id:"malvasiafina", frase:["“A Malvasia Fina é uma casta discreta do Douro e do Dão, com notas de cera e noz-moscada.”","“Malvasia Fina is a subtle grape from Douro and Dão, with notes of beeswax and nutmeg.”"], n:"Malvasia Fina", cor:"b", alias:["Malvasia Fina"],
+   onde:["Casta do interior norte, sobretudo do Douro e do Dão. Na Madeira se chama Boal.","A grape of the northern interior, mainly Douro and Dão. In Madeira it’s called Boal.",["wopmf","v2wmf","ivv18"]],
+   plantio:["Nos dados do IVV de 2018, era a 19.ª casta mais plantada do país.","In the IVV’s 2018 data, it was the country’s 19th most planted grape.",["ivv18"]],
+   aromas:["Discreta, com notas de cera, noz-moscada e um toque defumado.","Subtle, with notes of beeswax, nutmeg and a smoky touch.",["wopmf","v2wmf"]],
+   estilos:["Colhida cedo, também serve de base a espumantes.","Picked early, it’s also used as a base for sparkling wine.",["wopmf","v2wmf"]]},
+  {id:"bastardo", frase:["“O Bastardo é a mesma casta que no Jura, na França, se chama Trousseau. No Douro, amadurece muito cedo e entra há muito tempo no vinho do Porto.”","“Bastardo is the same grape the Jura, in France, calls Trousseau. In the Douro it ripens very early and has long gone into Port.”"], n:"Bastardo", cor:"t", alias:["Bastardo"],
+   onde:["É a mesma casta que no Jura, na França, se chama Trousseau. Em Portugal, está sobretudo no Douro.","The same grape the Jura, in France, calls Trousseau. In Portugal it’s mainly in the Douro.",["v2wbas","ctbas"]],
+   vinha:["Amadurece muito cedo. A uva fica muito doce, por isso o vinho pode ter bastante álcool.","Ripens very early. The grapes get very sweet, so the wine can be quite high in alcohol.",["v2wbas","ctbas"]],
+   estilos:["Entra há muito tempo no vinho do Porto.","It has long gone into Port.",["v2wbas","ctbas"]]},
+  {id:"tintamiuda", frase:["“A Tinta Miúda é a mesma casta que na Espanha se chama Graciano. Dá tintos de cor intensa e acidez alta, que envelhecem bem.”","“Tinta Miúda is the same grape Spain calls Graciano. It makes deeply coloured reds with high acidity that age well.”"], n:"Tinta Miúda", cor:"t", alias:["Tinta Miúda"],
+   onde:["É a mesma casta que na Espanha se chama Graciano.","The same grape Spain calls Graciano.",["v2wgra","sethgra"]],
+   vinha:["Bagos pequenos. Amadurece tarde.","Small berries. Ripens late.",["v2wgra","sethgra"]],
+   cor2:["Intensa.","Deep.",["v2wgra","sethgra"]],
+   acidez:["Alta.","High.",["v2wgra","sethgra"]],
+   guarda:["Envelhece bem.","Ages well.",["v2wgra","sethgra"]]},
+  {id:"encruzado", frase:["“O Encruzado é a casta branca do Dão. Tem corpo, elegância e frescor, com flores e cítricos.”","“Encruzado is Dão’s white grape. It has body, elegance and freshness, with flowers and citrus.”"], n:"Encruzado", cor:"b", alias:["Encruzado"], base:"encruzado",
+   onde:["Casta branca do Dão.","Dão’s white grape.",["wopbook","dec","buyer"]]},
+  {id:"fernaopires", frase:["“A Fernão Pires é a casta branca mais plantada de Portugal. É muito aromática, com flor de laranjeira e cítricos.”","“Fernão Pires is Portugal’s most planted white grape. It’s very aromatic, with orange blossom and citrus.”"], n:"Fernão Pires / Maria Gomes", cor:"b", alias:["Fernão Pires","Maria Gomes"], ex:["algumas safras com Maria Gomes"], base:"fernaopires",
+   onde:["Está em muitas regiões do país. Na Bairrada se chama Maria Gomes.","Grown in many regions of the country. In Bairrada it’s called Maria Gomes.",["wset","wopbook","ivv18"]],
+   plantio:["É a casta branca mais plantada de Portugal, com 6 a 7% da vinha.","Portugal’s most planted white grape, with 6 to 7% of the vineyard.",["ivv18","sethpt","wopkit"]]},
+  {id:"siria", frase:["“A Síria, que no Alentejo se chama Roupeiro, é muito aromática quando jovem: cítricos, flores e pêssego.”","“Síria, called Roupeiro in the Alentejo, is very aromatic when young: citrus, flowers and peach.”"], n:"Síria / Roupeiro", cor:"b", alias:["Síria","Roupeiro","Crato Branco"],
+   onde:["Tem muitos nomes: Síria nas Beiras, Roupeiro no Alentejo, Códega no Douro e Crato Branco no Algarve. É a casta branca mais plantada do Alentejo.","It goes by many names: Síria in the Beiras, Roupeiro in the Alentejo, Códega in the Douro and Crato Branco in the Algarve. It’s the Alentejo’s most planted white grape.",["wopsir","v2wsir","valgrape","sethalg"]],
+   aromas:["Muito aromática quando jovem: cítricos, flores, pêssego, melão e louro.","Very aromatic when young: citrus, flowers, peach, melon and bay.",["wopsir","valgrape"]],
+   guarda:["É para beber jovem, porque perde o aroma depressa.","Best drunk young, as it loses its aroma quickly.",["wopsir","v2wsir","valgrape"]],
+   vinha:["Produz muito. Dá o melhor em zonas altas e frescas, como a Beira Interior.","High yielding. At its best in cool, high areas such as Beira Interior.",["wopsir","v2wsir"]],
+   nota:["A Códega do Larinho é outra casta, apesar do nome parecido.","Códega do Larinho is a different grape, despite the similar name."]},
+  {id:"arintoacores", frase:["“O Arinto dos Açores só tem o nome em comum com o Arinto do continente. É uma casta das ilhas, de acidez alta.”","“Arinto dos Açores only shares a name with mainland Arinto. It’s an island grape with high acidity.”"], n:"Arinto dos Açores", cor:"b", alias:["Arinto dos Açores"],
+   onde:["Casta dos Açores. Apesar do nome, não é o Arinto do continente. Na ilha Terceira, o nome era Terrantez da Terceira.","An Azores grape. Despite the name, it isn’t mainland Arinto. On Terceira island it was called Terrantez da Terceira.",["cluboaz","jraz","sethaz","gisaz"]],
+   acidez:["Alta.","High.",["jraz","cluboaz","gisaz"]],
+   plantio:["É a casta tradicional mais plantada dos Açores.","The most planted traditional grape in the Azores.",["jraz","cluboaz"]],
+   hist:["As vinhas do Pico, em currais de pedra de basalto, são Patrimônio Mundial da UNESCO desde 2004.","Pico’s vineyards, in basalt-walled plots called currais, have been UNESCO World Heritage since 2004.",["jraz","cluboaz"]]},
+  {id:"moscatelroxo", frase:["“O Moscatel Roxo é uma casta rara de Setúbal, muito aromática. Esteve perto de desaparecer.”","“Moscatel Roxo is a rare grape from Setúbal, very aromatic. It came close to disappearing.”"], n:"Moscatel Galego Roxo", cor:"r", alias:["Moscatel Galego Roxo","Moscatel Roxo"],
+   onde:["Está na Península de Setúbal, em pouca quantidade. Os bagos são rosados a roxos, daí o nome.","Grown in the Setúbal Peninsula, in small quantities. The berries are pink to purple, hence the name (roxo).",["wopmr","blendmr"]],
+   aromas:["Muito aromática.","Very aromatic.",["wopmr","bacmr"]],
+   hist:["Esteve perto de desaparecer e voltou a ser plantada em Setúbal.","It came close to disappearing and has been replanted in Setúbal.",["blendmr","bacmr"]]},
+  {id:"negramole", frase:["“A Negra Mole é a casta tinta do Algarve. Dá vinhos de cor clara e corpo leve.”","“Negra Mole is the Algarve’s red grape. It makes pale, light-bodied wines.”"], n:"Negra Mole", cor:"t", alias:["Negra Mole"],
+   onde:["É a casta tinta tradicional do Algarve.","The Algarve’s traditional red grape.",["sulneg","sethalg","essneg"]],
+   cor2:["Clara. Dá tintos pálidos, palhetes e rosés.","Pale. It makes pale reds, palhetes and rosés.",["sulneg","essneg","wopneg","sethalg"]],
+   corpo:["Leve.","Light.",["sulneg","essneg"]],
+   hist:["Segundo a Comissão Vitivinícola do Algarve, é a segunda casta mais antiga de Portugal.","According to the Algarve Wine Commission, it’s Portugal’s second-oldest grape.",["sulneg","agroneg"]],
+   vinha:["A cor dos bagos varia muito: há tintos, rosados e quase brancos, às vezes no mesmo cacho.","Berry colour varies a lot: red, pink and almost white, sometimes on the same bunch.",["agroneg","essneg","wopneg"]]},
+  {id:"cercial", frase:["“O Cercial da Bairrada é uma casta de acidez alta e cítrica. Não é o Sercial da Madeira.”","“Bairrada’s Cercial is a grape with high, citrusy acidity. It isn’t Madeira’s Sercial.”"], n:"Cercial", cor:"b", alias:["Cercial"],
+   onde:["Na Bairrada, Cercial é o nome da casta que no Douro e no Dão se chama Cerceal. Não é o Sercial da Madeira.","In Bairrada, Cercial is the name of the grape the Douro and Dão call Cerceal. It isn’t Madeira’s Sercial.",["jrcer","wdser","radcer","v2wser"]],
+   acidez:["Alta, com um lado cítrico.","High, with a citrus side.",["radcer","wdser"]]},
+  {id:"sercialinho", frase:["“O Sercialinho é uma casta rara da Bairrada, criada por cruzamento nos anos 1950. Dá brancos de acidez alta.”","“Sercialinho is a rare Bairrada grape, bred by crossing in the 1950s. It makes whites with high acidity.”"], n:"Sercialinho", cor:"b", alias:["Sercialinho"],
+   onde:["Casta rara da Bairrada.","A rare Bairrada grape.",["wpser","wdser"]],
+   acidez:["Alta.","High.",["wpser","wdser"]],
+   hist:["É um cruzamento feito em Portugal nos anos 1950.","A crossing made in Portugal in the 1950s.",["wpser","wdser"]]}
+];
+
+/* v150c (14 nov 2026): textos enriquecidos com as fontes que a Pri enviou: páginas das castas no site Wines of Portugal (PT),
+   fichas do INIAV (Coleção Ampelográfica Nacional), catálogo "Castas recomendadas para a Região do Dão" (CEVD, 2002) e brochura ViniPortugal 2022.
+   Só entrou o que está em duas origens diferentes. Estes campos substituem ou somam-se aos de cima. */
+Object.assign(PERFIL_F, {
+  cevd:{t:"Centro de Estudos Vitivinícolas do Dão · Castas recomendadas para a Região do Dão (2002)"},
+  wopbr22:{t:"ViniPortugal · brochura Vinhos de Portugal (2022)"},
+  iniavar:{t:"INIAV · Aragonez", u:"https://www.iniav.pt/can/tintas/aragonez-t"},
+  iniavbaga:{t:"INIAV · Baga", u:"https://www.iniav.pt/can/tintas/baga-t"},
+  iniavalf:{t:"INIAV · Alfrocheiro", u:"https://www.iniav.pt/can/tintas/alfrocheiro-t"},
+  iniavari:{t:"INIAV · Arinto", u:"https://www.iniav.pt/can/brancas/arinto-b"},
+  iniavalv:{t:"INIAV · Alvarinho", u:"https://www.iniav.pt/can/brancas/alvarinho-b"},
+  iniavenc:{t:"INIAV · Encruzado", u:"https://www.iniav.pt/can/brancas/encruzado-b"},
+  iniavfp:{t:"INIAV · Fernão Pires", u:"https://www.iniav.pt/can/brancas/fernao-pires-b"},
+  wopenc:{t:"Wines of Portugal · Encruzado", u:"https://winesofportugal.com/pt/vinhos-portugueses/castas/encruzado/"},
+  wopfp:{t:"Wines of Portugal · Fernão Pires", u:"https://winesofportugal.com/pt/vinhos-portugueses/castas/fernao-pires/"}
+});
+const CASTAS_MAIS = {
+  touriganacional:{
+    cor2:["Muito intensa, com tons violeta quando o vinho é jovem.","Very deep, with violet tints when the wine is young.",["woptn","cevd","wopbr22"]],
+    corpo:["Encorpado.","Full-bodied.",["cevd","wopbr22"]],
+    taninos:["Firmes.","Firm.",["wopbook","wset","cevd"]],
+    aromas:["Violeta, bergamota e fruta negra, com um lado de esteva (um arbusto do mato).","Violet, bergamot and black fruit, with a touch of rockrose (a scrubland shrub).",["wopbook","wset","cevd","wopbr22"]],
+    vinha:["Dá pouca uva por planta. Os bagos são pequenos e de película grossa, que é de onde vem tanta cor.","Low yielding. The berries are small and thick-skinned, which is where all that colour comes from.",["woptn","v2wtn","cevd"]]},
+  tintaroriz:{
+    cor2:["Intensa nos bons anos.","Deep in good years.",["iniavar","cevd","wopbr22"]],
+    corpo:["Encorpado nos bons anos.","Full-bodied in good years.",["iniavar","cevd","wopbr22"]],
+    plantio:["É a casta mais plantada de Portugal, com cerca de 11% da vinha.","Portugal’s most planted grape, with about 11% of the vineyard.",["ivv18","sethpt","wopkit","iniavar"]],
+    vinha:["Planta vigorosa, que produz muito. Quando produz demais, a qualidade do vinho cai. Dá o melhor em clima quente e seco.","A vigorous, high-yielding vine. When it overproduces, wine quality drops. At its best in a hot, dry climate.",["wopar","v2war","iniavar","cevd"]]},
+  arinto:{
+    plantio:["É uma das três castas brancas mais plantadas de Portugal, com 3 a 4% da vinha.","One of Portugal’s three most planted white grapes, with 3 to 4% of the vineyard.",["ivv18","sethpt","wopkit","iniavari"]],
+    vinha:["Cachos compactos, de bagos pequenos. Amadurece tarde.","Compact bunches of small berries. Ripens late.",["wopari","v2wari","iniavari","wopbr22"]]},
+  baga:{
+    cor2:["Intensa nos anos secos, quando a uva amadurece bem.","Deep in dry years, when the grapes ripen well.",["wopbaga","iniavbaga"]],
+    aromas:["Cereja, ameixa e frutas silvestres. Com a idade, aparecem tabaco, café e erva seca.","Cherry, plum and wild berries. With age come tobacco, coffee and dried herbs.",["wopbaga","iniavbaga","wopbook"]],
+    plantio:["Está entre as dez castas mais plantadas de Portugal, com cerca de 4% da vinha.","Among Portugal’s ten most planted grapes, with about 4% of the vineyard.",["ivv18","sethpt","wopkit","iniavbaga"]],
+    vinha:["Amadurece tarde e gosta de solos de argila. Se chove em setembro, a uva apodrece com facilidade.","Ripens late and likes clay soils. If it rains in September, the grapes rot easily.",["wopbaga","sethbair","wset","iniavbaga"]]},
+  rabigato:{
+    hist:["O nome vem de “rabo de gato”. Já aparece em documentos do século XVI. Foi confundida com a Rabo de Ovelha, mas são castas diferentes.","The name comes from “cat’s tail”. It already appears in 16th-century documents. It was once confused with Rabo de Ovelha, but they are different grapes.",["ctrab","v2wrab","woprab"]],
+    vinha:["Bagos pequenos.","Small berries.",["woprab","v2wrab"]]},
+  tintocao:{
+    onde:["Casta antiga do Douro, uma das recomendadas para o vinho do Porto. Também está no Dão.","An old Douro grape, one of those recommended for Port. Also grown in the Dão.",["woptc","v2wtc","ivdp","cevd"]],
+    guarda:["Envelhece bem.","Ages well.",["woptc","cevd"]],
+    vinha:["Amadurece tarde e produz muito pouco. A película grossa protege a uva da podridão.","Ripens late and yields very little. Its thick skin protects the grapes from rot.",["woptc","v2wtc","cevd"]]},
+  jaen:{
+    acidez:["No Dão, costuma ser baixa.","In the Dão it’s usually low.",["wopjaen","v2wjaen","cevd"]],
+    vinha:["Amadurece cedo e produz muito. É sensível à podridão.","Ripens early and yields a lot. Prone to rot.",["wopjaen","cevd"]]},
+  alfrocheiro:{
+    aromas:["Muito frutado: frutas silvestres, amora e morango maduro.","Very fruity: wild berries, blackberry and ripe strawberry.",["wopalf","v2walf","iniavalf"]],
+    plantio:["Tem cerca de 1% da vinha do país. Nos dados do IVV de 2018, era a 29.ª casta mais plantada.","About 1% of the country’s vineyard. In the 2018 IVV figures it was the 29th most planted grape.",["ivv18","iniavalf"]],
+    vinha:["Planta vigorosa. A uva apodrece com facilidade.","A vigorous vine. The grapes rot easily.",["wopalf","iniavalf"]]},
+  alvarinho:{
+    aromas:["Pêssego, limão, maracujá e lichia, com flor de laranjeira e jasmim.","Peach, lemon, passion fruit and lychee, with orange blossom and jasmine.",["wopalv","iniavalv","wopbook"]],
+    guarda:["Envelhece bem.","Ages well.",["wopalv","iniavalv","wopbr22"]],
+    vinha:["Planta vigorosa, mas que produz pouco: os cachos são pequenos e os bagos têm muitas grainhas (sementes).","A vigorous vine that yields little: the bunches are small and the berries have many pips.",["wopalv","iniavalv"]]},
+  loureiro:{
+    estilos:["Em corte, costuma se juntar ao Arinto e à Trajadura.","In blends it usually joins Arinto and Trajadura.",["woploi","v2wloi"]]},
+  bical:{
+    corpo:["Macio.","Soft.",["wopbic","cevd"]],
+    madeira:["Dá bons resultados em barrica.","Does well in barrel.",["wopbic","cevd"]],
+    vinha:["Amadurece cedo. A uva chega a muito açúcar, por isso o vinho pode ter bastante álcool.","Ripens early. The grapes get very sweet, so the wine can be quite high in alcohol.",["wopbic","cevd"]]},
+  bastardo:{
+    vinha:["Amadurece muito cedo. A uva fica muito doce, por isso o vinho pode ter bastante álcool.","Ripens very early. The grapes get very sweet, so the wine can be quite high in alcohol.",["v2wbas","ctbas","cevd"]]},
+  encruzado:{
+    onde:["Casta branca do Dão. Quase toda a área plantada está lá.","Dão’s white grape. Almost all of its plantings are there.",["wopenc","iniavenc","wopbook"]],
+    guarda:["Ganha complexidade com os anos.","Gains complexity over the years.",["wopbook","vi","dec","cevd"]],
+    vinha:["Produz de forma regular e dá poucos problemas na vinha.","Yields regularly and gives few problems in the vineyard.",["wopenc","cevd"]]},
+  fernaopires:{
+    acidez:["Baixa. Por isso tem menos frescor que outras brancas.","Low, so it has less freshness than other whites.",["iniavfp","wopbr22"]],
+    estilos:["Faz vinho de uma casta só, cortes, espumante e colheita tardia (vinho doce).","Makes varietal wines, blends, sparkling and late harvest (sweet wine).",["wopfp","iniavfp","wopbr22"]],
+    plantio:["É a casta branca mais plantada de Portugal e a 4.ª no total, com cerca de 6% da vinha.","Portugal’s most planted white grape and 4th overall, with about 6% of the vineyard.",["ivv18","sethpt","wopkit","iniavfp"]],
+    vinha:["Amadurece cedo e produz muito. É sensível à geada.","Ripens early and yields a lot. Sensitive to frost.",["wopfp","iniavfp"]]}
+};
+CASTAS_CARTA.forEach(c=>Object.assign(c, CASTAS_MAIS[c.id]||{}));
+
+/* v150d (14 nov 2026, OK da Pri): nas castas, a página do Wines of Portugal (entidade oficial) passa a bastar como fonte.
+   Continua de fora o que outra fonte contradiz (acidez do Viosinho, cor do Tinto Cão, taninos do Alfrocheiro, rendimento da Malvasia Fina). */
+const CASTAS_WOP = {
+  tourigafranca:{
+    cor2:["Intensa.","Deep.",["woptf","wopbook","we"]],
+    corpo:["Encorpado, com muita fruta.","Full-bodied, with plenty of fruit.",["woptf"]],
+    taninos:["Estrutura firme, mas elegante.","Firm but elegant structure.",["woptf","we","wopbook"]],
+    aromas:["Amora, rosa e flores do campo, com um lado de esteva (um arbusto do mato).","Blackberry, rose and wild flowers, with a touch of rockrose (a scrubland shrub).",["woptf","v2wtf","wopbook"]],
+    vinha:["Produz bem e de forma regular, e resiste bem às doenças.","Yields well and regularly, and resists disease well.",["woptf","v2wtf"]]},
+  tintaroriz:{
+    aromas:["Fruta vermelha, ameixa e amora, com especiarias.","Red fruit, plum and blackberry, with spice.",["wopbook","fal","wopar"]]},
+  arinto:{
+    estilos:["Muito usado em corte, para dar frescor a castas com menos acidez. Também faz espumante.","Widely used in blends to bring freshness to lower-acid grapes. Also makes sparkling wine.",["wopari","wopbook"]],
+    guarda:["Envelhece bem.","Ages well.",["wopsite","wopbook","wset"]]},
+  viosinho:{
+    onde:["Casta do Douro, de origem transmontana. Entra nos brancos da região e no Porto branco. Aparece muito em vinhas velhas, misturada com outras castas.","A Douro grape of Trás-os-Montes origin. It goes into the region’s whites and white Port. Often found in old vineyards, mixed with other grapes.",["wopvio","v2wvio"]],
+    vinha:["Cachos e bagos pequenos. Amadurece cedo e produz pouco. Gosta de calor e de sol.","Small bunches and berries. Ripens early and yields little. Likes heat and sun.",["wopvio","v2wvio"]]},
+  rabigato:{
+    onde:["Casta branca do Douro, presente em todo o Douro Superior. Entra em vinhos brancos e no Porto branco.","A white Douro grape, found throughout the Douro Superior. It goes into white wines and white Port.",["woprab","v2wrab","ivdp"]],
+    aromas:["Flor de laranjeira e de acácia, com um lado vegetal e mineral.","Orange and acacia blossom, with a vegetal, mineral side.",["woprab","v2wrab"]]},
+  gouveio:{
+    onde:["Casta do Douro e de Trás-os-Montes. Hoje está em todo o país e cresce depressa no Alentejo.","A grape from the Douro and Trás-os-Montes. Today it’s grown all over the country and is spreading fast in the Alentejo.",["wopgou","v2wgou","wopbook"]],
+    aromas:["Frescos e cítricos, com pêssego e anis.","Fresh and citrusy, with peach and aniseed.",["wopgou"]],
+    vinha:["Amadurece relativamente cedo.","Ripens fairly early.",["wopgou","v2wgou"]]},
+  tintocao:{
+    corpo:["Encorpado.","Full-bodied.",["woptc","cevd"]],
+    aromas:["Flores delicadas.","Delicate flowers.",["woptc"]]},
+  jaen:{
+    aromas:["Perfumada, com amora, mirtilo e cereja.","Perfumed, with blackberry, blueberry and cherry.",["wopjaen","v2wjaen"]]},
+  vinhao:{
+    plantio:["É a casta tinta mais plantada dos Vinhos Verdes. Nos dados do IVV de 2018, era a 13.ª do país.","The most planted red grape in Vinho Verde. In the 2018 IVV figures it ranked 13th in the country.",["wopvin","ivv18"]]},
+  alvarinho:{
+    hist:["Foi uma das primeiras castas portuguesas a ser engarrafada sozinha, com o sucesso dos vinhos de Monção e Melgaço.","One of the first Portuguese grapes to be bottled on its own, thanks to the success of the wines of Monção and Melgaço.",["wopalv"]]},
+  loureiro:{
+    aromas:["Muito floral: flor de laranjeira, acácia e tília, com maçã, pêssego e cítricos.","Very floral: orange blossom, acacia and linden, with apple, peach and citrus.",["woploi","v2wloi"]],
+    hist:["Só há pouco tempo passou a ser vista como uma casta nobre.","Only recently has it come to be seen as a noble grape.",["woploi"]]},
+  bical:{
+    aromas:["Pêssego e damasco. Em anos mais quentes, aparece um toque de fruta tropical.","Peach and apricot. In warmer years a touch of tropical fruit shows.",["wopbic","sethbic"]],
+    guarda:["Com a idade, ganha notas de mel.","With age it gains honeyed notes.",["wopbic","sethbic"]],
+    estilos:["Na Bairrada, é muito usado em espumante, muitas vezes com Arinto e Cercial.","In Bairrada it’s widely used for sparkling wine, often with Arinto and Cercial.",["wopbic","sethbic"]]},
+  malvasiafina:{
+    aromas:["Discreta, com notas de mel, cera, noz-moscada e um toque defumado.","Discreet, with notes of honey, wax, nutmeg and a smoky touch.",["wopmf","v2wmf"]],
+    estilos:["É sobretudo uma casta de corte. Colhida cedo, serve de base a espumantes, com bons resultados em Távora-Varosa.","Mainly a blending grape. Picked early, it’s a base for sparkling wines, with good results in Távora-Varosa.",["wopmf","v2wmf"]]},
+  encruzado:{
+    aromas:["Flores delicadas e cítricos, com pera e marmelo. Às vezes aparece um toque de resina e um lado mineral.","Delicate flowers and citrus, with pear and quince. Sometimes a resinous touch and a mineral side show.",["wopbook","vi","dec","wopenc"]]},
+  fernaopires:{
+    onde:["Está em todo o país, com mais força no Tejo, em Lisboa e na Bairrada, onde se chama Maria Gomes.","Grown all over the country, most of all in Tejo, Lisboa and Bairrada, where it’s called Maria Gomes.",["wopfp","wset","wopbook","ivv18"]],
+    aromas:["Muito aromático: flor de laranjeira, tília, rosa, lima e tangerina.","Very aromatic: orange blossom, linden, rose, lime and tangerine.",["wopbook","wset","folly","wopfp"]]},
+  moscatelroxo:{
+    estilos:["Dá vinhos generosos muito doces, de sabor persistente.","Makes very sweet fortified wines with a lingering flavour.",["wopmr"]],
+    vinha:["Nasceu de uma mutação natural do Moscatel Galego. Os cachos e os bagos são menores que os dele.","It arose from a natural mutation of Moscatel Galego. Its bunches and berries are smaller.",["wopmr"]]}
+};
+CASTAS_CARTA.forEach(c=>Object.assign(c, CASTAS_WOP[c.id]||{}));
 /* Carta atual: tira dicas e perguntas que nomeiam vinhos que não estão nesta carta (voltam em dezembro) */
 if(CARTA_ATUAL){
   const NF=["Tricot","Poeira","Raposinha","Quinta de Santiago","Donzelinho","Pedra Alta","QPA","Pedra Nº","Gamine","Purista Rosé","Ciste","Menina d","Pi…Não","Tedo","Blanc de Blancs","3B","Cortinha Velha Velha Reserva","Velha Reserva da Cortinha","Rosa Duck","Duckman","Revela Alfrocheiro","Aline Domingues","Odile Bouchard","Joana Santiago","Olga Martins","Diana Moreira","Paula Bragança"];
@@ -2356,7 +2742,7 @@ function pDescobrir(){
   {
     const g=CASTAS_PT[l.pt], allE=!!l.byStyle;
     const alts=os.length>1?`<div class="dalts"><span class="lbl">${allE?L("Como gosta?","How do they like it?"):L("Alternativas","Alternatives")}</span><div class="dalt-row">${os.map((o,i)=>`<button class="dalt" data-dalt="${i}" aria-pressed="${o===l}">${esc(o.label)}</button>`).join("")}</div></div>`:"";
-    match=`${alts}${dSotPick(dPick)}<div class="dmatch" style="--c:var(${g.cor==="b"?"--bra":"--tin"})" key="${l.pt}">
+    match=`${alts}${dSotPick(dPick)}<div class="dmatch" style="--c:var(${g.cor==="b"?"--bra":g.cor==="r"?"--ros":"--tin"})" key="${l.pt}">
       <div class="dpair"><span>${esc(dIntN(c))}</span><i aria-hidden="true">→</i><b>${esc(g.n)}</b></div>
       ${l.e&&!allE?`<div class="dstyle">${esc(tx(l.e))}</div>`:""}${l.also&&l.also.length?`<div class="dstyle">${L("Também combina:","Also a match:")} ${esc(l.also.join(", "))}</div>`:""}
       ${l.frase&&!(l.semTxt&&!dHasCarta(l))?`<p class="vsay">${tx(l.frase)}</p>`:""}
@@ -2378,6 +2764,50 @@ document.addEventListener("click",e=>{
 });
 
 
+
+/* ---------- Castas portuguesas (v150, 14 nov 2026): ranking da carta ativa + perfil + vinhos. Dados em castas.js (CASTAS_CARTA). ---------- */
+function cWines(c){
+  const al=c.alias.map(fold), ex=(c.ex||[]).map(fold);
+  return W.filter(w=>{ let s=" "+fold(w.castas||"")+" "; ex.forEach(x=>{ s=s.split(x).join(" "); }); s=s.replace(/[^a-z0-9]+/g," ");
+    return al.some(a=>s.indexOf(" "+a.replace(/[^a-z0-9]+/g," ")+" ")>=0); });
+}
+let cOpen=null, cFil="todas";
+/* da ficha do vinho para o perfil da casta (só castas com perfil e confirmadas na ficha) */
+function cLinks(w){ if(typeof CASTAS_CARTA==="undefined"||isLocked("castas")) return ""; const cs=CASTAS_CARTA.filter(c=>cWines(c).some(x=>x.id===w.id)); return cs.length?`<span class="clinks"><span>${L("Conhecer a casta:","About the grape:")}</span> ${cs.map(c=>`<button class="clink" data-casta="${c.id}">${esc(c.n.split(" / ")[0])}</button>`).join(" ")}</span>`:""; }
+document.addEventListener("click",e=>{ const t=e.target.closest("[data-casta]"); if(!t) return; const rep=sheetPushed; navClose=dlg.open; if(dlg.open) dlg.close(); cOpen=t.dataset.casta; cFil="todas"; go("castas",rep);
+  setTimeout(()=>{ const d=document.querySelector('details.cst[data-cst="'+cOpen+'"]'); if(d){ const tb=Math.round((document.querySelector(".topbar")||document.body).getBoundingClientRect().bottom||64); scrollTo(0,Math.max(0,d.getBoundingClientRect().top+scrollY-tb-8)); } },340); });
+function pCastas(){
+  const TC=[["cor2",P("Cor","Colour")],["acidez",P("Acidez","Acidity")],["corpo",P("Corpo","Body")],["taninos",P("Taninos","Tannins")],["aromas",P("Aromas","Aromas")],["madeira",P("Madeira","Oak")],["guarda",P("Guarda","Ageing")],["estilos",P("Estilos","Styles")]];
+  const TH=[["plantio",P("Plantio","Plantings")],["hist",P("História","History")],["vinha",P("Na vinha","In the vineyard")]], T=TC.concat(TH);
+  const i18=a=>esc(LANG==="en"?a[1]:a[0]);
+  const rows=CASTAS_CARTA.map(c=>({c,g:Object.assign({},c.base&&CASTAS_PT[c.base]||{},c),ws:cWines(c)})).filter(r=>r.ws.length).sort((a,b)=>b.ws.length-a.ws.length);
+  const maxN=rows.length?rows[0].ws.length:1, isB=r=>r.c.cor!=="t", nB=rows.filter(isB).length, nT=rows.length-nB;
+  const shown=rows.filter(r=>cFil==="todas"||(cFil==="b")===isB(r));
+  let rk=0; rows.forEach((r,i)=>{ if(!i||r.ws.length!==rows[i-1].ws.length) rk=i+1; r.rk=rk; });
+  const used=new Set();
+  const item=r=>{ const g=r.g, n=r.ws.length;
+    [g.onde].concat(T.map(([k])=>g[k])).forEach(x=>{ if(x&&x[2]) x[2].forEach(f=>used.add(f)); });
+    const mk=(TT,lab)=>{ const d=TT.filter(([k])=>g[k]).map(([k,l])=>`<dt>${tx(l)}</dt><dd>${i18(g[k])}</dd>`).join(""); return d?`<div class="cgrp"><span class="lbl">${lab}</span><dl class="dprof">${d}</dl></div>`:""; };
+    const dl=mk(TC,L("No copo","In the glass"));
+    const dh=TH.filter(([k])=>g[k]).map(([k,l])=>`<dt>${tx(l)}</dt><dd>${i18(g[k])}</dd>`).join("");
+    const more=dh?`<details class="cmore"><summary>${L("Na vinha e na história","Vineyard and history")}</summary><dl class="dprof">${dh}</dl></details>`:"";
+    return `<details class="cst" data-cst="${g.id}" style="--c:var(${g.cor==="b"?"--bra":g.cor==="r"?"--ros":"--tin"})"${cOpen===g.id?" open":""}>
+      <summary><span class="rk" aria-hidden="true"><b>${n}</b><i>${n===1?L("vinho","wine"):L("vinhos","wines")}</i></span><span class="nm"><i class="cdot" aria-hidden="true"></i>${esc(g.n)}<span class="vh">, ${g.cor==="b"?L("branca","white"):g.cor==="r"?L("roxa","pink-skinned"):L("tinta","red")}, ${n} ${n===1?L("vinho","wine"):L("vinhos","wines")}</span></span><span class="cbar" aria-hidden="true"><i style="width:${Math.round(n/maxN*100)}%"></i></span></summary>
+      <div class="cst-in">${g.onde?`<p class="clead">${i18(g.onde)}</p>`:""}${g.frase?`<div class="cgrp"><span class="lbl">${L("Para dizer ao cliente","To tell the guest")}</span><p class="vsay">${i18(g.frase)}</p></div>`:""}
+        <div class="dsrow"><span class="lbl">${L("Na carta","On the list")} · ${n}</span><div class="chips">${r.ws.map(w=>wchip(w.id)).join("")}</div>${g.nota?`<p class="dnota">${i18(g.nota)}</p>`:""}</div>
+        ${dl}${more}</div></details>`; };
+  const list=shown.map(item).join("");
+  const F=Object.assign({},CFONTES,PERFIL_F), src=[...used].filter(k=>F[k]).map(k=>F[k]);
+  return `<section class="panel cstp"><div class="sec-h vhead"><h2>${L("As castas que mandam na nossa carta","The grapes that rule our list")}</h2>
+    <p>${L("Da mais presente para a menos. Toque numa casta para ver o que dizer e em quais vinhos ela está.","Most frequent first. Tap a grape to see what to say and which wines it’s in.")}</p></div>
+    <div class="seg cseg" role="group" aria-label="${L("Filtrar por cor","Filter by colour")}">${[["todas",L("Todas","All"),rows.length,""],["t",L("Tintas","Red"),nT,"--tin"],["b",L("Brancas","White"),nB,"--bra"]].map(([id,lab,q,c])=>`<button type="button" data-cfil="${id}" aria-pressed="${cFil===id}">${c?`<i class="cdot" style="--c:var(${c})" aria-hidden="true"></i>`:""}${lab} <span class="cq">${q}</span></button>`).join("")}</div>
+    <div class="cst-list">${list}</div>
+    <div class="qfoot" role="note"><p>${L("Um vinho só conta para uma casta quando a ficha diz que ela está lá. O perfil descreve a casta em geral. Para o estilo de cada vinho, abra a ficha.","A wine only counts for a grape when its sheet names it. The profile describes the grape in general. For each wine’s style, open its sheet.")}</p>
+    <details class="dsrc"><summary>${L("Todas as fontes","All sources")} · ${src.length}</summary><ul>${src.map(s=>`<li>${s.u?`<a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a>`:esc(s.t)}</li>`).join("")}</ul></details></div></section>`;
+}
+document.addEventListener("click",e=>{ const t=e.target.closest("[data-cfil]"); if(!t) return; cFil=t.dataset.cfil; cOpen=null; render(); });
+document.addEventListener("toggle",e=>{ const d=e.target; if(d.classList&&d.classList.contains("cst")){ if(d.open){ cOpen=d.dataset.cst; document.querySelectorAll("details.cst[open]").forEach(o=>{ if(o!==d) o.open=false; });
+  requestAnimationFrame(()=>{ const tb=Math.round((document.querySelector(".topbar")||document.body).getBoundingClientRect().bottom||64), y=d.getBoundingClientRect().top; if(y<tb+4||y>innerHeight*0.45) scrollTo({top:Math.max(0,y+scrollY-tb-8),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); }); } else if(cOpen===d.dataset.cst) cOpen=null; } },true);
 
 /* hand-drawn illustrations: one wobble filter + offset "print" fills */
 const ROUGH = `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -2504,7 +2934,7 @@ function sheet(w){
     desc:`${wf(w,"desc")?`<div class="block"><p>${esc(desc)}</p></div>`:""}
       <div class="block"><h4>${L("Características principais","Key facts")}</h4><dl class="facts">
         <dt>${L("Região","Region")}</dt><dd>${esc(reg(w.regiao))}${sub?`, ${esc(sub)}`:""}</dd>
-        ${w.castas?`<dt>${L("Castas","Grapes")}</dt><dd>${esc(wf(w,"castas"))}</dd>`:""}
+        ${w.castas?`<dt>${L("Castas","Grapes")}</dt><dd>${esc(wf(w,"castas"))}${cLinks(w)}</dd>`:""}
         <dt>${L("Tipo","Style")}</dt><dd>${esc(tipo)}</dd>
         ${w.corpo?`<dt>${L("Corpo","Body")}</dt><dd>${esc(wf(w,"corpo"))}</dd>`:""}
         <dt>${L("Produtor","Producer")}</dt><dd>${esc(w.produtor)}</dd>
@@ -2576,6 +3006,7 @@ let qSels=["gluten"];
 
 /* ícones da barra (traço simples, herdam a cor) */
 const ICO = {
+  castas:'<path d="M12 20.5V11"/><path d="M12 11c-4.4 0-7-2.3-7-6.2 4.2 0 7 2 7 6.2z"/><path d="M12 14c0-3.3 2.4-5.2 6.8-5.2 0 3.7-2.5 5.2-6.8 5.2z"/>',
   stock:'<path d="M4 8.5 12 4l8 4.5v7L12 20l-8-4.5z"/><path d="M4 8.5 12 13l8-4.5M12 13v7"/>',
   inicio:'<path d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/>',
   vinhos:'<path d="M8 3h8l-.6 6.2A3.4 3.4 0 0 1 12 12.4a3.4 3.4 0 0 1-3.4-3.2zM12 12.4V20M8.5 20.5h7"/><path d="M8.4 7.5h7.2"/>',
@@ -2591,7 +3022,7 @@ const ICO = {
 };
 const RAMO = `<svg class="ramo" viewBox="0 0 300 200" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><defs><filter id="hSa" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="1.3"/></filter></defs><g filter="url(#hSa)"><path fill="currentColor" stroke="none" d="M20.5 187.1L24.5 185.3 28.5 183.4 32.6 181.5 36.6 179.6 40.7 177.7 44.8 175.8 48.9 173.8 53 171.8 57.1 169.8 61.3 167.7 65.4 165.7 69.6 163.6 73.8 161.4 78 159.3 82.2 157.1 86.4 154.9 90.7 152.7 94.9 150.4 99.2 148.1 103.5 145.8 107.8 143.4 112.1 141.1 116.4 138.6 120.7 136.2 125.1 133.7 129.4 131.2 133.8 128.7 138.1 126.2 142.5 123.6 146.9 120.9 151.3 118.3 155.7 115.6 160.1 112.9 164.6 110.1 169 107.3 173.5 104.5 177.9 101.7 182.4 98.8 186.8 95.9 191.3 92.9 195.8 89.9 200.3 86.9 204.8 83.9 209.3 80.8 213.8 77.6 218.4 74.5 222.9 71.3 227.4 68.1 232 64.8 236.5 61.5 241.1 58.1 245.6 54.8 250.2 51.3 254.8 47.9 259.3 44.4 263.9 40.8 268.5 37.3 273.1 33.7 277.7 30 282.3 26.3 281.7 25.7 277.1 29.4 272.5 33 267.9 36.6 263.4 40.1 258.8 43.6 254.2 47.1 249.6 50.5 245 53.9 240.5 57.3 235.9 60.6 231.3 63.9 226.8 67.1 222.2 70.4 217.7 73.5 213.2 76.7 208.6 79.8 204.1 82.8 199.6 85.9 195.1 88.9 190.6 91.8 186.1 94.7 181.6 97.6 177.2 100.5 172.7 103.3 168.2 106.1 163.8 108.9 159.3 111.6 154.9 114.3 150.5 116.9 146.1 119.6 141.7 122.2 137.3 124.7 132.9 127.3 128.6 129.8 124.2 132.2 119.9 134.7 115.5 137.1 111.2 139.5 106.9 141.8 102.6 144.1 98.3 146.4 94 148.7 89.8 150.9 85.5 153.1 81.3 155.3 77.1 157.5 72.9 159.6 68.7 161.7 64.5 163.8 60.3 165.8 56.2 167.9 52 169.8 47.9 171.8 43.8 173.8 39.7 175.7 35.6 177.6 31.6 179.4 27.5 181.3 23.5 183.1 19.5 184.9Z"/><path fill="currentColor" fill-opacity=".16" stroke-width=".9" d="M54.2 170L50.7 167.7 49.1 165.8 48 164 47.2 162.3 46.6 160.6 45.9 158.9 45.2 157.1 44.6 155.4 44.4 153.8 44.7 152.3 45 150.8 45.2 149.2 45.2 147.7 45.2 146.1 45.5 144.6 46.3 143.1 47.2 141.8 48.2 140.4 48.9 139 49.6 137.5 50.3 136.1 51.3 134.7 52.7 133.4 54.1 132.1 55.4 130.8 56.7 129.5 58 128.2 59.5 126.9 61.2 125.7 63.6 124.6 63.6 124.6 64.9 126.5 65.6 128.2 66.1 129.9 66.4 131.5 66.7 133.2 67.1 134.8 67.6 136.5 68.1 138.2 68.2 139.8 68.1 141.4 68 142.9 67.9 144.5 68.2 146.1 68.5 147.7 68.6 149.3 68.2 150.8 67.7 152.3 67.2 153.8 66.9 155.3 66.8 156.9 66.6 158.4 66 159.9 65.1 161.2 64 162.6 63 164 62.1 165.4 61.1 166.7 59.8 168 57.8 169.2 54.2 170Z"/><path stroke-width=".55" stroke-opacity=".7" d="M54.2 170L54.3 168.5 54.4 166.9 54.5 165.4 54.7 163.8 54.8 162.3 55 160.7 55.1 159.2 55.3 157.6 55.5 156.1 55.7 154.6 55.9 153 56.2 151.5 56.5 150 56.7 148.5 57 147 57.4 145.4 57.7 143.9 58.1 142.4 58.5 140.9 58.9 139.4 59.3 137.9 59.7 136.5 60.1 135 60.6 133.5 61.1 132 61.6 130.5 62.1 129.1"/><path stroke-width=".55" stroke-opacity=".7" d="M54.7 163Q50.9 158.5 46.3 153.7M54.7 163Q60.1 160.4 64.8 157.6M55.9 153.3Q52 148.7 47.9 144.1M55.9 153.3Q61.3 150.7 66.6 148M57.7 143.8Q55 139.4 52.7 135.2M57.7 143.8Q62 140.9 66.6 138M60.3 134.4Q59.9 130.5 60.3 126.8M60.3 134.4Q62.3 131 65 127.8"/><path fill="currentColor" fill-opacity=".16" stroke-width=".9" d="M54.2 170L57.1 167.6 59.2 166.9 61.1 166.6 62.8 166.7 64.4 166.8 66.1 166.9 67.8 166.9 69.5 167 71 167.5 72.3 168.3 73.6 169.2 75 169.9 76.4 170.4 77.9 170.8 79.3 171.5 80.5 172.6 81.6 173.8 82.8 175 84 176 85.3 176.8 86.6 177.7 87.8 178.8 88.8 180.2 89.8 181.6 90.9 183 92 184.2 93.1 185.5 94.1 186.9 95 188.6 95.6 190.7 95.6 190.7 93.3 191.9 91.3 192.5 89.4 192.9 87.6 193.1 85.7 193.3 83.9 193.5 82 193.9 80.2 194.1 78.4 194.1 76.9 193.8 75.3 193.3 73.8 193.1 72.1 193 70.4 192.9 68.8 192.6 67.5 191.9 66.2 190.9 65 189.9 63.6 189.1 62.2 188.5 60.9 187.7 59.7 186.6 58.7 185.1 57.8 183.4 56.9 181.8 56 180.3 55.1 178.6 54.3 176.7 53.8 174.1 54.2 170Z"/><path stroke-width=".55" stroke-opacity=".7" d="M54.2 170L55.5 170.9 56.8 171.8 58.1 172.6 59.4 173.5 60.7 174.3 62 175.1 63.3 176 64.6 176.8 65.9 177.6 67.3 178.4 68.6 179.1 70 179.9 71.3 180.6 72.7 181.3 74.1 182 75.5 182.7 76.9 183.4 78.3 184 79.7 184.7 81.1 185.3 82.5 185.9 84 186.4 85.4 187 86.9 187.6 88.3 188.1 89.8 188.7 91.2 189.2"/><path stroke-width=".55" stroke-opacity=".7" d="M60 173.9Q65.4 171.3 70.5 169.4M60 173.9Q61.2 179.8 62.1 186.3M68.3 179Q73.8 176.4 79.2 173.9M68.3 179Q69.5 184.9 70.6 191M77 183.5Q81.9 181.9 87 180.1M77 183.5Q78.7 188.3 80.7 192.7M86 187.2Q89.8 187.8 94.1 187.7M86 187.2Q88.8 190 91.9 191.9"/><path fill="currentColor" fill-opacity=".16" stroke-width=".9" d="M104.8 144L101.7 142 100.2 140.3 99.3 138.7 98.6 137.1 98.1 135.6 97.5 134.1 96.8 132.5 96.3 131 96.2 129.6 96.4 128.2 96.7 126.9 96.9 125.5 96.9 124.1 96.9 122.7 97.2 121.4 97.8 120.1 98.7 118.9 99.6 117.7 100.2 116.4 100.8 115.2 101.4 113.9 102.4 112.7 103.5 111.5 104.8 110.4 106 109.2 107.1 108.1 108.3 106.9 109.6 105.8 111.2 104.7 113.3 103.8 113.3 103.8 114.4 105.4 115.1 106.9 115.5 108.4 115.8 109.9 116 111.4 116.4 112.8 116.8 114.3 117.2 115.8 117.3 117.2 117.3 118.6 117.1 120 117.1 121.4 117.3 122.8 117.5 124.3 117.6 125.7 117.3 127.1 116.8 128.3 116.3 129.6 116.1 131 116 132.4 115.8 133.7 115.3 135 114.5 136.3 113.6 137.5 112.6 138.7 111.8 139.9 111 141.1 109.7 142.3 108 143.3 104.8 144Z"/><path stroke-width=".55" stroke-opacity=".7" d="M104.8 144L104.9 142.7 105 141.3 105.1 139.9 105.2 138.5 105.4 137.1 105.5 135.8 105.7 134.4 105.8 133 106 131.7 106.2 130.3 106.4 129 106.6 127.6 106.9 126.2 107.1 124.9 107.4 123.6 107.7 122.2 108 120.9 108.3 119.5 108.7 118.2 109 116.9 109.4 115.6 109.8 114.2 110.2 112.9 110.6 111.6 111 110.3 111.5 109 111.9 107.7"/><path stroke-width=".55" stroke-opacity=".7" d="M105.3 137.8Q101.9 133.8 97.9 129.5M105.3 137.8Q110.1 135.5 114.2 133M106.4 129.2Q102.9 125.1 99.3 121M106.4 129.2Q111.2 126.9 115.9 124.5M108 120.7Q105.6 116.9 103.6 113.1M108 120.7Q111.8 118.2 115.9 115.7M110.4 112.4Q110 109 110.4 105.7M110.4 112.4Q112.1 109.4 114.5 106.5"/><path fill="currentColor" fill-opacity=".16" stroke-width=".9" d="M104.8 144L107.1 141.7 108.9 140.8 110.6 140.4 112.1 140.3 113.5 140.3 115 140.2 116.6 140.1 118 140 119.4 140.3 120.6 140.9 121.9 141.6 123.1 142.1 124.5 142.4 125.8 142.7 127.1 143.2 128.3 144 129.4 145 130.5 146 131.6 146.8 132.9 147.4 134.1 148 135.2 148.9 136.2 150.1 137.3 151.2 138.3 152.3 139.4 153.3 140.5 154.4 141.5 155.5 142.4 156.9 143.2 158.8 143.2 158.8 141.2 160 139.5 160.7 137.8 161.2 136.2 161.6 134.6 161.9 133 162.3 131.4 162.7 129.8 163.1 128.3 163.2 126.8 163.1 125.5 162.8 124 162.7 122.5 162.8 121 162.8 119.6 162.7 118.4 162.2 117.2 161.4 116 160.7 114.7 160.1 113.5 159.6 112.2 159.1 111.1 158.2 110.1 157 109.1 155.6 108.2 154.2 107.2 152.9 106.3 151.6 105.4 149.9 104.8 147.7 104.8 144Z"/><path stroke-width=".55" stroke-opacity=".7" d="M104.8 144L106 144.7 107.2 145.3 108.4 146 109.6 146.6 110.9 147.3 112.1 147.9 113.3 148.5 114.6 149.1 115.8 149.7 117 150.3 118.3 150.9 119.6 151.4 120.8 151.9 122.1 152.5 123.4 153 124.7 153.4 125.9 153.9 127.2 154.4 128.5 154.8 129.9 155.2 131.2 155.6 132.5 156 133.8 156.4 135.1 156.8 136.5 157.1 137.8 157.5 139.1 157.8"/><path stroke-width=".55" stroke-opacity=".7" d="M110.2 146.9Q114.8 144.2 119.2 142.1M110.2 146.9Q111.8 152 113.2 157.7M118 150.7Q122.6 148 127.2 145.3M118 150.7Q119.6 155.9 121.1 161.2M126.1 154Q130.3 152.2 134.6 150.1M126.1 154Q128 158.1 130.1 161.8M134.3 156.5Q137.8 156.7 141.5 156.2M134.3 156.5Q137 158.7 140 160.2"/><path fill="currentColor" fill-opacity=".16" stroke-width=".9" d="M157.1 113.9L154.4 112.1 153.1 110.6 152.3 109.2 151.7 107.8 151.3 106.5 150.7 105.2 150.1 103.8 149.7 102.5 149.6 101.3 149.8 100.1 150.1 98.9 150.2 97.7 150.2 96.5 150.2 95.3 150.5 94.1 151 93 151.8 91.9 152.5 90.9 153.1 89.8 153.6 88.6 154.2 87.5 155 86.5 156 85.5 157.1 84.5 158.2 83.5 159.2 82.4 160.2 81.4 161.3 80.5 162.7 79.5 164.5 78.7 164.5 78.7 165.5 80.1 166.1 81.5 166.5 82.8 166.7 84 166.9 85.3 167.2 86.6 167.6 87.9 168 89.2 168.1 90.4 168 91.7 167.9 92.9 167.9 94.1 168 95.3 168.3 96.6 168.3 97.8 168.1 99 167.6 100.2 167.2 101.3 167 102.5 166.9 103.7 166.8 104.9 166.3 106 165.6 107.1 164.8 108.1 164 109.2 163.3 110.3 162.5 111.3 161.4 112.3 159.9 113.2 157.1 113.9Z"/><path stroke-width=".55" stroke-opacity=".7" d="M157.1 113.9L157.2 112.7 157.3 111.5 157.4 110.2 157.5 109 157.6 107.8 157.7 106.6 157.9 105.4 158 104.3 158.2 103.1 158.3 101.9 158.5 100.7 158.7 99.5 158.9 98.3 159.1 97.1 159.4 96 159.6 94.8 159.9 93.6 160.2 92.5 160.5 91.3 160.8 90.1 161.1 89 161.5 87.8 161.8 86.7 162.2 85.5 162.6 84.4 162.9 83.2 163.3 82.1"/><path stroke-width=".55" stroke-opacity=".7" d="M157.6 108.4Q154.6 104.9 151.1 101.2M157.6 108.4Q161.7 106.4 165.4 104.2M158.5 100.9Q155.5 97.3 152.3 93.7M158.5 100.9Q162.7 98.9 166.8 96.8M159.9 93.5Q157.8 90.1 156.1 86.8M159.9 93.5Q163.2 91.3 166.8 89.1M162 86.2Q161.7 83.2 162 80.3M162 86.2Q163.5 83.6 165.6 81.1"/><path fill="currentColor" fill-opacity=".16" stroke-width=".9" d="M157.1 113.9L158.9 111.6 160.4 110.7 161.8 110.2 163.1 110 164.4 109.9 165.7 109.6 167 109.4 168.3 109.2 169.5 109.4 170.6 109.8 171.7 110.3 172.9 110.6 174.1 110.7 175.3 110.9 176.5 111.2 177.5 111.8 178.6 112.6 179.6 113.3 180.7 113.9 181.8 114.3 182.9 114.8 184 115.5 185 116.3 186 117.3 187 118.1 188 118.9 189 119.7 190 120.6 191 121.8 191.8 123.3 191.8 123.3 190.2 124.6 188.7 125.3 187.3 125.9 186 126.4 184.6 126.8 183.3 127.2 181.9 127.8 180.5 128.2 179.2 128.5 177.9 128.5 176.7 128.4 175.5 128.4 174.2 128.6 172.9 128.8 171.7 128.8 170.5 128.4 169.4 127.9 168.3 127.3 167.2 126.9 166 126.7 164.9 126.3 163.8 125.6 162.8 124.6 161.9 123.5 161 122.4 160 121.4 159.1 120.3 158.2 118.9 157.5 117 157.1 113.9Z"/><path stroke-width=".55" stroke-opacity=".7" d="M157.1 113.9L158.2 114.3 159.3 114.8 160.4 115.2 161.6 115.7 162.7 116.1 163.8 116.6 164.9 117 166.1 117.4 167.2 117.8 168.3 118.2 169.5 118.6 170.6 119 171.7 119.3 172.9 119.7 174.1 120 175.2 120.3 176.4 120.6 177.5 120.9 178.7 121.1 179.9 121.4 181.1 121.6 182.2 121.8 183.4 122.1 184.6 122.3 185.8 122.4 187 122.6 188.2 122.8"/><path stroke-width=".55" stroke-opacity=".7" d="M162.1 115.9Q165.9 113.1 169.5 110.9M162.1 115.9Q163.9 120.2 165.6 125M169.2 118.5Q173 115.7 176.7 113M169.2 118.5Q171 122.9 172.8 127.3M176.5 120.6Q180 118.7 183.6 116.5M176.5 120.6Q178.5 124 180.7 127.1M183.9 122.1Q186.9 122 190.1 121.2M183.9 122.1Q186.4 123.8 189.1 124.8"/><path fill="currentColor" fill-opacity=".16" stroke-width=".9" d="M205.4 82.7L203 81.2 201.9 79.9 201.2 78.7 200.7 77.5 200.3 76.4 199.8 75.2 199.3 74 198.9 72.9 198.8 71.8 199 70.8 199.2 69.7 199.3 68.7 199.3 67.6 199.3 66.6 199.5 65.6 200 64.6 200.7 63.7 201.3 62.7 201.8 61.8 202.3 60.8 202.8 59.8 203.5 58.9 204.3 58 205.3 57.2 206.2 56.3 207.1 55.4 207.9 54.5 208.9 53.7 210.1 52.8 211.7 52.1 211.7 52.1 212.6 53.4 213.1 54.5 213.4 55.7 213.6 56.8 213.8 57.9 214.1 59 214.5 60.1 214.7 61.2 214.9 62.3 214.8 63.4 214.7 64.4 214.7 65.5 214.8 66.6 215 67.7 215.1 68.8 214.9 69.8 214.5 70.8 214.1 71.8 213.9 72.8 213.9 73.8 213.7 74.9 213.4 75.9 212.8 76.8 212 77.7 211.3 78.6 210.7 79.6 210.1 80.5 209.2 81.4 207.9 82.2 205.4 82.7Z"/><path stroke-width=".55" stroke-opacity=".7" d="M205.4 82.7L205.4 81.7 205.5 80.6 205.6 79.6 205.7 78.5 205.8 77.5 205.9 76.5 206 75.4 206.1 74.4 206.3 73.3 206.4 72.3 206.6 71.3 206.7 70.2 206.9 69.2 207.1 68.2 207.3 67.2 207.5 66.1 207.8 65.1 208 64.1 208.3 63.1 208.5 62.1 208.8 61.1 209.1 60.1 209.4 59.1 209.7 58.1 210 57.1 210.4 56.1 210.7 55.1"/><path stroke-width=".55" stroke-opacity=".7" d="M205.8 78Q203.2 74.9 200.1 71.7M205.8 78Q209.4 76.2 212.5 74.3M206.5 71.5Q203.9 68.4 201.1 65.3M206.5 71.5Q210.2 69.7 213.7 67.9M207.8 65Q205.9 62.1 204.4 59.2M207.8 65Q210.6 63.1 213.7 61.1M209.5 58.7Q209.2 56.1 209.5 53.6M209.5 58.7Q210.8 56.4 212.7 54.2"/><path fill="currentColor" fill-opacity=".16" stroke-width=".9" d="M205.4 82.7L206.8 80.6 208 79.7 209.2 79.2 210.3 78.9 211.4 78.7 212.5 78.4 213.6 78 214.7 77.8 215.7 77.8 216.8 78.1 217.8 78.4 218.8 78.6 219.8 78.7 220.9 78.7 221.9 78.9 222.9 79.3 223.9 79.9 224.8 80.4 225.8 80.8 226.8 81.1 227.8 81.4 228.8 81.9 229.7 82.6 230.7 83.3 231.6 84 232.6 84.6 233.5 85.2 234.4 85.9 235.3 86.8 236.2 88.1 236.2 88.1 234.9 89.3 233.7 90.1 232.5 90.7 231.4 91.2 230.3 91.7 229.1 92.2 228 92.8 226.8 93.3 225.7 93.6 224.6 93.7 223.6 93.7 222.5 93.8 221.4 94.1 220.3 94.4 219.2 94.5 218.2 94.3 217.2 93.9 216.2 93.5 215.2 93.2 214.1 93.1 213.1 92.9 212.2 92.4 211.2 91.6 210.3 90.7 209.4 89.8 208.5 89 207.6 88.1 206.7 87 205.9 85.5 205.4 82.7Z"/><path stroke-width=".55" stroke-opacity=".7" d="M205.4 82.7L206.4 83 207.4 83.4 208.4 83.7 209.4 84 210.4 84.2 211.4 84.5 212.4 84.8 213.4 85.1 214.4 85.3 215.5 85.6 216.5 85.8 217.5 86.1 218.5 86.3 219.5 86.5 220.6 86.7 221.6 86.8 222.6 87 223.6 87.1 224.7 87.3 225.7 87.4 226.8 87.5 227.8 87.6 228.8 87.7 229.9 87.8 230.9 87.8 232 87.9 233 88"/><path stroke-width=".55" stroke-opacity=".7" d="M209.9 84.1Q212.9 81.4 215.8 79.2M209.9 84.1Q211.8 87.7 213.6 91.7M216.3 85.8Q219.3 83 222.3 80.4M216.3 85.8Q218.2 89.4 220.1 93.1M222.7 87Q225.6 85.1 228.5 82.9M222.7 87Q224.8 89.8 226.9 92.3M229.3 87.7Q231.9 87.4 234.6 86.4M229.3 87.7Q231.6 88.9 234 89.6"/></g><g stroke="none"><ellipse class="berry" cx="231" cy="61.6" rx="3.2" ry="1.9" transform="rotate(-70.8 231 61.6)"/><ellipse class="berry" cx="234.1" cy="65.8" rx="3.2" ry="1.9" transform="rotate(-0.8 234.1 65.8)"/><ellipse class="berry" cx="244.7" cy="51.6" rx="2.9" ry="1.7" transform="rotate(-71.6 244.7 51.6)"/><ellipse class="berry" cx="247.8" cy="55.8" rx="2.9" ry="1.7" transform="rotate(-1.6 247.8 55.8)"/><ellipse class="berry" cx="257" cy="42.3" rx="2.5" ry="1.5" transform="rotate(-72.4 257 42.3)"/><ellipse class="berry" cx="260.2" cy="46.4" rx="2.5" ry="1.5" transform="rotate(-2.4 260.2 46.4)"/><ellipse class="berry" cx="268" cy="33.8" rx="2.2" ry="1.3" transform="rotate(-73.1 268 33.8)"/><ellipse class="berry" cx="271.2" cy="37.9" rx="2.2" ry="1.3" transform="rotate(-3.1 271.2 37.9)"/><ellipse class="berry" cx="277.6" cy="26.2" rx="1.8" ry="1.1" transform="rotate(-73.6 277.6 26.2)"/><ellipse class="berry" cx="280.9" cy="30.2" rx="1.8" ry="1.1" transform="rotate(-3.6 280.9 30.2)"/></g></svg>`;
 const icon = k=>`<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[k]}</svg>`;
-const BNAV = [["inicio",P("Início","Home")],["vinhos",P("Vinhos","Wines")],["vender",P("Vender","Sell")],["alergenios",P("Alergénios","Allergens")]];
+const BNAV = [["inicio",P("Início","Home")],["vinhos",P("Vinhos","Wines")],["castas",P("Castas","Grapes")],["vender",P("Vender","Sell")],["alergenios",P("Alergénios","Allergens")]];
 const TILES = {
   mito:["mito",P("O Mito","Mito"),P("O Mito, o chef e a história para contar","Mito, the chef and the story to tell")],
   vinhos:["vinhos",P("Vinhos","Wines"),P(`${W.length} vinhos, um a um`,`${W.length} wines, one by one`)],
@@ -2599,6 +3030,7 @@ const TILES = {
   vender:["vender",P("Perguntas à mesa","Questions at the table"),P("As dúvidas que mais aparecem","What guests ask most")],
   alergenios:["alergenios",P("Alergénios","Allergens"),P("Pode comer isto? Quadro da cozinha","Can they eat this? Kitchen chart")],
   mulheres:["mulheres",P("Rainhas do Terroir","Queens of Terroir"),P(`${M.length} mulheres, ${M.length} histórias`,`${M.length} women, ${M.length} stories`)],
+  castas:["castas",P("Castas portuguesas","Portuguese grapes"),P("As que mais aparecem na carta","The ones we pour most")],
   como:["como",P("Como se faz","How it’s made"),P("Como nasce cada estilo","How each style is born")],
   aromas:["aromas",P("Nariz no copo","Nose in the glass"),P("Aromas · aula e teste","Aromas · lesson and quiz")],
   conceito:["conceito",P("A carta","The list"),P("A ideia por trás da carta","The idea behind the list")],
@@ -2875,7 +3307,7 @@ function renderBnav(){
   $("#bnav").setAttribute("aria-label",L("Navegação principal","Main navigation"));
 }
 function openMore(){
-  more.innerHTML=`<div class="more-in"><div class="more-h"><b class="disp">${L("Todas as seções","All sections")}</b><button class="close" data-more-close aria-label="${L("Fechar","Close")}" style="position:static">×</button></div>${[[L("Em serviço","On service"),["vinhos","descobrir","vender","alergenios"].concat(ckHas()?["cocktails"]:[],STK?["stock"]:[])],[L("Aprender","Learn"),["aromas","como","mulheres"]],[L("A casa","The house"),["mito","conceito"]]].map(([h,ids])=>`<div class="eyebrow mgrp">${h}</div><div class="tiles">${ids.map(tile).join("")}</div>`).join("")}</div>`;
+  more.innerHTML=`<div class="more-in"><div class="more-h"><b class="disp">${L("Todas as seções","All sections")}</b><button class="close" data-more-close aria-label="${L("Fechar","Close")}" style="position:static">×</button></div>${[[L("Em serviço","On service"),["vinhos","descobrir","vender","alergenios"].concat(ckHas()?["cocktails"]:[],STK?["stock"]:[])],[L("Aprender","Learn"),["aromas","como","castas","mulheres"]],[L("A casa","The house"),["mito","conceito"]]].map(([h,ids])=>`<div class="eyebrow mgrp">${h}</div><div class="tiles">${ids.map(tile).join("")}</div>`).join("")}</div>`;
   if(!more.open) more.showModal();
 }
 more.addEventListener("click",e=>{ if(e.target===more||e.target.closest("[data-more-close]")) more.close(); else if(e.target.closest("[data-tab]")) more.close(); });
@@ -2912,7 +3344,7 @@ function renderChrome(){
 function render(){
   renderChrome();
   const m=$("#main");
-  m.innerHTML = cur==="inicio"?pInicio():cur==="mito"?pMito():cur==="alergenios"?pAlerg():cur==="conceito"?pConceito():cur==="mulheres"?pMulheres():cur==="vender"?pVendas():cur==="como"?pComo():cur==="aromas"?pAromas():cur==="vinhos"?pVinhos():cur==="descobrir"?pDescobrir():cur==="stock"&&STK?pStock():cur==="cocktails"&&!ckLock()?pCocktails():pSoon(cur);
+  m.innerHTML = cur==="inicio"?pInicio():cur==="mito"?pMito():cur==="alergenios"?pAlerg():cur==="conceito"?pConceito():cur==="mulheres"?pMulheres():cur==="vender"?pVendas():cur==="como"?pComo():cur==="castas"?pCastas():cur==="aromas"?pAromas():cur==="vinhos"?pVinhos():cur==="descobrir"?pDescobrir():cur==="stock"&&STK?pStock():cur==="cocktails"&&!ckLock()?pCocktails():pSoon(cur);
   { const pt=m.querySelector("section.panel h2"); if(pt&&cur!=="inicio") pt.classList.add("ptitle"); }
   if(!m.querySelector("h1")){ const t=TABS.find(x=>x.id===cur); m.insertAdjacentHTML("afterbegin",`<h1 class="vh">Salva · ${t?t.n[LANG==="en"?1:0]:""}</h1>`); }
   renderBnav();
