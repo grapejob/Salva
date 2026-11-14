@@ -1249,7 +1249,7 @@ function pConceito(){
   const doses = W.filter(isDose).length;
   const regs = REG_ORDER.map(([r,dp,de])=>{ const ws=W.filter(w=>w.regiao===r); return `<div class="reg"><h4>${reg(r)}<small>${L(dp,de)}</small></h4><div class="chips">${ws.map(w=>wchip(w.id)).join("")}</div></div>`}).join("");
   const quote = L(
-    "Entre a vinha e o copo, há histórias que permanecem e outras que começam. Esta seleção reúne diferentes regiões, castas e formas de fazer vinho. Privilegiamos produtores com identidade própria, práticas conscientes e uma relação próxima com a terra, dando especial destaque ao trabalho de mulheres no vinho português. Uma carta para descobrir, conversar e compartilhar. Saúde!",
+    "Entre a vinha e o copo, há uma longa história, que merece ser contada… Através da sua gente, da sua terra. Tantas regiões, castas e formas diferentes de se fazer vinho, e de se viver a vinha. De norte a sul, do espumante ao fortificado, privilegiamos produtores com identidade própria, com viés sustentável, dando especial destaque ao trabalho de mulheres na indústria do vinho português. Uma carta para descobrir, conversar e compartilhar. Saúde!",
     "Between vineyard and glass, some stories endure while others begin. Our selection celebrates distinctive Portuguese wines, thoughtful producers and the women helping shape the future of wine.");
   const pillars = LANG==="en" ? [
     ["Women in wine","Winemakers, producers and growers from north to south. Almost every wine has a woman on the team, and each line of the list names the people who make it."],
@@ -1258,38 +1258,38 @@ function pConceito(){
     ["Low intervention","Wild yeasts, biodynamics, natural wine, skin contact, little new oak. Producers with mindful practices and a close bond with the land."],
     ["Always something off the list","The list invites questions: “Ask our team about bottles beyond the list.” Knowing what we have in the cellar is part of the service."]
   ] : [
-    ["Mulheres no vinho","Enólogas, produtoras e viticultoras de norte a sul. Quase todos os vinhos têm uma mulher na equipa, e a carta mostra o nome de quem faz o vinho em cada linha."],
-    ["Curta de propósito","Poucas referências, cada uma com um papel claro. É mais fácil de escolher para quem se senta e mais fácil de conhecer bem para quem serve."],
+    ["Mulheres no vinho","A história do vinho português também foi construída por mulheres, muitas vezes longe dos nomes e dos registros que ganharam destaque.</p><p>Por gerações, elas trabalharam na vinha, na vindima e na produção, ajudando a manter viva uma tradição.</p><p>Hoje, outras mulheres dão continuidade a esse trabalho, agora também como produtoras, enólogas e líderes.</p><p>Ter tantas delas nesta carta é uma forma de reconhecer quem veio antes e dar visibilidade a quem continua escrevendo essa história."],
+    ["Menos é mais","Poucas referências, cada uma com uma identidade e um propósito bem definidos. A intenção é despertar no cliente um interesse crescente pelo vinho português e, ao mesmo tempo, criar oportunidades para explorarmos diferentes terroirs a cada garrafa, indo além das regiões mais habituais, como Douro e Alentejo."],
     ["Inverno no copo","Brancos com mais corpo e alguns com barrica, tintos mais estruturados, para pratos de cogumelos, couve, cenoura, ravioli e carne."],
-    ["Pouca intervenção","Leveduras indígenas, biodinâmica, vinho natural, curtimenta, pouca madeira nova. Produtores com práticas conscientes e ligação próxima à terra."],
-    ["Sempre algo fora da carta","A carta convida a perguntar: “Há sempre algo fora da carta. Pergunte à equipa.” Saber o que temos na adega faz parte do serviço."]
+    ["Sustentabilidade","Menos intervenção, mais expressão do terroir.</p><p>Procuramos produtores com práticas conscientes e uma relação próxima e respeitosa com a terra. Valorizamos quem cuida da vinha com responsabilidade, seja através da viticultura biológica ou biodinâmica, de uma abordagem mais natural na adega, do uso de leveduras indígenas, da curtimenta ou de uma utilização comedida de madeira nova.</p><p>Tão bom quanto desfrutar de uma boa garrafa hoje é saber que estamos valorizando práticas que permitem à terra continuar a dar frutos amanhã."],
+    ["O que os olhos não veem","“Há sempre algo fora da carta. Pergunte à equipa.”</p><p>Conhecer o que temos na adega faz parte do serviço, especialmente durante a transição entre cartas, quando ainda temos vinhos da seleção de verão em estoque.</p><p>Eles foram escolhidos com os mesmos critérios e merecem continuar a ser apresentados. Esteja atento ao perfil do cliente e aproveite a oportunidade para sugerir algo diferente, seja uma alternativa adequada ou uma descoberta inesperada.</p><p>Saiba sempre quais são, quantas garrafas temos e quanto custam."]
   ];
   const legend = LANG==="en" ? [
     ["Name, vintage and price,","with glass and bottle when there are both."],["Grapes | region.","Grape names only, no percentages."],
     ["Body · aromas · palate.","Light, medium or full-bodied; then what you find on the nose and palate."],["Who makes the wine.","Women first, then men."]
   ] : [
-    ["Nome, safra e preço,","com copo e garrafa quando há os dois."],["Castas | região.","Só os nomes das castas, sem porcentagens."],
-    ["Corpo · aromas · boca.","Leve, médio ou encorpado; depois o que se sente no nariz e na boca."],["Quem faz o vinho.","Mulheres primeiro, depois homens."]
+    ["Nome e preço,","com copo e garrafa quando há os dois."],["Castas | região.",""],
+    ["Corpo · aromas · boca.","Leve, médio ou encorpado; depois o que se sente no nariz e na boca."],["Quem faz o vinho.",""]
   ];
   /* Fora da carta em garrafeira, segundo o inventário (atual.stock.fora) */
   const foraHoje=(STK&&STK.fora||[]).filter(f=>f.un!==0).map(f=>f.n);
   const g=byId.guru;
   return `<section class="panel">
   <div class="letter">
-    <blockquote>${quote}<footer>Priscila Lopes · ${CARTA_ATUAL?L("Chefe de sala","Head of front of house"):L("Chefe de sala · abertura da carta de inverno","Head of front of house · opening of the winter list")}</footer></blockquote>
+    <blockquote>${quote}<footer>Priscila Lopes · ${CARTA_ATUAL?L("Chefe de sala e sommelière","Head of front of house and sommelier"):L("Chefe de sala · abertura da carta de inverno","Head of front of house · opening of the winter list")}</footer></blockquote>
     <div class="nums">
-      <div><b>${W.length}</b><span>${L("referências, e nem uma a mais","references, and not one more")}</span></div>
+      <div><b>${W.length}</b><span>${L("referências. Um brinde!","references, and not one more")}</span></div>
       ${CARTA_ATUAL?"":`<div><b>${withWoman}</b><span>${L("vinhos com uma mulher na equipa","wines with a woman on the team")}</span></div>
       <div><b>${REG_ORDER.length}</b><span>${L("regiões, do Minho aos Açores","regions, from the Minho to the Azores")}</span></div>`}
-      <div><b>${copo}</b><span>${L(`vinhos a copo, mais ${doses} doses de Porto e generosos`,`wines by the glass, plus ${doses} Port and fortified serves`)}</span></div>
+      <div><b>${copo}</b><span>${L(`vinhos a copo: diversidade de estilos e variedade!`,`wines by the glass, plus ${doses} Port and fortified serves`)}</span></div>
     </div>
   </div>
-  <div class="sec-h"><div class="eyebrow">${L("As ideias da carta","The ideas behind the list")}</div><h2>${CARTA_ATUAL?L("Quatro coisas para dizer com confiança","Four things to say with confidence"):L("Cinco coisas para dizer com confiança","Five things to say with confidence")}</h2></div>
-  <div class="pillars">${pillars.filter(([h])=>!(CARTA_ATUAL&&(h==="Inverno no copo"||h==="Winter in the glass"))).map(([h,p])=>`<div class="pillar"><h3>${h}</h3><p>${p}</p>${(h==="Sempre algo fora da carta"||h==="Always something off the list")&&foraHoje.length?`<p class="hoje"><b>${L("Hoje","Today")} 🍷</b> ${foraHoje.map(esc).join(" · ")}</p>`:""}</div>`).join("")}</div>
-  <div class="sec-h"><div class="eyebrow">${L("Como ler a carta","How to read the list")}</div><h2>${L("Quatro linhas, um vinho","Four lines, one wine")}</h2><p>${L("Cada vinho aparece sempre da mesma forma. Se você souber ler estas quatro linhas, já sabe apresentar qualquer garrafa.","Every wine is always shown the same way. If you can read these four lines, you can present any bottle.")}</p></div>
+  <div class="sec-h"><div class="eyebrow">${L("Conceito","The ideas behind the list")}</div><h2>${L("Como a carta foi construída","How the list was built")}</h2></div>
+  <div class="pillars">${pillars.filter(([h])=>!(CARTA_ATUAL&&(h==="Inverno no copo"||h==="Winter in the glass"))).map(([h,p])=>`<div class="pillar"><h3>${h}</h3><p>${p}</p>${(h==="O que os olhos não veem"||h==="Always something off the list")&&foraHoje.length?`<p class="hoje"><b>${L("Hoje","Today")} 🍷</b> ${foraHoje.map(esc).join(" · ")}</p>`:""}</div>`).join("")}</div>
+  <div class="sec-h"><div class="eyebrow">${L("Como ler a carta","How to read the list")}</div><h2>${L("Quatro linhas","Four lines, one wine")}</h2><p>${L("Novo formato da carta de inverno, ainda em construção. Cada vinho aparece sempre da mesma forma. Se você souber ler estas quatro linhas, já sabe apresentar qualquer garrafa.","Every wine is always shown the same way. If you can read these four lines, you can present any bottle.")}</p></div>
   <div class="anatomy">
     <div class="carta-line">
-      <div class="l1"><span data-n="1">Guru, Wine &amp; Soul 2023</span><span>82 €</span></div>
+      <div class="l1"><span data-n="1">Guru, Wine &amp; Soul</span><span>82 €</span></div>
       <div class="l2"><span data-n="2">Viosinho, Rabigato, Códega do Larinho ${L("e","and")} Gouveio | Douro</span></div>
       <div class="l3"><span data-n="3">${esc(lineOf(g))}</span></div>
       <div class="l4"><span data-n="4">Sandra Tavares ${L("e","and")} Jorge Borges</span></div>
@@ -1493,15 +1493,15 @@ const STEPS = [
    imp:P("Uva muito madura tem mais açúcar, por isso dá mais álcool e mais corpo. Colhida mais cedo, a uva tem muito mais acidez e menos açúcar: menos álcool, menos corpo, mais leveza. Muita coisa fica decidida antes de a uva entrar na adega, ainda na vinha, antes mesmo da vindima.","Very ripe grapes have more sugar, so they give more alcohol and more body. Picked earlier, the grapes have much more acidity and less sugar: less alcohol, less body, more lightness. A lot is decided before the grapes reach the cellar, still in the vineyard, even before the harvest."),
    table:P("“Muito do que o vinho é está na uva antes mesmo da colheita. E aqui buscamos saber o nome da pessoa que dedicou a vida a isto.”","“Much of what a wine is lies in the grape, even before the harvest. And here we make a point of knowing the name of the person who has devoted their life to it.”"),
    ex:["3b"], exT:P("A Filipa Pato trabalha a vinha em biodinâmica.","Filipa Pato farms biodynamically.")},
-  {id:"vindima", e:"✂️", art:"vindima", t:P("Vindima e chegada à adega","Harvest and arrival at the cellar"),
+  {id:"vindima", e:"✂️", art:"vindima", t:P("Vindima e adega","Harvest and arrival at the cellar"),
    what:P("Escolher o dia certo e levar a uva sã e fresca para a adega. Lá: escolha, desengace (tirar os engaços, se se quiser), esmagamento e, nos brancos, prensagem antes de fermentar.","Pick on the right day and get sound, cool grapes to the cellar. There: sorting, destemming (if wanted), crushing and, for whites, pressing before fermentation."),
-   imp:P("Uva quente ou maltratada oxida e perde aroma. Vindimar à noite ou de manhã cedo ajuda a preservar o frescor.","Warm or bruised grapes oxidise and lose aroma. Picking at night or early morning helps keep freshness."),
-   table:P("“Vindimado à mão, e neste caso de noite, para a uva chegar fresca à adega.”","“Hand-picked, at night in this case, so the grapes reach the cellar cool.”"),
+   imp:P("Uva quente ou maltratada oxida e perde aroma. Vindimar à noite ou de manhã cedo ajuda a preservar o frescor. No Alentejo, por causa do calor intenso, muitas vindimas são feitas de madrugada!","Warm or bruised grapes oxidise and lose aroma. Picking at night or early morning helps keep freshness."),
+   table:P("“Uvas vindimadas à mão, e neste caso de noite, para chegarem frescas à adega.”","“Hand-picked, at night in this case, so the grapes reach the cellar cool.”"),
    ex:["purista-rose","cland-b","cland-t"], exT:P("Vindima à noite no Purista Rosé; manual nos Clandestino.","Night harvest for Purista Rosé; hand-picked for the Clandestinos.")},
   {id:"ferm", e:"🫧", art:"ferm", t:P("Fermentação","Fermentation"),
    what:P("A levedura come o açúcar da uva. O resultado? Álcool, CO₂, calor e um vinho nascendo. Brancos e rosés fermentam mais frescos (cerca de 12–22 °C); tintos mais quentes (cerca de 20–32 °C) e com as películas.","Yeast eats the grape sugar. The result? Alcohol, CO₂, heat and a wine being born. Whites and rosés ferment cooler (around 12–22 °C); reds warmer (around 20–32 °C) and on their skins."),
    imp:P("Fresco preserva os aromas de fruta; quente ajuda a tirar cor e tanino das películas. Leveduras indígenas podem dar mais camadas, mas são menos previsíveis do que as selecionadas.","Cool keeps fruit aromas; warm helps pull colour and tannin from the skins. Wild yeasts can add layers but are less predictable than selected ones."),
-   table:P("“Fermentou com as leveduras que vieram da vinha, sem leveduras compradas.”","“It fermented with the yeasts that came in from the vineyard, no bought-in yeast.”"),
+   table:P("“Fermentou com as leveduras que vieram da vinha, sem leveduras selecionadas (compradas).”","“It fermented with the yeasts that came in from the vineyard, no bought-in yeast.”"),
    ex:["mainova","furnas","purista-rose"], exT:P("Leveduras indígenas.","Wild (indigenous) yeasts.")},
   {id:"estagio", e:"🛢️", art:"estagio", t:P("Estágio","Ageing"),
    what:P("Antes da garrafa, o vinho descansa. O inox não deixa entrar oxigênio nem dá sabor. O cimento e a madeira grande ou usada também quase não dão sabor, mas deixam o vinho respirar um pouco. A barrica nova e pequena é a que mais se nota: tostado, baunilha, especiaria.","Before bottling, the wine rests. Steel lets in no oxygen and adds no flavour. Concrete and large or used wood add little flavour but let the wine breathe a little. New, small barrels show the most: toast, vanilla, spice."),
@@ -1646,7 +1646,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v149", data:"2026-11-13"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v150", data:"2026-11-13"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
