@@ -1689,7 +1689,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v156", data:"2026-11-24"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v157", data:"2026-11-24"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -3111,6 +3111,7 @@ let qSels=["gluten"];
 
 /* ícones da barra (traço simples, herdam a cor) */
 const ICO = {
+  sobre:'<circle cx="12" cy="12" r="8.5"/><circle cx="14.6" cy="9.6" r="1.6" fill="currentColor" stroke="none"/>',
   mapa:'<path d="M9 4.5 3.5 6.5v13l5.5-2 6 2 5.5-2v-13l-5.5 2-6-2z"/><path d="M9 4.5v13M15 6.5v13"/>',
   castas:'<path d="M12 20.5V11"/><path d="M12 11c-4.4 0-7-2.3-7-6.2 4.2 0 7 2 7 6.2z"/><path d="M12 14c0-3.3 2.4-5.2 6.8-5.2 0 3.7-2.5 5.2-6.8 5.2z"/>',
   stock:'<path d="M4 8.5 12 4l8 4.5v7L12 20l-8-4.5z"/><path d="M4 8.5 12 13l8-4.5M12 13v7"/>',
@@ -3137,6 +3138,7 @@ const TILES = {
   alergenios:["alergenios",P("Alergénios","Allergens"),P("Pode comer isto? Quadro da cozinha","Can they eat this? Kitchen chart")],
   mulheres:["mulheres",P("Rainhas do Terroir","Queens of Terroir"),P(`${M.length} mulheres, ${M.length} histórias`,`${M.length} women, ${M.length} stories`)],
   mapa:["mapa",P("Mapa da carta","Wine map"),P("De onde vem cada vinho","Where each wine comes from")],
+  sobre:["sobre",P("Sobre o Salva","About Salva"),P("O que é e de onde veio a ideia","What it is and where the idea came from")],
   castas:["castas",P("Castas portuguesas","Portuguese grapes"),P("As que mais aparecem na carta","The ones we pour most")],
   como:["como",P("Como se faz","How it’s made"),P("Como nasce cada estilo","How each style is born")],
   aromas:["aromas",P("Nariz no copo","Nose in the glass"),P("Aromas · aula e teste","Aromas · lesson and quiz")],
@@ -3148,7 +3150,7 @@ const TILES = {
   stock:["stock",P("Estoque","Estoque"),P("O que temos e o que repor","What we have and what to order")]
 };
 const srcLink = k=>SRC[k]?`<a class="src" href="${SRC[k].u}" target="_blank" rel="noopener">${esc(SRC[k].t)}</a>`:"";
-const tile = id=>{ const [e,t,d]=TILES[id]; if(id==="mapa") return `<a class="tile" href="mapa.html"><span class="te">${icon(e)}</span><span class="tt"><b>${tx(t)}</b><small>${tx(d)}</small></span><span class="tgo" aria-hidden="true">›</span></a>`; const soon=TABS.find(x=>x.id===id)?.soon; if(isLocked(id)) return ""; /* v129: abas fechadas não aparecem */ if(0) return `<button class="tile is-lock" disabled title="${L("Fechado por enquanto","Locked for now")}"><span class="te">${icon(e)}</span><span class="tt"><b>🔒 ${tx(t)}</b><small>${tx(d)}</small></span></button>`; return `<button class="tile${soon?" is-soon":""}" data-tab="${id}"><span class="te">${icon(e)}</span><span class="tt"><b>${tx(t)}</b><small>${tx(d)}</small></span><span class="tgo" aria-hidden="true">›</span></button>`; };
+const tile = id=>{ const [e,t,d]=TILES[id]; const LINK={mapa:"mapa.html",sobre:"entrada.html"}; if(LINK[id]) return `<a class="tile" href="${LINK[id]}"><span class="te">${icon(e)}</span><span class="tt"><b>${tx(t)}</b><small>${tx(d)}</small></span><span class="tgo" aria-hidden="true">›</span></a>`; const soon=TABS.find(x=>x.id===id)?.soon; if(isLocked(id)) return ""; /* v129: abas fechadas não aparecem */ if(0) return `<button class="tile is-lock" disabled title="${L("Fechado por enquanto","Locked for now")}"><span class="te">${icon(e)}</span><span class="tt"><b>🔒 ${tx(t)}</b><small>${tx(d)}</small></span></button>`; return `<button class="tile${soon?" is-soon":""}" data-tab="${id}"><span class="te">${icon(e)}</span><span class="tt"><b>${tx(t)}</b><small>${tx(d)}</small></span><span class="tgo" aria-hidden="true">›</span></button>`; };
 
 /* ---------- Início ---------- */
 function factPool(){
@@ -3416,7 +3418,7 @@ function renderBnav(){
   $("#bnav").setAttribute("aria-label",L("Navegação principal","Main navigation"));
 }
 function openMore(){
-  more.innerHTML=`<div class="more-in"><div class="more-h"><b class="disp">${L("Todas as seções","All sections")}</b><button class="close" data-more-close aria-label="${L("Fechar","Close")}" style="position:static">×</button></div>${[[L("Em serviço","On service"),["vinhos","descobrir","vender","alergenios"].concat(ckHas()?["cocktails"]:[],STK?["stock"]:[])],[L("Aprender","Learn"),["mapa","aromas","como","castas","mulheres"]],[L("A casa","The house"),["mito","conceito"]]].map(([h,ids])=>`<div class="eyebrow mgrp">${h}</div><div class="tiles">${ids.map(tile).join("")}</div>`).join("")}</div>`;
+  more.innerHTML=`<div class="more-in"><div class="more-h"><b class="disp">${L("Todas as seções","All sections")}</b><button class="close" data-more-close aria-label="${L("Fechar","Close")}" style="position:static">×</button></div>${[[L("Em serviço","On service"),["vinhos","descobrir","vender","alergenios"].concat(ckHas()?["cocktails"]:[],STK?["stock"]:[])],[L("Aprender","Learn"),["mapa","aromas","como","castas","mulheres"]],[L("A casa","The house"),["mito","conceito","sobre"]]].map(([h,ids])=>`<div class="eyebrow mgrp">${h}</div><div class="tiles">${ids.map(tile).join("")}</div>`).join("")}</div>`;
   if(!more.open) more.showModal();
 }
 more.addEventListener("click",e=>{ if(e.target===more||e.target.closest("[data-more-close]")) more.close(); else if(e.target.closest("[data-tab]")) more.close(); });
