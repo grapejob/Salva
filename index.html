@@ -1240,6 +1240,18 @@ html::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 /* v169: Mapa no centro da barra de baixo (link para mapa.html, com o mesmo visual dos botões) */
 .bnav a.bnl{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;border-radius:12px;color:var(--muted);font-family:var(--display);font-size:12px;font-weight:600;min-height:52px;text-decoration:none}
 @media (max-width:1100px){.bnav a.bnl{border-radius:22px}}
+/* v170: ranking das castas em posições (1ª, 2ª, 3ª…), pódio com selo e contagem de vinhos ao lado do nome */
+.cst summary{grid-template-columns:44px minmax(0,1fr) 14px}
+.cst .rk{width:40px;height:40px;border-radius:50%;align-items:center;justify-content:center;border:1px solid var(--line);background:transparent}
+.cst .rk b{font-family:var(--display);font-weight:700;font-size:15.5px;letter-spacing:-.01em;color:var(--muted);font-variant-numeric:tabular-nums}
+.cst .rk.pod{border:0;box-shadow:inset 0 0 0 1.5px var(--pc),0 0 0 3px var(--pb)}
+.cst .rk.pod b{color:var(--ink);font-size:16.5px}
+.cst .rk.p1{--pc:#b8892b;--pb:rgba(184,137,43,.16);background:rgba(184,137,43,.14)}
+.cst .rk.p2{--pc:#8b9097;--pb:rgba(139,144,151,.16);background:rgba(139,144,151,.13)}
+.cst .rk.p3{--pc:#a2643a;--pb:rgba(162,100,58,.16);background:rgba(162,100,58,.13)}
+.cst .nm{flex-wrap:wrap;row-gap:2px}.cst .nm .nmt{min-width:0}
+.cst .nm .cn{font-family:var(--display);font-weight:500;font-size:13px;color:var(--muted);white-space:nowrap;margin-left:auto}
+@media (hover:hover){.cst summary:hover .rk:not(.pod){border-color:var(--line2)}}
 </style>
 
 <header class="topbar"><div class="wrap tb-in"><button class="brand disp" data-tab="inicio" aria-label="Salva, início (em teste)"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="61" cy="41" r="9.5" fill="var(--red)"/></svg><span class="wm">Salva<em>.</em></span><span class="tag" id="tb-tag" aria-hidden="true">em teste</span></button><span class="tb-ed" id="tb-ed"></span><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt">PT</button><button type="button" data-lang="en">EN</button></div></div></header>
@@ -1790,7 +1802,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao: "v169", data:"2026-11-27"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao: "v170", data:"2026-11-27"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -3304,7 +3316,9 @@ function pCastas(){
   const rows=CASTAS_CARTA.map(c=>({c,g:Object.assign({},c.base&&CASTAS_PT[c.base]||{},c),ws:cWines(c)})).filter(r=>r.ws.length).sort((a,b)=>b.ws.length-a.ws.length);
   const maxN=rows.length?rows[0].ws.length:1, isB=r=>r.c.cor!=="t", nB=rows.filter(isB).length, nT=rows.length-nB;
   const shown=rows.filter(r=>cFil==="todas"||(cFil==="b")===isB(r));
-  let rk=0; rows.forEach((r,i)=>{ if(!i||r.ws.length!==rows[i-1].ws.length) rk=i+1; r.rk=rk; });
+  /* v170: posição (1ª, 2ª, 3ª…) dentro do filtro ativo; empate = mesma posição, sem saltar números (1ª, 2ª, 3ª, 3ª, 4ª); pódio (1ª–3ª) com selo */
+  let rk=0; shown.forEach((r,i)=>{ if(!i||r.ws.length!==shown[i-1].ws.length) rk++; r.rk=rk; });
+  const ord=k=>LANG==="en"?k+(k%100>10&&k%100<14?"th":["th","st","nd","rd"][k%10]||"th"):k+"ª";
   const used=new Set(), atIdx=atIndex(rows);
   const item=r=>{ const g=r.g, n=r.ws.length;
     [g.onde].concat(T.map(([k])=>g[k])).forEach(x=>{ if(x&&x[2]) x[2].forEach(f=>used.add(f)); });
@@ -3318,14 +3332,14 @@ function pCastas(){
     const aSegH=A?`<div class="atseg" role="group" aria-label="${L("Modo","Mode")}">${[["consultar",L("Consultar","Look up")],["explorar",L("Explorar","Explore")],["treinar",L("Treinar","Practise")]].filter(([id])=>id!=="explorar"||(A.fotos&&A.fotos.length)).map(([id,lab])=>`<button type="button" data-atm="${id}" aria-pressed="${atMode===id}">${lab}</button>`).join("")}</div>`:"";
     const aCons=A?`${A.sin?`<p class="atsin">${i18(A.sin)}</p>`:""}<details class="cmore atalem"><summary>${L("Para ir além: reconhecer na vinha","Going further: spotting it in the vineyard")}</summary><dl class="dprof">${[["folha",P("Folha","Leaf")],["cacho",P("Cacho","Bunch")],["bago",P("Bago","Berry")]].filter(([k])=>A[k]).map(([k,l])=>`<dt>${tx(l)}</dt><dd>${i18(A[k])}</dd>`).join("")}</dl>${A.aviso?`<p class="dnota">${i18(A.aviso)}</p>`:""}</details>`:"";
     return `<details class="cst" data-cst="${g.id}" style="--c:var(${g.cor==="b"?"--bra":g.cor==="r"?"--ros":"--tin"})"${cOpen===g.id?" open":""}>
-      <summary><span class="rk" aria-hidden="true"><b>${n}</b><i>${n===1?L("vinho","wine"):L("vinhos","wines")}</i></span><span class="nm"><i class="cdot" aria-hidden="true"></i>${esc(g.n)}<span class="vh">, ${g.cor==="b"?L("branca","white"):g.cor==="r"?L("roxa","pink-skinned"):L("tinta","red")}, ${n} ${n===1?L("vinho","wine"):L("vinhos","wines")}</span></span><span class="cbar" aria-hidden="true"><i style="width:${Math.round(n/maxN*100)}%"></i></span></summary>
+      <summary><span class="rk${r.rk<=3?" pod p"+r.rk:""}" aria-hidden="true"><b>${ord(r.rk)}</b></span><span class="nm"><i class="cdot" aria-hidden="true"></i><span class="nmt">${esc(g.n)}</span><small class="cn" aria-hidden="true">${n} ${n===1?L("vinho","wine"):L("vinhos","wines")}</small><span class="vh">, ${ord(r.rk)} ${L("lugar","place")}, ${g.cor==="b"?L("branca","white"):g.cor==="r"?L("roxa","pink-skinned"):L("tinta","red")}, ${n} ${n===1?L("vinho","wine"):L("vinhos","wines")}</span></span><span class="cbar" aria-hidden="true"><i style="width:${Math.round(n/maxN*100)}%"></i></span></summary>
       <div class="cst-in">${A&&atMode==="consultar"?aHero:""}${aSegH}${A&&atMode==="explorar"?atExplore(A):A&&atMode==="treinar"?atTrain(A):`${g.onde?`<p class="clead">${i18(g.onde)}</p>`:""}${g.frase?`<div class="cgrp"><span class="lbl">${L("Para dizer ao cliente","To tell the guest")}</span><p class="vsay">${i18(g.frase)}</p></div>`:""}
         <div class="dsrow"><span class="lbl">${L("Na carta","On the list")} · ${n}</span><div class="chips">${r.ws.map(w=>wchip(w.id)).join("")}</div>${g.nota?`<p class="dnota">${i18(g.nota)}</p>`:""}</div>
         ${aMap}${dl}${aCons}${more}`}</div></details>`; };
   const list=shown.map(item).join("");
   const F=Object.assign({},CFONTES,PERFIL_F), src=[...used].filter(k=>F[k]).map(k=>F[k]);
   return `<section class="panel cstp"><div class="sec-h vhead"><h2>${L("As castas que mandam na nossa carta","The grapes that rule our list")}</h2>
-    <p>${L("Da mais presente para a menos. Toque numa casta para ver o que dizer e em quais vinhos ela está.","Most frequent first. Tap a grape to see what to say and which wines it’s in.")}</p></div>
+    <p>${L("O ranking da carta: da casta que está em mais vinhos para a que está em menos. Toque numa casta para ver o que dizer e em quais vinhos ela está.","The list’s ranking: from the grape in the most wines to the one in the fewest. Tap a grape to see what to say and which wines it’s in.")}</p></div>
     ${atIdx}
     <div class="seg cseg" role="group" aria-label="${L("Filtrar por cor","Filter by colour")}">${[["todas",L("Todas","All"),rows.length,""],["t",L("Tintas","Red"),nT,"--tin"],["b",L("Brancas","White"),nB,"--bra"]].map(([id,lab,q,c])=>`<button type="button" data-cfil="${id}" aria-pressed="${cFil===id}">${c?`<i class="cdot" style="--c:var(${c})" aria-hidden="true"></i>`:""}${lab} <span class="cq">${q}</span></button>`).join("")}</div>
     <div class="cst-list">${list}</div>
