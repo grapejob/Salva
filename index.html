@@ -1339,7 +1339,7 @@ function mf(m,f){ if(LANG==="en"){ const e=EN.mulheres[m.id]; if(e&&e[f]!=null) 
 const $ = (s,r=document)=>r.querySelector(s);
 const esc = s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fold = s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
-const euro = n=>n==null?"":`${n} €`;
+const euro = n=>(n==null||(typeof PRECOS_OK!=="undefined"&&!PRECOS_OK))?"":`${n} €`;   /* preços escondidos enquanto PRECOS_OK=false (edicao-mito.js) */
 const initials = n=>n.replace(/\(.*?\)/g,"").split(/\s+/).filter(x=>x&&x[0]===x[0].toUpperCase()&&x.length>2).slice(0,2).map(x=>x[0]).join("");
 const womanColor = i=>["--tin","--accent-2","--ros","--lar","--a-fp","--bra","--por","--a-min"][i%8];
 const isDose = w=>w.sec==="por"||w.sec==="gen";
@@ -1366,12 +1366,14 @@ function shot(w){
 }
 function wchip(id){ const w=byId[id]; return `<button class="wchip" style="--c:var(${SEC[w.sec].c})" data-wine="${w.id}">${esc(wf(w,"nome"))}</button>`; }
 function serveTxt(w){
-  if(isDose(w)) return `${L("Dose 60 ml","60 ml serve")} · ${euro(w.copo)}`;
+  if(isDose(w)) return `${L("Dose 60 ml","60 ml serve")}${euro(w.copo)?" · "+euro(w.copo):""}`;
+  if(!euro(1)) return w.copo?L("Servido a copo","By the glass"):"";
   return [w.copo?`${L("Copo","Glass")} ${euro(w.copo)}`:"",w.garrafa?`${L("Garrafa","Bottle")} ${euro(w.garrafa)}`:""].filter(Boolean).join(" · ");
 }
 
 /* preço na lista: [principal, secundário] — garrafa em destaque, copo/dose por baixo */
 function priceCol(w){
+  if(!euro(1)) return ["",isDose(w)?L("dose 60 ml","60 ml serve"):w.copo?L("a copo","by the glass"):""];
   if(isDose(w)) return [euro(w.copo),L("dose 60 ml","60 ml serve")];
   if(w.garrafa) return [euro(w.garrafa),w.copo?`${L("copo","glass")} ${euro(w.copo)}`:""];
   return [euro(w.copo),w.copo?L("copo","glass"):""];
@@ -1424,7 +1426,7 @@ function pConceito(){
   <div class="sec-h"><div class="eyebrow">${L("Como ler a carta","How to read the list")}</div><h2>${L("Quatro linhas","Four lines, one wine")}</h2><p>${L("Novo formato da carta de inverno, ainda em construção. Cada vinho aparece sempre da mesma forma. Se você souber ler estas quatro linhas, já sabe apresentar qualquer garrafa.","Every wine is always shown the same way. If you can read these four lines, you can present any bottle.")}</p></div>
   <div class="anatomy">
     <div class="carta-line">
-      <div class="l1"><span data-n="1">Guru, Wine &amp; Soul</span><span>82 €</span></div>
+      <div class="l1"><span data-n="1">Guru, Wine &amp; Soul</span><span>${euro(byId.guru&&byId.guru.garrafa)||L("preço","price")}</span></div>
       <div class="l2"><span data-n="2">Viosinho, Rabigato, Códega do Larinho ${L("e","and")} Gouveio | Douro</span></div>
       <div class="l3"><span data-n="3">${esc(lineOf(g))}</span></div>
       <div class="l4"><span data-n="4">Sandra Tavares ${L("e","and")} Jorge Borges</span></div>
@@ -1781,7 +1783,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v160", data:"2026-11-27"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao:"v161", data:"2026-11-27"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -1789,6 +1791,8 @@ const PROXIMA_CARTA = {mulheres:["odile-bouchard","aline-domingues","joana-santi
 /* 🔒 Abas fechadas (Pri, 9 nov 2026): aparecem no "Mais" com cadeado e não abrem. Para abrir, tirar o id daqui.
    Vender: parada até a Pri ter tempo de trabalhar nela.
    Aromas ("Nariz no copo"): fechada em 12 nov 2026, ainda não está pronta. Fechada também esconde a pista "cheira a…" na pesquisa. */
+/* Preços da carta de inverno 2027 ainda por confirmar (Pri, 27 nov 2026): false esconde todos os preços; true volta a mostrá-los. */
+const PRECOS_OK = false;
 const ABAS_FECHADAS = ["vender","aromas"];
 /* 🔒 Cocktails (Pri, 9 nov 2026): fichas técnicas da Lia Igreja × Mito (material/lia-igreja-mito-fichas.pdf).
    A aba aparece fechada com cadeado. Para abrir, mudar fechado:true → fechado:false. Texto só das fichas e da carta (fotos em material/lia-igreja-cocktails-*.jpg), sem acrescentos. Preços, "leva", perfil e versão sem álcool vêm da carta; técnica, copo e passos vêm das fichas. */
@@ -3558,7 +3562,7 @@ function sheet(w){
       <div class="lang sheet-lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="${LANG==='pt'}">PT</button><button type="button" data-lang="en" aria-pressed="${LANG==='en'}">EN</button></div>
       <div class="crumb"><b>${sn(w.sec)}</b> / ${esc(reg(w.regiao))}${sub?` / ${esc(sub)}`:""}</div>
       <h2>${w.ano?esc(w.ano)+" ":""}${esc(nome)}</h2>
-      <div class="price">${w.copo?`<div><small>${isDose(w)?L("Dose 60 ml","60 ml serve"):L("Copo","Glass")}</small><b>${euro(w.copo)}</b></div>`:""}${w.garrafa?`<div><small>${L("Garrafa","Bottle")}</small><b>${euro(w.garrafa)}</b></div>`:""}${stUn(w.id)!=null?`<div class="pstk${stLow(stUn(w.id))?" low":""}"><small>${L("Estoque","Estoque")} · ${stDate()}</small><b>${stTxt(stUn(w.id))}</b></div>`:""}</div>
+      <div class="price">${!euro(1)?`<div><small>${L("Preço","Price")}</small><b>${L("a confirmar","to be confirmed")}</b></div>`:""}${euro(1)&&w.copo?`<div><small>${isDose(w)?L("Dose 60 ml","60 ml serve"):L("Copo","Glass")}</small><b>${euro(w.copo)}</b></div>`:""}${euro(1)&&w.garrafa?`<div><small>${L("Garrafa","Bottle")}</small><b>${euro(w.garrafa)}</b></div>`:""}${stUn(w.id)!=null?`<div class="pstk${stLow(stUn(w.id))?" low":""}"><small>${L("Estoque","Estoque")} · ${stDate()}</small><b>${stTxt(stUn(w.id))}</b></div>`:""}</div>
       <div class="by">${L("De","By")} <b>${esc(ppl(w))}</b></div>
       <button type="button" class="vstat s-${w.estado||"pend"}" data-stab="prova" data-tofontes="1" style="align-self:flex-start">${tx(VST()[w.estado||"pend"])}</button>
       <div class="stabs" role="group" aria-label="${L("Seções da ficha","Sheet sections")}">${tabs.map(([k,n])=>`<button type="button" data-stab="${k}" aria-pressed="${sTab===k}">${n}</button>`).join("")}</div>
@@ -3576,7 +3580,7 @@ function sheetLight(w){
       <div class="lang sheet-lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="${LANG==='pt'}">PT</button><button type="button" data-lang="en" aria-pressed="${LANG==='en'}">EN</button></div>
       <div class="crumb"><b>${sn(w.sec)}</b> / ${esc(reg(w.regiao))}${sub?` / ${esc(sub)}`:""}</div>
       <h2>${esc(nome)}</h2>
-      <div class="price">${w.copo?`<div><small>${isDose(w)?L("Dose 60 ml","60 ml serve"):L("Copo","Glass")}</small><b>${euro(w.copo)}</b></div>`:""}${w.garrafa?`<div><small>${L("Garrafa","Bottle")}</small><b>${euro(w.garrafa)}</b></div>`:""}${stUn(w.id)!=null?`<div class="pstk${stLow(stUn(w.id))?" low":""}"><small>${L("Estoque","Estoque")} · ${stDate()}</small><b>${stTxt(stUn(w.id))}</b></div>`:""}</div>
+      <div class="price">${!euro(1)?`<div><small>${L("Preço","Price")}</small><b>${L("a confirmar","to be confirmed")}</b></div>`:""}${euro(1)&&w.copo?`<div><small>${isDose(w)?L("Dose 60 ml","60 ml serve"):L("Copo","Glass")}</small><b>${euro(w.copo)}</b></div>`:""}${euro(1)&&w.garrafa?`<div><small>${L("Garrafa","Bottle")}</small><b>${euro(w.garrafa)}</b></div>`:""}${stUn(w.id)!=null?`<div class="pstk${stLow(stUn(w.id))?" low":""}"><small>${L("Estoque","Estoque")} · ${stDate()}</small><b>${stTxt(stUn(w.id))}</b></div>`:""}</div>
       ${w.pessoas?`<div class="by">${L("De","By")} <b>${esc(ppl(w))}</b></div>`:""}
       <div class="sbody"><div class="block"><p class="todo">${L("A ficha completa deste vinho está a caminho. Até lá, conte o que está na carta: o nome, a região e o preço.","This wine’s full sheet is on its way. Until then, tell what’s on the list: name, region and price.")}</p></div></div>
     </div>
@@ -3727,6 +3731,7 @@ function smartAnswer(raw){
   let sort=null;
   if(/ barat| em conta| cheap| economic/.test(q)){ sort=(a,b)=>a.garrafa-b.garrafa; why.push(L("do preço mais baixo para o mais alto","lowest price first")); }
   else if(/ caro| premium| especial| celebr| expensive/.test(q)){ sort=(a,b)=>b.garrafa-a.garrafa; why.push(L("do preço mais alto para o mais baixo","highest price first")); }
+  if(sort&&!euro(1)){ sort=null; why.pop(); }
   if(!F.length&&!sort){ if(/ para (o |a |os |as )?(peixe|carne|marisco|prato|pratos|fish|meat)/.test(q)) return box("",L("Harmonizações ainda não estão na Salva","Pairings aren’t in Salva yet"),L("Chegam quando o menu de inverno estiver confirmado. Até lá, pergunte à mesa o que vão comer e use “O cliente diz…”.","They’ll come once the winter menu is confirmed. Until then, ask the table what they’re eating and use “The guest says…”."),[`<button class="hit" data-tab="vender"><b>${L("Abrir “O cliente diz…”","Open “The guest says…”")}</b><span>${L("Vender à mesa","Selling at the table")}</span></button>`],""); return ""; }
   let ws=W.filter(w=>(!sec||w.sec===sec)&&F.every(f=>f(w)));
   const fresh=/ fresc| fresh| acide| vibrant| crisp/.test(q);
@@ -4048,13 +4053,13 @@ const SF=[
   {g:"flor",re:/ (florais|floral|flor|flores|florid[oa]s?|flowers?|flowery|perfumad[oa]s?) /,t:P("Floral","Floral"),f:w=>sfFam(w,["flor"])},
   {g:"ervas",re:/ (ervas?|herbal|herbs?|herbaceous|especiad[oa]s?|especiarias?|picantes?|pimenta|spic\w*|pepper\w*|menta|mint\w*|balsamic[oa]s?) /,t:P("Ervas e especiaria","Herbs and spice"),f:w=>sfFam(w,["ervas"])},
   {g:"min",re:/ (minerais|mineral|minerals?|salin[oa]s?|salgad[oa]s?|saline|salty|iodad[oa]s?) /,t:P("Mineral e salino","Mineral and saline"),f:w=>sfFam(w,["min"])||sfEv(w,["satb","satn"],/mineral|salin/,/mineral|salin/)},
-  {g:"copo",re:/ (a copo|ao copo|copos?|by the glass|glass) /,t:P("A copo","By the glass"),f:w=>w.copo?`${L("Copo","Glass")} ${euro(w.copo)}`:null}
+  {g:"copo",re:/ (a copo|ao copo|copos?|by the glass|glass) /,t:P("A copo","By the glass"),f:w=>w.copo?(euro(1)?`${L("Copo","Glass")} ${euro(w.copo)}`:L("A copo","By the glass")):null}
 ];
 function styleFind(raw,curto,sem){
   let q=" "+fold(raw).replace(/€/g," euros ").replace(/[^a-z0-9]+/g," ").trim()+" ";
   const hit=[];
   const pm=q.match(/ (ate|maximo|max|menos de|abaixo de|under|below|up to|less than) (\d{2,3})( euros?| eur)? /);
-  if(pm){ const n=+pm[2]; hit.push({g:"preco",t:P(`Até ${n} €`,`Up to €${n}`),f:w=>w.garrafa&&w.garrafa<=n?`${L("Garrafa","Bottle")} ${euro(w.garrafa)}`:null}); q=q.replace(pm[0]," "); }
+  if(pm&&euro(1)){ const n=+pm[2]; hit.push({g:"preco",t:P(`Até ${n} €`,`Up to €${n}`),f:w=>w.garrafa&&w.garrafa<=n?`${L("Garrafa","Bottle")} ${euro(w.garrafa)}`:null}); q=q.replace(pm[0]," "); }
   for(const c of SF){ let m; while((m=q.match(c.re))){ if(!hit.includes(c)) hit.push(c); q=q.replace(m[0]," "); } }
   if(!hit.length) return null;
   const pool=W.filter(w=>!w.light&&["2","1","div"].includes(w.estado)&&!(sem||[]).includes(w.id));
