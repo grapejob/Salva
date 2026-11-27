@@ -1802,7 +1802,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao: "v170", data:"2026-11-27"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao: "v171", data:"2026-11-27"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -3143,6 +3143,189 @@ const ATLAS = {
    - bastardo-folha ...................... PDF material/castas/atlas-bastardo/ (internet)
    - bastardo-ilustracao ................. assinada J. Troncy, Ampélographie (Viala e Vermorel, 1901–1910?), provável domínio público, por confirmar
    Detalhes: salva/textos/atlas-fontes-por-confirmar.md. A Touriga Nacional tem crédito INIAV. */
+/* ---------- v171 (27 nov 2026): Atlas das outras 14 castas da carta, ainda SEM fotos (a Pri envia depois: cacho + folha de cada).
+   Regra da Pri (27 nov): sites de vinho comuns servem de fonte. Onde as fontes discordam (tamanho do cacho do Rabigato,
+   casca da Baga, folha do Alvarinho), a app não diz nada. Notas: salva/textos/atlas-pesquisa-14-castas-2026-11-27.md ---------- */
+Object.assign(ATLAS_F, {
+  kopkeari:{t:"Kopke Group · Arinto", u:"https://kopkegroupwineshop.com/blogs/news/casta-arinto-tudo-o-que-necessita-saber"},
+  wpari:{t:"wein.plus · Arinto", u:"https://glossary.wein-plus.eu/arinto"},
+  wpbaga:{t:"wein.plus · Baga", u:"https://glossary.wein-plus.eu/baga"},
+  wpvio:{t:"wein.plus · Viosinho", u:"https://glossary.wein.plus/viosinho"},
+  wpgou:{t:"wein.plus · Gouveio", u:"https://glossary.wein.plus/gouveio"},
+  wprab:{t:"wein.plus · Rabigato", u:"https://glossary.wein-plus.eu/rabigato"},
+  vvrab:{t:"Vinovoss · Rabigato", u:"https://vinovoss.com/grapes/rabigato/"},
+  wpcod:{t:"wein.plus · Códega de Larinho", u:"https://glossary.wein-plus.eu/codega-de-larinho"},
+  baucod:{t:"Baur au Lac Vins · Códega do Larinho", u:"https://www.bauraulacvins.ch/en/codega-do-larinho-_content---1--636--11062717.html"},
+  wpbic:{t:"wein.plus · Bical", u:"https://glossary.wein.plus/bical"},
+  ctbic:{t:"Cellar Tours · Bical", u:"https://www.cellartours.com/blog/portugal/bicals-return-to-grace"},
+  wpmf:{t:"wein.plus · Malvasia Fina", u:"https://glossary.wein.plus/malvasia-fina"},
+  wfmf:{t:"Wine Folly · Malvasia Fina", u:"https://winefolly.com/malvasia-fina/"},
+  mapaalb:{t:"Ministerio de Agricultura (Espanha) · Albariño", u:"https://servicio.mapa.gob.es/ministerio/pags/exposiciones/vid/www/imagenes/pdf/ALBARINO.pdf"},
+  mapagod:{t:"Ministerio de Agricultura (Espanha) · Godello", u:"https://servicio.mapa.gob.es/ministerio/pags/exposiciones/vid/www/imagenes/pdf/GODELLO.pdf"},
+  museogod:{t:"Museo do Viño de Galicia · Godello", u:"https://museovinogalicia.xunta.gal/en/the-wine/grapes-and-wines-of-galicia/godello"},
+  evegagod:{t:"EVEGA (Xunta de Galicia) · A variedade Godello", u:"https://evega.xunta.gal/sites/default/files/contido/estudios/mografico1_a_variedade_godello.pdf"},
+  madgra:{t:"Comunidad de Madrid · Coleção de videira: Graciano", u:"https://www.comunidad.madrid/info/coleccion-vid/esp080-bgvcam1136"},
+  pengra:{t:"Guía Peñín · Graciano", u:"https://guiapenin.wine/en-graciano"},
+  sethenc:{t:"Wine with Seth · Encruzado", u:"https://www.winewithseth.com/winewiki/encruzado-portugal/"},
+  bauenc:{t:"Baur au Lac Vins · Encruzado", u:"https://bauraulacvins.ch/en/encruzado-_content---1--647.html"},
+  sabfp:{t:"Sábado · Fernão Pires, a rainha do Tejo", u:"https://www.sabado.pt/gps/detalhe/tudo-sobre-a-casta-rainha-do-tejo-a-fernao-pires"},
+  uevaa:{t:"Universidade de Évora · A. Ribeiro, dissertação sobre as castas dos Açores (2020)", u:"https://rdpc.uevora.pt/bitstream/10174/29827/1/Mestrado-Viticultura_e_Enologia-Andre_Ribeiro.pdf"},
+  awcaa:{t:"Azores Wine Company · Arinto dos Açores", u:"https://res.cloudinary.com/dnstt5z80/raw/upload/v1747126830/uws_documents-live/AWC_Arinto_dos_Acores.pdf"},
+  iniavser:{t:"INIAV · Sercial (e as castas de nome parecido)", u:"https://www.iniav.pt/can/brancas/sercial-b"}
+});
+Object.assign(PERFIL_F, ATLAS_F);
+Object.assign(ATLAS, {
+  arinto:{
+    folha:["Grande, em forma de pentágono, com três lóbulos (as pontas da folha) pouco marcados.","Large and pentagonal, with three faint lobes (the points of the leaf).",["iniavari"]],
+    cacho:["Compacto: os bagos ficam bem juntos.","Compact: the berries sit tightly together.",["wopari","kopkeari","iniavari"]],
+    bago:["Pequeno e verde-amarelado.","Small and yellowish green.",["wopari","kopkeari","iniavari"]],
+    conta:["Uma lenda conta que cruzados alemães trouxeram o Arinto para Portugal. Ninguém conseguiu provar essa história. Uma das primeiras menções escritas à casta é do agrônomo Vicêncio Alarte.","A legend says German crusaders brought Arinto to Portugal. Nobody has ever proved it. One of the first written mentions of the grape is by the agronomist Vicêncio Alarte.","Por que importa: ajuda a separar a história da lenda quando o assunto é a origem da casta.","Why it matters: it helps separate history from legend when the grape’s origin comes up."],
+    fotos:[],
+    treino:[
+      {q:["Como é o cacho do Arinto?","What is the Arinto bunch like?"],o:[["Compacto, com bagos pequenos","Compact, with small berries"],["Solto, com bagos grandes","Loose, with large berries"],["Comprido e ralo, com poucos bagos","Long and sparse, with few berries"]],ok:0,fb:["Bagos pequenos, verde-amarelados e bem juntos.","Small yellowish-green berries, tightly packed."]},
+      {q:["No Vinho Verde, o Arinto também se chama…","In Vinho Verde, Arinto is also called…"],o:[["Pedernã","Pedernã"],["Loureiro","Loureiro"],["Trajadura","Trajadura"]],ok:0,fb:["Loureiro e Trajadura são outras castas da região.","Loureiro and Trajadura are other grapes from the region."]},
+      {q:["A história dos cruzados alemães que trouxeram o Arinto é…","The story of German crusaders bringing Arinto is…"],o:[["Um fato comprovado","A proven fact"],["Uma lenda, sem prova","A legend, with no proof"],["Um registro oficial do século XX","An official 20th-century record"]],ok:1,fb:["É uma boa história, mas é lenda.","It’s a good story, but it’s a legend."]},
+      {q:["No copo, o que o Arinto costuma trazer?","In the glass, what does Arinto usually bring?"],o:[["Acidez alta, limão e maçã verde","High acidity, lemon and green apple"],["Pouca acidez e notas de mel","Low acidity and honey notes"],["Taninos firmes e frutas pretas","Firm tannins and black fruit"]],ok:0,fb:["E a acidez continua alta mesmo em clima quente.","And the acidity stays high even in warm climates."]}
+    ]},
+  baga:{
+    sin:["Também é chamada Baga de Louro.","Also called Baga de Louro.",["wpbaga","iniavbaga"]],
+    folha:["Média, em forma de pentágono, com cinco lóbulos (as pontas da folha).","Medium-sized and pentagonal, with five lobes (the points of the leaf).",["iniavbaga"]],
+    cacho:["Médio, em forma de cone e compacto.","Medium-sized, conical and compact.",["iniavbaga"]],
+    bago:["Negro-azulado.","Blue-black.",["iniavbaga","wopbaga"]],
+    conta:["A Baga amadurece tarde e é sensível à podridão. Por isso tem fama de casta difícil.","Baga ripens late and is prone to rot. That’s why it has a reputation as a difficult grape.","Por que importa: explica o cuidado que o produtor precisa ter com essa uva até a colheita.","Why it matters: it explains how much care the grower needs to give this grape until harvest."],
+    fotos:[],
+    treino:[
+      {q:["Por que a Baga tem fama de casta difícil?","Why does Baga have a reputation as a difficult grape?"],o:[["Amadurece tarde e é sensível à podridão","It ripens late and is prone to rot"],["Dá pouquíssimas uvas","It gives very few grapes"],["Só cresce em solo de areia","It only grows in sand"]],ok:0,fb:["Por isso a colheita da Baga pede paciência.","That’s why the Baga harvest takes patience."]},
+      {q:["De qual casta a Baga é filha?","Which grape is Baga’s parent?"],o:[["Malvasia Fina","Malvasia Fina"],["Touriga Nacional","Touriga Nacional"],["Arinto","Arinto"]],ok:0,fb:["Uma casta branca é mãe de uma das tintas mais firmes de Portugal.","A white grape is the parent of one of Portugal’s firmest reds."]},
+      {q:["No copo, o que a Baga costuma trazer?","In the glass, what does Baga usually bring?"],o:[["Acidez alta e taninos firmes, com cereja e ameixa","High acidity and firm tannins, with cherry and plum"],["Pouca acidez e muito perfume floral","Low acidity and lots of floral perfume"],["Um branco leve e cítrico","A light, citrusy white"]],ok:0,fb:["E com os anos ganha tabaco, café e erva seca.","And with age it picks up tobacco, coffee and dried herbs."]}
+    ]},
+  viosinho:{
+    sin:["Também aparece escrito Viozinho.","Also spelled Viozinho.",["wpvio"]],
+    cacho:["Pequeno.","Small.",["wopvio"]],
+    bago:["Pequeno. A uva amadurece cedo.","Small. The grapes ripen early.",["wopvio"]],
+    conta:["O Viosinho entra tanto no vinho do Porto como nos brancos do Douro sem fortificação. Quase sempre aparece em corte, junto com outras castas.","Viosinho goes into both Port and unfortified Douro whites. It almost always appears in a blend with other grapes.","Por que importa: no corte, é ele que traz perfume e corpo.","Why it matters: in a blend, it brings perfume and body."],
+    fotos:[],
+    treino:[
+      {q:["Como são o cacho e o bago do Viosinho?","What are the Viosinho bunch and berry like?"],o:[["Os dois são pequenos","Both are small"],["Os dois são grandes","Both are large"],["Cacho grande, bago pequeno","Large bunch, small berry"]],ok:0,fb:["E a uva amadurece cedo.","And the grapes ripen early."]},
+      {q:["Onde o Viosinho entra?","Where does Viosinho go?"],o:[["No vinho do Porto e nos brancos do Douro","Into Port and Douro whites"],["Só em espumantes","Only into sparkling wine"],["Só em tintos","Only into reds"]],ok:0,fb:["E quase sempre em corte com outras castas.","And almost always blended with other grapes."]},
+      {q:["No copo, o que o Viosinho costuma trazer?","In the glass, what does Viosinho usually bring?"],o:[["Perfume floral e corpo","Floral perfume and body"],["Taninos firmes","Firm tannins"],["Aroma de couro","A leather aroma"]],ok:0,fb:["Dá brancos encorpados e perfumados.","It makes full-bodied, perfumed whites."]}
+    ]},
+  gouveio:{
+    sin:["Na Galiza, na Espanha, a mesma casta se chama Godello.","In Galicia, Spain, the same grape is called Godello.",["museogod","wpgou"]],
+    folha:["Em forma de pentágono.","Pentagonal.",["evegagod","mapagod"]],
+    cacho:["Pequeno e compacto.","Small and compact.",["museogod","mapagod","evegagod"]],
+    bago:["Pequeno, um pouco alongado e verde-amarelado. Quando amadurece, fica dourado.","Small, slightly oval and yellowish green. It turns golden as it ripens.",["evegagod","mapagod"]],
+    conta:["A casta deve ter nascido nas encostas do rio Sil, na Galiza, onde se chama Godello. No Douro, ganhou o nome de Gouveio.","The grape probably comes from the slopes of the river Sil in Galicia, where it is called Godello. In the Douro, it became Gouveio.","Por que importa: quem já provou um Godello espanhol tem uma pista do que esperar.","Why it matters: anyone who has tasted a Spanish Godello has a clue what to expect."],
+    fotos:[],
+    treino:[
+      {q:["Como o Gouveio se chama na Galiza?","What is Gouveio called in Galicia?"],o:[["Godello","Godello"],["Albariño","Albariño"],["Treixadura","Treixadura"]],ok:0,fb:["Godello do lado espanhol, Gouveio do lado português.","Godello on the Spanish side, Gouveio on the Portuguese side."]},
+      {q:["Como é o cacho do Gouveio?","What is the Gouveio bunch like?"],o:[["Pequeno e compacto","Small and compact"],["Grande e solto","Large and loose"],["Comprido e ralo","Long and sparse"]],ok:0,fb:["E os bagos ficam dourados quando amadurecem.","And the berries turn golden as they ripen."]},
+      {q:["No copo, o que o Gouveio costuma trazer?","In the glass, what does Gouveio usually bring?"],o:[["Frescor, cítricos, pêssego e um toque de anis","Freshness, citrus, peach and a hint of anise"],["Taninos firmes e cor escura","Firm tannins and dark colour"],["Rosa e lichia","Rose and lychee"]],ok:0,fb:["Dá brancos frescos e com corpo, que envelhecem bem.","It makes fresh whites with body that age well."]}
+    ]},
+  rabigato:{
+    bago:["Pequeno e verde-amarelado.","Small and yellowish green.",["woprab","ctrab"]],
+    conta:["O nome vem de “rabo de gato”. É uma referência à forma comprida do cacho.","The name comes from “rabo de gato”, cat’s tail. It refers to the long shape of the bunch.","Por que importa: é um jeito fácil de lembrar o nome e a casta.","Why it matters: it’s an easy way to remember the name and the grape."],
+    fotos:[],
+    treino:[
+      {q:["De onde vem o nome Rabigato?","Where does the name Rabigato come from?"],o:[["De “rabo de gato”","From “rabo de gato”, cat’s tail"],["De um produtor chamado Rabi","From a grower called Rabi"],["De uma aldeia do Minho","From a village in Minho"]],ok:0,fb:["O cacho é comprido, como um rabo de gato.","The bunch is long, like a cat’s tail."]},
+      {q:["Como é o bago do Rabigato?","What is the Rabigato berry like?"],o:[["Pequeno e verde-amarelado","Small and yellowish green"],["Grande e rosado","Large and pink"],["Negro-azulado","Blue-black"]],ok:0,fb:["Uma uva branca de bago pequeno.","A white grape with small berries."]},
+      {q:["No copo, o que o Rabigato costuma trazer?","In the glass, what does Rabigato usually bring?"],o:[["Acidez alta e flor de laranjeira","High acidity and orange blossom"],["Taninos firmes e cereja","Firm tannins and cherry"],["Pouca acidez e mel","Low acidity and honey"]],ok:0,fb:["No Douro se diz que ele é “ácido tartárico natural”.","In the Douro they call it “natural tartaric acid”."]}
+    ]},
+  codegalarinho:{
+    sin:["Também aparece escrita Côdega do Larinho.","Also spelled Côdega do Larinho.",["wpcod"]],
+    aviso:["Não é a Síria, que em algumas regiões também se chama Códega.","It isn’t Síria, which is also called Códega in some regions."],
+    conta:["A Códega do Larinho quase sempre entra em corte, junto com outras castas.","Códega do Larinho is almost always blended with other grapes.","Por que importa: na ficha do vinho, procure por ela entre as castas do corte.","Why it matters: on the wine sheet, look for it among the grapes in the blend."],
+    fotos:[],
+    treino:[
+      {q:["A Códega do Larinho é a mesma casta que a Síria?","Is Códega do Larinho the same grape as Síria?"],o:[["Sim, só muda o nome","Yes, only the name changes"],["Não. São castas diferentes","No. They are different grapes"],["Só no Alentejo","Only in the Alentejo"]],ok:1,fb:["A Síria também é chamada de Códega em algumas regiões, e daí vem a confusão.","Síria is also called Códega in some regions, hence the confusion."]},
+      {q:["No copo, o que a Códega do Larinho costuma trazer?","In the glass, what does Códega do Larinho usually bring?"],o:[["Fruta tropical e flores","Tropical fruit and flowers"],["Taninos firmes","Firm tannins"],["Cereja e ameixa","Cherry and plum"]],ok:0,fb:["Muito aroma, com menos frescor.","Lots of aroma, with less freshness."]},
+      {q:["Como a Códega do Larinho costuma aparecer?","How does Códega do Larinho usually appear?"],o:[["Em corte com outras castas","Blended with other grapes"],["Sempre sozinha","Always on its own"],["Só no vinho do Porto","Only in Port"]],ok:0,fb:["Quase sempre junto com outras brancas.","Almost always alongside other whites."]}
+    ]},
+  alvarinho:{
+    cacho:["Pequeno e medianamente compacto. Muitas vezes parece duplo, porque cresce uma asa (um cacho menor preso ao principal).","Small and fairly compact. It often looks double, because a wing grows (a smaller bunch attached to the main one).",["iniavalv","mapaalb"]],
+    bago:["Redondo e verde-amarelado.","Round and yellowish green.",["iniavalv","mapaalb"]],
+    conta:["O Alvarinho é antigo. As primeiras referências à casta aparecem em textos publicados antes de 1800.","Alvarinho is an old grape. The first references to it appear in texts published before 1800.","Por que importa: é uma casta com nome próprio dos dois lados da fronteira, Alvarinho em Portugal e Albariño na Espanha.","Why it matters: it has its own name on each side of the border: Alvarinho in Portugal, Albariño in Spain."],
+    fotos:[],
+    treino:[
+      {q:["Como o Alvarinho se chama na Espanha?","What is Alvarinho called in Spain?"],o:[["Albariño","Albariño"],["Godello","Godello"],["Verdejo","Verdejo"]],ok:0,fb:["É a mesma casta, com o nome em galego.","It’s the same grape, with its Galician name."]},
+      {q:["Como é o cacho do Alvarinho?","What is the Alvarinho bunch like?"],o:[["Pequeno, às vezes com uma asa que o faz parecer duplo","Small, sometimes with a wing that makes it look double"],["Grande e muito solto","Large and very loose"],["Comprido como um rabo de gato","Long like a cat’s tail"]],ok:0,fb:["A asa é um cacho menor preso ao principal.","The wing is a smaller bunch attached to the main one."]},
+      {q:["No copo, o que o Alvarinho costuma trazer?","In the glass, what does Alvarinho usually bring?"],o:[["Acidez alta, pêssego, cítricos e jasmim","High acidity, peach, citrus and jasmine"],["Taninos firmes e frutas pretas","Firm tannins and black fruit"],["Pouca acidez e notas de mel","Low acidity and honey notes"]],ok:0,fb:["É a casta de Monção e Melgaço.","It’s the grape of Monção and Melgaço."]}
+    ]},
+  bical:{
+    cacho:["Médio e solto.","Medium-sized and loose.",["cevd"]],
+    bago:["Pequeno, com pintinhas escuras na casca.","Small, with tiny dark spots on the skin.",["wpbic","cevd"]],
+    aviso:["Bical também é um nome antigo da Touriga Nacional, mas são castas diferentes.","Bical is also an old name for Touriga Nacional, but they are different grapes."],
+    conta:["O apelido Borrado das Moscas quer dizer “cocô de mosca”. Vem das pintinhas escuras que aparecem nos bagos.","The nickname Borrado das Moscas means “fly droppings”. It comes from the tiny dark spots on the berries.","Por que importa: é um apelido que ninguém esquece, e ajuda a lembrar da casta.","Why it matters: nobody forgets the nickname, and it helps you remember the grape."],
+    fotos:[],
+    treino:[
+      {q:["Qual é o apelido do Bical na Bairrada?","What is Bical’s nickname in Bairrada?"],o:[["Borrado das Moscas","Borrado das Moscas"],["Rabo de Gato","Rabo de Gato"],["Pé de Perdiz","Pé de Perdiz"]],ok:0,fb:["Quer dizer “cocô de mosca”.","It means “fly droppings”."]},
+      {q:["De onde vem esse apelido?","Where does the nickname come from?"],o:[["Das pintinhas escuras nos bagos","The tiny dark spots on the berries"],["Das moscas que gostam da uva madura","Flies that like ripe grapes"],["Da cor escura do vinho","The dark colour of the wine"]],ok:0,fb:["As pintinhas parecem mesmo marcas de mosca.","The spots really do look like fly marks."]},
+      {q:["No copo, o que o Bical costuma trazer?","In the glass, what does Bical usually bring?"],o:[["Frescor, pêssego e damasco. Com a idade, mel","Freshness, peach and apricot. With age, honey"],["Taninos firmes e cereja","Firm tannins and cherry"],["Muito álcool e pouca fruta","Lots of alcohol and little fruit"]],ok:0,fb:["É uma das brancas clássicas da Bairrada.","It’s one of Bairrada’s classic whites."]}
+    ]},
+  malvasiafina:{
+    cacho:["Médio a grande e solto.","Medium to large and loose.",["cevd"]],
+    bago:["Pequeno, de casca grossa.","Small, with thick skin.",["cevd"]],
+    aviso:["O nome Boal também é usado para outras castas, e isso causa confusão.","The name Boal is also used for other grapes, which causes confusion."],
+    conta:["Com o nome de Boal, a Malvasia Fina é uma das quatro castas principais do vinho da Madeira. E é mãe da Baga, uma das tintas mais firmes de Portugal.","As Boal, Malvasia Fina is one of the four main grapes of Madeira wine. It is also the parent of Baga, one of Portugal’s firmest reds.","Por que importa: a mesma casta aparece em vinhos muito diferentes, com nomes diferentes.","Why it matters: the same grape shows up in very different wines, under different names."],
+    fotos:[],
+    treino:[
+      {q:["Como a Malvasia Fina se chama na Madeira?","What is Malvasia Fina called in Madeira?"],o:[["Boal","Boal"],["Sercial","Sercial"],["Verdelho","Verdelho"]],ok:0,fb:["Sercial e Verdelho são outras castas do vinho da Madeira.","Sercial and Verdelho are other Madeira grapes."]},
+      {q:["Qual destas castas é filha da Malvasia Fina?","Which of these grapes is Malvasia Fina’s offspring?"],o:[["Baga","Baga"],["Touriga Nacional","Touriga Nacional"],["Alvarinho","Alvarinho"]],ok:0,fb:["Uma branca discreta é mãe de uma tinta firme.","A discreet white is the parent of a firm red."]},
+      {q:["No copo, o que a Malvasia Fina costuma trazer?","In the glass, what does Malvasia Fina usually bring?"],o:[["Aroma discreto, com mel, cera e noz-moscada","A discreet aroma, with honey, wax and nutmeg"],["Muito perfume, com lichia","Lots of perfume, with lychee"],["Cereja e taninos firmes","Cherry and firm tannins"]],ok:0,fb:["Às vezes aparece um toque defumado.","Sometimes there’s a smoky touch."]}
+    ]},
+  tintamiuda:{
+    sin:["Na França, chama-se Morrastel.","In France, it is called Morrastel.",["madgra","pengra"]],
+    folha:["Média, em forma de pentágono, com cinco lóbulos (as pontas da folha).","Medium-sized and pentagonal, with five lobes (the points of the leaf).",["madgra"]],
+    cacho:["Médio, em forma de cone e compacto.","Medium-sized, conical and compact.",["madgra"]],
+    bago:["Pequeno e negro-azulado. A polpa não tem cor: a cor está na casca.","Small and blue-black. The pulp is colourless: the colour is in the skin.",["madgra","sethgra"]],
+    conta:["Na Rioja, o primeiro vinho feito só com Graciano foi lançado pela Viña Ijalba, em 1995.","In Rioja, the first wine made only from Graciano was released by Viña Ijalba in 1995.","Por que importa: mostra que vinho só desta casta é uma ideia recente, mesmo na Espanha.","Why it matters: it shows that single-variety wine from this grape is a recent idea, even in Spain."],
+    fotos:[],
+    treino:[
+      {q:["Como a Tinta Miúda se chama na Espanha?","What is Tinta Miúda called in Spain?"],o:[["Graciano","Graciano"],["Tempranillo","Tempranillo"],["Mencía","Mencía"]],ok:0,fb:["Tempranillo é a Tinta Roriz, e Mencía é a Jaen.","Tempranillo is Tinta Roriz, and Mencía is Jaen."]},
+      {q:["De que cor é a polpa da Tinta Miúda?","What colour is Tinta Miúda’s pulp?"],o:[["Sem cor. A cor está na casca","Colourless. The colour is in the skin"],["Vermelha","Red"],["Roxa","Purple"]],ok:0,fb:["Como na maioria das uvas tintas.","As in most red grapes."]},
+      {q:["No copo, o que a Tinta Miúda costuma trazer?","In the glass, what does Tinta Miúda usually bring?"],o:[["Cor intensa e acidez alta","Deep colour and high acidity"],["Cor clara e pouca acidez","Pale colour and low acidity"],["Flor de laranjeira","Orange blossom"]],ok:0,fb:["E vinhos que envelhecem bem.","And wines that age well."]}
+    ]},
+  encruzado:{
+    folha:["Pequena, em forma de pentágono, com cinco lóbulos (as pontas da folha).","Small and pentagonal, with five lobes (the points of the leaf).",["iniavenc"]],
+    cacho:["Pequeno, em forma de cilindro e medianamente compacto.","Small, cylindrical and fairly compact.",["iniavenc","cevd"]],
+    bago:["Médio, verde-amarelado e um pouco achatado.","Medium-sized, yellowish green and slightly flattened.",["iniavenc","cevd"]],
+    conta:["O Encruzado praticamente só existe no Dão, onde é a branca mais plantada.","Encruzado is grown almost only in the Dão, where it is the most planted white.","Por que importa: Encruzado no rótulo é quase sinônimo de Dão.","Why it matters: Encruzado on a label almost always means Dão."],
+    fotos:[],
+    treino:[
+      {q:["Onde o Encruzado é a casta branca principal?","Where is Encruzado the main white grape?"],o:[["No Dão","In the Dão"],["No Vinho Verde","In Vinho Verde"],["No Alentejo","In the Alentejo"]],ok:0,fb:["Fora do Dão, ele é raro.","Outside the Dão, it’s rare."]},
+      {q:["Como é o cacho do Encruzado?","What is the Encruzado bunch like?"],o:[["Pequeno e em forma de cilindro","Small and cylindrical"],["Grande e solto","Large and loose"],["Duplo, com uma asa grande","Double, with a big wing"]],ok:0,fb:["E os bagos são médios e verde-amarelados.","And the berries are medium-sized and yellowish green."]},
+      {q:["No copo, o que o Encruzado costuma trazer?","In the glass, what does Encruzado usually bring?"],o:[["Flores, cítricos e frescor, com corpo","Flowers, citrus and freshness, with body"],["Taninos firmes e cereja","Firm tannins and cherry"],["Muito doce e pouca acidez","Very sweet with low acidity"]],ok:0,fb:["Às vezes aparece um toque de resina e um lado mineral.","Sometimes there’s a resinous touch and a mineral side."]}
+    ]},
+  fernaopires:{
+    folha:["Média, em forma de pentágono, com três lóbulos (as pontas da folha).","Medium-sized and pentagonal, with three lobes (the points of the leaf).",["iniavfp"]],
+    cacho:["Médio, em forma de cone, com asas (cachos menores presos ao principal).","Medium-sized and conical, with wings (smaller bunches attached to the main one).",["iniavfp"]],
+    bago:["Redondo, pequeno e verde-amarelado.","Round, small and yellowish green.",["iniavfp"]],
+    conta:["Há registros da Fernão Pires desde o século XVIII. Hoje é uma das castas mais plantadas de Portugal.","Fernão Pires has been recorded since the 18th century. Today it is one of Portugal’s most planted grapes.","Por que importa: por estar em tantas regiões, aparece em muitas cartas, às vezes como Maria Gomes.","Why it matters: because it grows in so many regions, it shows up on many lists, sometimes as Maria Gomes."],
+    fotos:[],
+    treino:[
+      {q:["Como a Fernão Pires se chama na Bairrada?","What is Fernão Pires called in Bairrada?"],o:[["Maria Gomes","Maria Gomes"],["Bical","Bical"],["Cercial","Cercial"]],ok:0,fb:["Bical e Cercial são outras brancas da Bairrada.","Bical and Cercial are other Bairrada whites."]},
+      {q:["No copo, o que a Fernão Pires costuma trazer?","In the glass, what does Fernão Pires usually bring?"],o:[["Muito aroma: flor de laranjeira e cítricos","Lots of aroma: orange blossom and citrus"],["Quase nenhum aroma","Almost no aroma"],["Taninos firmes","Firm tannins"]],ok:0,fb:["É uma das brancas mais aromáticas de Portugal.","It’s one of Portugal’s most aromatic whites."]},
+      {q:["Como é a acidez da Fernão Pires?","What is Fernão Pires’s acidity like?"],o:[["Baixa, com menos frescor","Low, with less freshness"],["Muito alta","Very high"],["Igual à do Arinto","The same as Arinto’s"]],ok:0,fb:["Por isso costuma ir bem em corte com castas mais frescas.","That’s why it often blends with fresher grapes."]}
+    ]},
+  arintoacores:{
+    bago:["Pequeno. Entre as brancas dos Açores, é a de bago menor.","Small. Among the Azores whites, it has the smallest berries.",["uevaa"]],
+    conta:["Apesar do nome, o Arinto dos Açores não é parente do Arinto do continente. Os dois só dividem o nome e a acidez alta.","Despite the name, Arinto dos Açores isn’t related to mainland Arinto. The two share only the name and high acidity.","Por que importa: ajuda a não confundir os dois na carta.","Why it matters: it helps you not to mix the two up on the list."],
+    fotos:[],
+    treino:[
+      {q:["O Arinto dos Açores é parente do Arinto do continente?","Is Arinto dos Açores related to mainland Arinto?"],o:[["Não. Só divide o nome e a acidez","No. It shares only the name and the acidity"],["Sim, é a mesma casta","Yes, it’s the same grape"],["Sim, é filho do Arinto","Yes, it’s Arinto’s offspring"]],ok:0,fb:["É uma casta das ilhas, com história própria.","It’s an island grape with its own story."]},
+      {q:["Qual era o nome oficial dele até 2012?","What was its official name until 2012?"],o:[["Terrantez da Terceira","Terrantez da Terceira"],["Pedernã","Pedernã"],["Boal","Boal"]],ok:0,fb:["Pedernã é o Arinto do continente no Vinho Verde.","Pedernã is mainland Arinto in Vinho Verde."]},
+      {q:["No copo, o que o Arinto dos Açores costuma trazer?","In the glass, what does Arinto dos Açores usually bring?"],o:[["Acidez alta","High acidity"],["Pouca acidez e muito açúcar","Low acidity and lots of sugar"],["Taninos firmes","Firm tannins"]],ok:0,fb:["Nisso ele lembra o Arinto do continente.","In that, it recalls mainland Arinto."]}
+    ]},
+  cercial:{
+    aviso:["Não é o Sercial da Madeira, que em algumas regiões se chama Esgana Cão, nem o Cerceal Branco do Douro e do Dão.","It isn’t Madeira’s Sercial, which some regions call Esgana Cão, nor the Cerceal Branco of the Douro and Dão."],
+    conta:["Cercial, Sercial, Cerceal Branco e Sercialinho têm nomes parecidos, mas são quatro castas diferentes. O Cercial é da Bairrada.","Cercial, Sercial, Cerceal Branco and Sercialinho have similar names, but they are four different grapes. Cercial is from Bairrada.","Por que importa: na carta, o Cercial é um branco da Bairrada, e não um vinho da Madeira.","Why it matters: on the list, Cercial is a Bairrada white, not a Madeira wine."],
+    fotos:[],
+    treino:[
+      {q:["O Cercial da Bairrada é o mesmo Sercial da Madeira?","Is Bairrada’s Cercial the same as Madeira’s Sercial?"],o:[["Não. São castas diferentes","No. They are different grapes"],["Sim, só muda a grafia","Yes, only the spelling changes"],["Sim, mas plantado no continente","Yes, but grown on the mainland"]],ok:0,fb:["Os nomes parecidos confundem até quem é do ramo.","The similar names confuse even people in the trade."]},
+      {q:["De que região é o Cercial?","Which region is Cercial from?"],o:[["Bairrada","Bairrada"],["Açores","Azores"],["Algarve","Algarve"]],ok:0,fb:["Junto com o Bical e a Maria Gomes.","Alongside Bical and Maria Gomes."]},
+      {q:["No copo, o que o Cercial costuma trazer?","In the glass, what does Cercial usually bring?"],o:[["Acidez alta e cítrica","High, citrusy acidity"],["Taninos e cor escura","Tannins and dark colour"],["Muito perfume, com lichia","Lots of perfume, with lychee"]],ok:0,fb:["É uma casta de frescor.","It’s a grape for freshness."]}
+    ]}
+});
 Object.keys(ATLAS).forEach(k=>{ (ATLAS[k].fotos||[]).forEach(f=>{ if(!f.cred) f.cred="Autor desconhecido"; }); });
 /* Carta atual: tira dicas e perguntas que nomeiam vinhos que não estão nesta carta (voltam em dezembro) */
 if(CARTA_ATUAL){
@@ -3329,11 +3512,11 @@ function pCastas(){
     const A=typeof ATLAS!=="undefined"&&ATLAS[g.id]; if(A) ["sin","folha","cacho","bago"].forEach(k=>{ const v=ATLAS[g.id][k]; if(v&&v[2]) v[2].forEach(f=>used.add(f)); });
     const regs=atRegs(r.ws), aMap=regs.length?`<div class="cgrp"><span class="lbl">${L("No mapa da carta","On the wine map")}</span><ul class="atl-map">${regs.map(([k,nm,q])=>`<li><a href="mapa.html#${k}">${esc(nm)} <small>${q} ${q===1?L("vinho","wine"):L("vinhos","wines")}</small></a></li>`).join("")}</ul></div>`:"";
     const hf=atCover(A), aHero=hf?`<figure class="atl-hero"><button type="button" class="atl-frame" data-atm="explorar" style="aspect-ratio:${atRatio(hf)}" aria-label="${L("Explorar a foto","Explore the photo")}"><img class="atl-par" src="${IMGS[hf.img]||""}" alt="${i18(hf.alt)}" loading="lazy"></button><figcaption><b>Fig. ${atFig(g.id)}</b><em>${i18(hf.lab)} · ${esc(g.n.split(" / ")[0])}</em>${hf.cred?`<span>${L("Foto","Photo")}: ${atCred(hf.cred)}</span>`:""}<button type="button" class="atl-go" data-atm="explorar">${L("Explorar","Explore")} ›</button></figcaption></figure>`:"";
-    const aSegH=A?`<div class="atseg" role="group" aria-label="${L("Modo","Mode")}">${[["consultar",L("Consultar","Look up")],["explorar",L("Explorar","Explore")],["treinar",L("Treinar","Practise")]].filter(([id])=>id!=="explorar"||(A.fotos&&A.fotos.length)).map(([id,lab])=>`<button type="button" data-atm="${id}" aria-pressed="${atMode===id}">${lab}</button>`).join("")}</div>`:"";
+    const aSegH=A?`<div class="atseg" role="group" aria-label="${L("Modo","Mode")}">${[["consultar",L("Consultar","Look up")],["explorar",L("Explorar","Explore")],["treinar",L("Treinar","Practise")]].filter(([id])=>id!=="explorar"||(A.fotos&&A.fotos.length)).map(([id,lab])=>`<button type="button" data-atm="${id}" aria-pressed="${(cOpen===g.id?atMode:"consultar")===id}">${lab}</button>`).join("")}</div>`:"";
     const aCons=A?`${A.sin?`<p class="atsin">${i18(A.sin)}</p>`:""}<details class="cmore atalem"><summary>${L("Para ir além: reconhecer na vinha","Going further: spotting it in the vineyard")}</summary><dl class="dprof">${[["folha",P("Folha","Leaf")],["cacho",P("Cacho","Bunch")],["bago",P("Bago","Berry")]].filter(([k])=>A[k]).map(([k,l])=>`<dt>${tx(l)}</dt><dd>${i18(A[k])}</dd>`).join("")}</dl>${A.aviso?`<p class="dnota">${i18(A.aviso)}</p>`:""}</details>`:"";
     return `<details class="cst" data-cst="${g.id}" style="--c:var(${g.cor==="b"?"--bra":g.cor==="r"?"--ros":"--tin"})"${cOpen===g.id?" open":""}>
       <summary><span class="rk${r.rk<=3?" pod p"+r.rk:""}" aria-hidden="true"><b>${ord(r.rk)}</b></span><span class="nm"><i class="cdot" aria-hidden="true"></i><span class="nmt">${esc(g.n)}</span><small class="cn" aria-hidden="true">${n} ${n===1?L("vinho","wine"):L("vinhos","wines")}</small><span class="vh">, ${ord(r.rk)} ${L("lugar","place")}, ${g.cor==="b"?L("branca","white"):g.cor==="r"?L("roxa","pink-skinned"):L("tinta","red")}, ${n} ${n===1?L("vinho","wine"):L("vinhos","wines")}</span></span><span class="cbar" aria-hidden="true"><i style="width:${Math.round(n/maxN*100)}%"></i></span></summary>
-      <div class="cst-in">${A&&atMode==="consultar"?aHero:""}${aSegH}${A&&atMode==="explorar"?atExplore(A):A&&atMode==="treinar"?atTrain(A):`${g.onde?`<p class="clead">${i18(g.onde)}</p>`:""}${g.frase?`<div class="cgrp"><span class="lbl">${L("Para dizer ao cliente","To tell the guest")}</span><p class="vsay">${i18(g.frase)}</p></div>`:""}
+      <div class="cst-in">${A&&(atMode==="consultar"||cOpen!==g.id)?aHero:""}${aSegH}${A&&cOpen===g.id&&atMode==="explorar"?atExplore(A):A&&cOpen===g.id&&atMode==="treinar"?atTrain(A):`${g.onde?`<p class="clead">${i18(g.onde)}</p>`:""}${g.frase?`<div class="cgrp"><span class="lbl">${L("Para dizer ao cliente","To tell the guest")}</span><p class="vsay">${i18(g.frase)}</p></div>`:""}
         <div class="dsrow"><span class="lbl">${L("Na carta","On the list")} · ${n}</span><div class="chips">${r.ws.map(w=>wchip(w.id)).join("")}</div>${g.nota?`<p class="dnota">${i18(g.nota)}</p>`:""}</div>
         ${aMap}${dl}${aCons}${more}`}</div></details>`; };
   const list=shown.map(item).join("");
