@@ -1849,7 +1849,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao: "v173", data:"2026-11-28"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao: "v174", data:"2026-11-28"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -1862,7 +1862,7 @@ const PRECOS_OK = false;
 const ABAS_FECHADAS = ["vender","aromas"];
 /* 🔒 Cocktails (Pri, 9 nov 2026): fichas técnicas da Lia Igreja × Mito (material/lia-igreja-mito-fichas.pdf).
    A aba aparece fechada com cadeado. Para abrir, mudar fechado:true → fechado:false. Texto só das fichas e da carta (fotos em material/lia-igreja-cocktails-*.jpg), sem acrescentos. Preços, "leva", perfil e versão sem álcool vêm da carta; técnica, copo e passos vêm das fichas. */
-const COCKTAILS = {fechado:true, fonte:P("Fichas técnicas · Lia Igreja × Mito","Tech sheets · Lia Igreja × Mito"),
+const COCKTAILS = {fechado:false, fonte:P("Fichas técnicas · Lia Igreja × Mito","Tech sheets · Lia Igreja × Mito"),
  intro:P("Com inspiração na assinatura da cozinha do Mito, esta carta incorpora ingredientes, sabores e cultura gastronômica.","Inspired by the signature of Mito’s kitchen, this list brings in ingredients, flavours and food culture."), introAutor:"Lia Igreja",
  /* Pri, 9 nov: a Lia faz os cocktails de assinatura do Mito há alguns anos e trabalha também no Fiasco.
     Fiasco confirmado em Agenda Porto, Time Out Porto (mar 2026) e Porto Secreto: Av. Rodrigues de Freitas 133, bar e loja de discos. */
