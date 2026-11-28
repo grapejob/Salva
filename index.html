@@ -1299,6 +1299,8 @@ html::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .pr-alg-ok{color:var(--ink);background:var(--chip)}
 .pr-pv{margin:2px 0 6px}.pr-pv span{font-weight:600;display:block}
 .pr-foot{margin:8px 0 0;color:var(--muted);font-size:14px;max-width:62ch}
+/* v175: Mapa e Comida na barra de cima; cabe tudo sem rolar a partir de 1101 px */
+@media (min-width:1101px) and (max-width:1199px){#tablist .tab{padding:8px 11px}}
 </style>
 
 <header class="topbar"><div class="wrap tb-in"><button class="brand disp" data-tab="inicio" aria-label="Salva, início (em teste)"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="61" cy="41" r="9.5" fill="var(--red)"/></svg><span class="wm">Salva<em>.</em></span><span class="tag" id="tb-tag" aria-hidden="true">em teste</span></button><span class="tb-ed" id="tb-ed"></span><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt">PT</button><button type="button" data-lang="en">EN</button></div></div></header>
@@ -1385,8 +1387,8 @@ const REG_ORDER = [
 ];
 const BODY = {"Leve":"Light","Médio":"Medium","Encorpado":"Full-bodied"};
 const TABS = [
-  {id:"inicio",n:["Início","Home"]},{id:"mito",n:["O Mito","Mito"]},{id:"vinhos",n:["Vinhos","Wines"]},{id:"descobrir",n:["Com sotaque português","With a Portuguese accent"],hide:true},{id:"vender",n:["Vender à mesa","Selling"]},{id:"alergenios",n:["Alergénios","Allergens"]},{id:"cocktails",n:["Cocktails","Cocktails"]},{id:"mulheres",n:["Rainhas do Terroir","Queens of Terroir"]},{id:"como",n:["Como se faz","How it’s made"]},{id:"castas",n:["Castas portuguesas","Portuguese grapes"]},{id:"aromas",n:["Aromas","Aromas"]},{id:"conceito",n:["A carta","The list"]},{id:"stock",n:["Estoque","Estoque"],hide:true},
-  {sep:true},{id:"jogo",n:["Jogo","Game"],soon:true},{id:"comida",n:["Carta de comida","Food menu"],hide:true},{id:"harmonias",n:["Harmonizações","Pairings"],soon:true}
+  {id:"inicio",n:["Início","Home"]},{id:"mito",n:["O Mito","Mito"]},{id:"vinhos",n:["Vinhos","Wines"]},{id:"descobrir",n:["Com sotaque português","With a Portuguese accent"],hide:true},{id:"vender",n:["Vender à mesa","Selling"]},{id:"alergenios",n:["Alergénios","Allergens"]},{id:"comida",n:["Comida","Food"]},{id:"cocktails",n:["Cocktails","Cocktails"]},{id:"mulheres",n:["Rainhas do Terroir","Queens of Terroir"]},{id:"como",n:["Como se faz","How it’s made"]},{id:"castas",n:["Castas","Grapes"]},{id:"aromas",n:["Aromas","Aromas"]},{id:"conceito",n:["A carta","The list"]},{id:"stock",n:["Estoque","Estoque"],hide:true},
+  {sep:true},{id:"jogo",n:["Jogo","Game"],soon:true},{id:"harmonias",n:["Harmonizações","Pairings"],soon:true}
 ];
 /* translated field getters: fall back to Portuguese when no English text exists */
 function wf(w,f){
@@ -1849,7 +1851,7 @@ const TESTE = [
    Tudo o que é específico do Mito: identidade da edição, a casa, fontes, guia de alergénios,
    guiões de venda e propostas de gestos. Para outra casa: copiar este arquivo e trocar o conteúdo.
    Os vinhos e as produtoras desta edição estão em data.json (+ en.json). */
-const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao: "v174", data:"2026-11-28"};
+const EDICAO = {id:"mito", nome:"Mito", ed:P("Edição Mito em construção · Porto 2026","Mito edition under construction · Porto 2026"), versao: "v175", data:"2026-11-28"};
 /* 🔒 Próxima carta (Pri, 9 nov 2026): produtoras que só entram na carta de inverno.
    Ficam escondidas enquanto houver carta atual (data.json → atual). Desbloqueiam sozinhas quando se tira "atual" em dezembro;
    para desbloquear antes, apagar o id daqui. */
@@ -4300,7 +4302,7 @@ function renderChrome(){
   { const vn=String(EDICAO.versao||"").replace(/^v/i,""), dt=String(EDICAO.data||"").split("-").reverse().join(".");
     $("#fver").textContent=`Salva · ${tx(EDICAO.ed)}`; } $("#tabsnav").setAttribute("aria-label",u.nav);
   document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===LANG)));
-  $("#tablist").innerHTML = TABS.filter(t=>!t.soon&&!t.hide&&!(t.id&&isLocked(t.id))&&(t.id!=="cocktails"||ckHas())).map(t=>isLocked(t.id)?`<button class="tab" disabled title="${L("Fechado por enquanto","Locked for now")}">🔒 ${t.n[LANG==="en"?1:0]}</button>`:t.sep?`<span class="tab-sep" aria-hidden="true"></span>`:`<button class="tab" data-tab="${t.id}"${cur===t.id||(t.id==="vinhos"&&cur==="descobrir")?' aria-current="page"':""}>${t.n[LANG==="en"?1:0]}${t.soon?` <span class="soon">${u.soon}</span>`:""}</button>`).join("");
+  $("#tablist").innerHTML = TABS.filter(t=>!t.soon&&!t.hide&&!(t.id&&isLocked(t.id))&&(t.id!=="cocktails"||ckHas())).map(t=>isLocked(t.id)?`<button class="tab" disabled title="${L("Fechado por enquanto","Locked for now")}">🔒 ${t.n[LANG==="en"?1:0]}</button>`:t.sep?`<span class="tab-sep" aria-hidden="true"></span>`:`<button class="tab" data-tab="${t.id}"${cur===t.id||(t.id==="vinhos"&&cur==="descobrir")?' aria-current="page"':""}>${t.n[LANG==="en"?1:0]}${t.soon?` <span class="soon">${u.soon}</span>`:""}</button>${t.id==="vinhos"?`<a class="tab" href="mapa.html" style="text-decoration:none">${L("Mapa","Map")}</a>`:""}`).join(""); /* v175: Mapa e Carta de comida também na barra de cima (ecrãs largos, sem barra de baixo) */
 }
 function render(){ if(typeof atPar==='function') requestAnimationFrame(atPar);
   renderChrome();
