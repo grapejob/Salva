@@ -6,6 +6,12 @@
 <title>Salva · Edição Mito</title>
 <meta name="description" content="O Salva reúne a carta de vinhos, os alergénios e a história da casa num só lugar, para toda a equipa de sala. Uma ideia de Priscila Lopes.">
 <meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="48x48" href="icones/favicon-48.png">
+<link rel="apple-touch-icon" href="icones/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Salva">
+<script>/* ícone no ecrã inicial (modo app) abre direto a ferramenta */try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches)location.replace("app.html"+location.hash)}catch(e){}</script>
+
 <meta name="theme-color" content="#f3eee3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1a1b15" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -734,7 +740,7 @@ section{position:relative}
       <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="61" cy="41" r="9.5" fill="var(--red)"/></svg>
       <span>Salva<em>.</em></span>
     </a>
-    <a class="btn btn-p top-cta" href="https://grapejob.github.io/Salva/" target="_blank" rel="noopener">Abrir o Salva</a>
+    <a class="btn btn-p top-cta" href="app.html">Abrir o Salva</a>
   </div>
   <div class="progress" id="progress"></div>
 </header>
@@ -754,7 +760,7 @@ section{position:relative}
       <h1 id="h1">Toda a equipa falando <i>a mesma <span class="u">língua.<svg class="uline" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M3 9 C 40 4, 90 3, 130 6 S 185 10, 197 5"/></svg></span></i></h1>
         <p class="lede">O Salva reúne a carta de vinhos, os alergénios e a história da casa num só lugar, no telemóvel, no tablet ou no computador da sala. Assim, quem recebe tem a resposta certa à mão, sem deixar a mesa à espera.</p>
         <div class="cta">
-          <a class="btn btn-p" href="https://grapejob.github.io/Salva/" target="_blank" rel="noopener">Abrir o Salva
+          <a class="btn btn-p" href="app.html">Abrir o Salva
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn btn-g" href="#ideia">Conhecer a ideia</a>
         </div>
@@ -1024,7 +1030,7 @@ section{position:relative}
     <span class="eyebrow reveal">Pronto para o serviço</span>
     <h2 class="reveal">Bom serviço, <i>Time!</i></h2>
     <p class="lede reveal">O Salva já está em teste no Mito. Abra, explore e conte à Pri o que achou.</p>
-    <div class="cta reveal"><a class="btn btn-p" href="https://grapejob.github.io/Salva/" target="_blank" rel="noopener">Abrir o Salva
+    <div class="cta reveal"><a class="btn btn-p" href="app.html">Abrir o Salva
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </div>
 </section>

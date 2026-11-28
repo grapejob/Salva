@@ -3,7 +3,7 @@
   "short_name": "Salva",
   "description": "Salva · Edição Mito",
   "lang": "pt-BR",
-  "start_url": "./",
+  "start_url": "./app.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
